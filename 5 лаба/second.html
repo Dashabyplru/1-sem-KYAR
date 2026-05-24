@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Популярность русских исполнителей</title>
+  <style>
+    table {
+      border-collapse: separate;
+      width: 600px;
+      margin: 30px auto;
+      font-family: Arial, sans-serif;
+    }
+
+    thead th{
+      background: darkblue;
+      text-align: center;
+      font-size: 1.2em;
+      color: white;
+    }
+
+    th, td {
+      border: 2px solid #000;
+      border-style: double;
+      padding: 8px 12px;
+      vertical-align: middle;
+    }
+    caption {
+      font-size: 1.1em;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    td:first-child,
+    th:first-child {
+      color: black;
+    }
+    thead th:first-child {
+      background-color: white;
+      color: black;
+    }
+    td:not(:first-child),
+    th:not(:first-child) {
+      color: white;
+    }
+    tfoot td:first-child {
+      border: none;
+      color: black;
+    }
+    tfoot td:not(:first-child) {
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+<table>
+  <caption>Популярность русских исполнителей, Q1 2024</caption>
+  
+  <!-- Определение цветов фона для столбцов -->
+  <colgroup>
+    <col style="color: white;"> 
+    <col style="background-color: #00bfff;">
+    <col style="background-color: purple;"> 
+    <col style="background-color: green;">  
+  </colgroup>
+  
+  <thead>
+    <tr>
+      <th style="border: none; background-color: white; color: black;"></th> <!-- Пустая ячейка -->
+      <th>Исполнитель</th>
+      <th>Доля популярности</th>
+      <th>Рост за год</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>#1 ↑</td>
+      <td>ANNA ASTI</td>
+      <td>18%</td>
+      <td>+60%</td>
+    </tr>
+    <tr>
+      <td>#2 ↑</td>
+      <td>ВИА Гра</td>
+      <td>15%</td>
+      <td>+25%</td>
+    </tr>
+    <tr>
+      <td>#3 →</td>
+      <td>Олег Майами</td>
+      <td>13%</td>
+      <td>+10%</td>
+    </tr>
+    <tr>
+      <td>#4 ↑</td>
+      <td>Леша Свик</td>
+      <td>11%</td>
+      <td>+35%</td>
+    </tr>
+    <tr>
+      <td>#5 ↑</td>
+      <td>NILETTO</td>
+      <td>10%</td>
+      <td>+90%</td>
+    </tr>
+    <tr>
+      <td>#6 ↓</td>
+      <td>Винтаж</td>
+      <td>8%</td>
+      <td>-12%</td>
+    </tr>
+    <tr>
+      <td>#7 →</td>
+      <td>Бьянка</td>
+      <td>7%</td>
+      <td>+5%</td>
+    </tr>
+    <tr>
+      <td>#8 ↑</td>
+      <td>MONA</td>
+      <td>6%</td>
+      <td>+22%</td>
+    </tr>
+    <tr>
+      <td>#9 →</td>
+      <td>Nkeei</td>
+      <td>6%</td>
+      <td>0%</td>
+    </tr>
+    <tr>
+      <td>#10 ↓</td>
+      <td>Михаил Шуфутинский</td>
+      <td>6%</td>
+      <td>-15%</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td style="border: none;"></td>
+      <td>Итого</td>
+      <td>100%</td>
+      <td>+22%</td>
+    </tr>
+  </tfoot>
+</table>
+
+</body>
+</html>

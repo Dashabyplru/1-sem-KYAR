@@ -1,0 +1,87 @@
+shop {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    padding: 20px;
+    display: block;
+}
+
+shop:before {
+    content: "Магазин: " attr(name) " | Категория: " attr(category);
+    font-size: 24px;
+    font-weight: bold;
+    color: #8a2be2;
+    display: block;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #8a2be2;
+}
+
+description {
+    font-style: italic;
+    color: #666;
+    display: block;
+    margin-bottom: 30px;
+    font-size: 16px;
+}
+
+product {
+    display: block;
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 15px 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-left: 5px solid #8a2be2;
+}
+
+name {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    display: block;
+    margin-bottom: 10px;
+}
+
+category {
+    display: inline-block;
+    background-color: #e6e6fa;
+    color: #8a2be2;
+    padding: 3px 8px;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+price {
+    color: #d2691e;
+    font-size: 18px;
+    font-weight: bold;
+    display: block;
+    margin: 5px 0;
+}
+
+quantity {
+    color: #2e8b57;
+    display: block;
+    margin: 5px 0;
+}
+
+description, release_year, sizes, material, concert_date, location {
+    color: #555;
+    display: block;
+    margin: 3px 0;
+}
+
+rating {
+    color: #ff8c00;
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+}
+
+image {
+    color: #1e90ff;
+    font-style: italic;
+    display: block;
+    margin-top: 5px;
+}

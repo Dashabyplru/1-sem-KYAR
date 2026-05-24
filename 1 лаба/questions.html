@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ответы на вопросы по HTML</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2c3e50;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .question {
+            background: #ecf0f1;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border-left: 5px solid #3498db;
+        }
+        
+        .question h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .answer {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .example {
+            background: #e8f4f8;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+        
+        .section-title {
+            margin-top: 30px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #bdc3c7;
+            color: #2c3e50;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        th, td {
+            border: 1px solid #bdc3c7;
+            padding: 10px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        code {
+            background: #e8f4f8;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        
+        .note {
+            background: #fff3cd;
+            padding: 10px;
+            border-radius: 5px;
+            border-left: 3px solid #ffc107;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Ответы на вопросы по HTML</h1>
+        
+        <div class="question">
+            <h3>1. Как создать простейшую веб-страницу?</h3>
+        </div>
+        <div class="answer">
+            <p>Простейшая веб-страница создается с помощью базовой структуры HTML-документа:</p>
+            <div class="example">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Заголовок страницы&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Привет, мир!&lt;/h1&gt;
+    &lt;p&gt;Это моя первая веб-страница.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</div>
+        </div>
+        
+        <div class="question">
+            <h3>2. Что представляет собой структура HTML-документа?</h3>
+        </div>
+        <div class="answer">
+            <p>Структура HTML-документа состоит из:</p>
+            <ul>
+                <li><code>&lt;!DOCTYPE html&gt;</code> - объявление типа документа</li>
+                <li><code>&lt;html&gt;</code> - корневой элемент</li>
+                <li><code>&lt;head&gt;</code> - раздел с метаинформацией</li>
+                <li><code>&lt;body&gt;</code> - основное содержимое страницы</li>
+            </ul>
+        </div>
+        
+        <div class="question">
+            <h3>3. Дайте определение понятиям «тег» и «элемент» HTML-документа?</h3>
+        </div>
+        <div class="answer">
+            <p><strong>Тег</strong> - это слова или символы, с помощью которых браузер распознает структуру и значение вашего текста (например, <code>&lt;p&gt;</code>, <code>&lt;div&gt;</code>).</p>
+            <p><strong>Элемент</strong> - это тег вместе с его содержимым и атрибутами (например, <code>&lt;p class="text"&gt;Текст&lt;/p&gt;</code>).</p>
+        </div>
+        
+        <div class="question">
+            <h3>4. Какие теги относятся к служебным, а какие – к структурным?</h3>
+        </div>
+        <div class="answer">
+            <p><strong>Служебные теги</strong>: <code>&lt;!DOCTYPE&gt;</code>, <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code>, <code>&lt;title&gt;</code>, <code>&lt;meta&gt;</code>, <code>&lt;link&gt;</code>, <code>&lt;style&gt;</code>, <code>&lt;script&gt;</code>.</p>
+            <p><strong>Структурные теги</strong>: <code>&lt;body&gt;</code>, <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;aside&gt;</code>, <code>&lt;footer&gt;</code>, <code>&lt;div&gt;</code>.</p>
+        </div>
+        
+        <div class="question">
+            <h3>5. В каком разделе страницы указывается заголовок веб-страницы?</h3>
+        </div>
+        <div class="answer">
+            <p>Заголовок веб-страницы указывается в разделе <code>&lt;head&gt;</code> с помощью тега <code>&lt;title&gt;</code>.</p>
+        </div>
+        
+        <div class="question">
+            <h3>6. Для чего используются метаданные? Каким тегом они указываются в структуре HTML-документа?</h3>
+        </div>
+        <div class="answer">
+            <p>Метаданные используются для предоставления информации о странице (кодировка, описание, ключевые слова, автор и т.д.). Они указываются с помощью тега <code>&lt;meta&gt;</code> в разделе <code>&lt;head&gt;</code>.</p>
+        </div>
+        
+        <div class="question">
+            <h3>7. Для чего используется !DOCTYPE?</h3>
+        </div>
+        <div class="answer">
+            <p><code>&lt;!DOCTYPE&gt;</code> указывает браузеру, какая версия HTML используется в документе, чтобы браузер мог правильно отображать страницу.</p>
+        </div>
+        
+        <div class="question">
+            <h3>8. Каким образом можно изменить установки для всей страницы в целом?</h3>
+        </div>
+        <div class="answer">
+            <p>Установки для всей страницы можно изменить с помощью:</p>
+            <ul>
+                <li>CSS-стилей в теге <code>&lt;style&gt;</code> в разделе <code>&lt;head&gt;</code></li>
+                <li>Глобальных атрибутов в теге <code>&lt;body&gt;</code></li>
+                <li>Изменения метатегов в разделе <code>&lt;head&gt;</code></li>
+            </ul>
+        </div>
+        
+        <div class="question">
+            <h3>9. Перечислите виды списков, которые предусмотрены в HTML?</h3>
+        </div>
+        <div class="answer">
+            <p>В HTML предусмотрены следующие виды списков:</p>
+            <ul>
+                <li>Маркированный список - <code>&lt;ul&gt;</code></li>
+                <li>Нумерованный список - <code>&lt;ol&gt;</code></li>
+                <li>Список определений - <code>&lt;dl&gt;</code></li>
+            </ul>
+        </div>
+        
+        <div class="question">
+            <h3>10. Как изменить вид маркера в маркированном списке?</h3>
+        </div>
+        <div class="answer">
+            <p>Вид маркера можно изменить с помощью CSS-свойства <code>list-style-type</code>:</p>
+            <div class="example">ul {
+  list-style-type: square; /* circle, disc, none */
+}</div>
+        </div>
+        
+        <div class="question">
+            <h3>11. Поясните, как изменить вид маркера в нумерованном списке.</h3>
+        </div>
+        <div class="answer">
+            <p>Вид маркера в нумерованном списке можно изменить с помощью CSS-свойства <code>list-style-type</code>:</p>
+            <div class="example">ol {
+  list-style-type: upper-roman; /* decimal, lower-alpha, upper-alpha etc. */
+}</div>
+        </div>
+        
+        <div class="question">
+            <h3>12. Каким образом изменить нумерацию в нумерованном списке?</h3>
+        </div>
+        <div class="answer">
+            <p>Нумерацию можно изменить с помощью атрибута <code>start</code> или CSS-счетчиков:</p>
+            <div class="example">&lt;ol start="5"&gt;
+  &lt;li&gt;Пункт 5&lt;/li&gt;
+  &lt;li&gt;Пункт 6&lt;/li&gt;
+&lt;/ol&gt;</div>
+        </div>
+        
+        <div class="question">
+            <h3>13. Из каких частей состоит список с определениями?</h3>
+        </div>
+        <div class="answer">
+            <p>Список определений состоит из:</p>
+            <ul>
+                <li><code>&lt;dl&gt;</code> - контейнер для списка определений</li>
+                <li><code>&lt;dt&gt;</code> - термин</li>
+                <li><code>&lt;dd&gt;</code> - определение термина</li>
+            </ul>
+        </div>
+        
+        <div class="question">
+            <h3>14. Каким образом можно построить вложенный список?</h3>
+        </div>
+        <div class="answer">
+            <p>Вложенный список создается путем размещения одного списка внутри элемента <code>&lt;li&gt;</code> другого списка:</p>
+            <div class="example">&lt;ul&gt;
+  &lt;li&gt;Пункт 1
+    &lt;ul&gt;
+      &lt;li&gt;Подпункт 1.1&lt;/li&gt;
+      &lt;li&gt;Подпункт 1.2&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Пункт 2&lt;/li&gt;
+&lt;/ul&gt;</div>
+        </div>
+        
+        <div class="question">
+            <h3>15. Создайте вложенный список из нумерованного, состоящего из двух пунктов, в каждом из которых два маркированных подпункта. Символ маркера квадрат.</h3>
+        </div>
+        <div class="answer">
+            <div class="example">&lt;ol&gt;
+  &lt;li&gt;Пункт 1
+    &lt;ul style="list-style-type: square;"&gt;
+      &lt;li&gt;Подпункт 1.1&lt;/li&gt;
+      &lt;li&gt;Подпункт 1.2&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Пункт 2
+    &lt;ul style="list-style-type: square;"&gt;
+      &lt;li&gt;Подпункт 2.1&lt;/li&gt;
+      &lt;li&gt;Подпункт 2.2&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;</div>
+        </div>
+        
+        <div class="question">
+            <h3>16. С помощью каких тегов создается простая таблица?</h3>
+        </div>
+        <div class="answer">
+            <p>Простая таблица создается с помощью тегов:</p>
+            <ul>
+                <li><code>&lt;table&gt;</code> - контейнер таблицы</li>
+                <li><code>&lt;tr&gt;</code> - строка таблицы</li>
+                <li><code>&lt;td&gt;</code> - ячейка таблицы</li>
+                <li><code>&lt;th&gt;</code> - заголовочная ячейка</li>
+            </ul>
+        </div>
+        
+        <div class="question">
+            <h3>17. Для чего предназначен тег &lt;th&gt;?</h3>
+        </div>
+        <div class="answer">
+            <p>Тег <code>&lt;th&gt;</code> предназначен для создания заголовочных ячеек таблицы. Текст в таких ячейках по умолчанию выделяется жирным шрифтом и выравнивается по центру.</p>
+        </div>
+        
+        <div class="question">
+            <h3>18. Какие элементы определяют строку таблицы?</h3>
+        </div>
+        <div class="answer">
+            <p>Строку таблицы определяет тег <code>&lt;tr&gt;</code> (table row).</p>
+        </div>
+        
+        <div class="question">
+            <h3>19. Что такое гипертекст?</h3>
+        </div>
+        <div class="answer">
+            <p>Гипертекст - это текст, содержащий гиперссылки на другие документы или части того же документа. HTML (HyperText Markup Language) является языком разметки гипертекста.</p>
+        </div>
+        
+        <div class="question">
+            <h3>20. Как организовать гиперссылку?</h3>
+        </div>
+        <div class="answer">
+            <p>Гиперссылка организуется с помощью тега <code>&lt;a&gt;</code> с атрибутом <code>href</code>, указывающим URL-адрес:</p>
+            <div class="example">&lt;a href="https://example.com"&gt;Текст ссылки&lt;/a&gt;</div>
+        </div>
+        
+        <div class="question">
+            <h3>21. Каким образом организовать переход в начало или конец документа?</h3>
+        </div>
+        <div class="answer">
+            <p>Для перехода внутри документа используются якоря с идентификаторами:</p>
+            <div class="example">&lt;a href="#top"&gt;В начало&lt;/a&gt;
+...
+&lt;h1 id="top"&gt;Заголовок&lt;/h1&gt;</div>
+        </div>
+        
+        <div class="question">
+            <h3>22. Создайте таблицу с гиперссылкой на другую веб-страницу.</h3>
+        </div>
+        <div class="answer">
+            <div class="example">&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;Название&lt;/th&gt;
+    &lt;th&gt;Ссылка&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Пример сайта&lt;/td&gt;
+    &lt;td&gt;&lt;a href="https://example.com"&gt;example.com&lt;/a&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</div>
+        </div>
+        
+        <div class="question">
+            <h3>23. Каким образом организовать гиперссылку, используя графическое изображение?</h3>
+        </div>
+        <div class="answer">
+            <p>Для создания графической гиперссылки нужно поместить тег <code>&lt;img&gt;</code> внутрь тега <code>&lt;a&gt;</code>:</p>
+            <div class="example">&lt;a href="https://example.com"&gt;
+  &lt;img src="image.jpg" alt="Описание изображения"&gt;
+&lt;/a&gt;</div>
+        </div>
+        
+        <div class="question">
+            <h3>24. Какие теги называются семантическими? Назовите основные семантические теги.</h3>
+        </div>
+        <div class="answer">
+            <p>Семантические теги - это теги, которые четко описывают свое содержание и роль на странице. Основные семантические теги:</p>
+            <ul>
+                <li><code>&lt;header&gt;</code> - верхний колонтитул</li>
+                <li><code>&lt;nav&gt;</code> - навигация</li>
+                <li><code>&lt;main&gt;</code> - основное содержание</li>
+                <li><code>&lt;section&gt;</code> - раздел документа</li>
+                <li><code>&lt;article&gt;</code> - независимая часть content</li>
+                <li><code>&lt;aside&gt;</code> - боковая панель</li>
+                <li><code>&lt;footer&gt;</code> - нижний колонтитул</li>
+            </ul>
+        </div>
+        
+        <div class="question">
+            <h3>25. Для чего необходимы теги &lt;section&gt; и &lt;article&gt;?</h3>
+        </div>
+        <div class="answer">
+            <p><code>&lt;section&gt;</code> используется для группировки тематического контента, обычно с заголовком.</p>
+            <p><code>&lt;article&gt;</code> предназначен для независимого, самодостаточного контента, который может распространяться отдельно (статьи, записи блога и т.д.).</p>
+        </div>
+        
+        <div class="question">
+            <h3>26. Какую функцию выполняют теги &lt;footer&gt; и &lt;header&gt;?</h3>
+        </div>
+        <div class="answer">
+            <p><code>&lt;header&gt;</code> содержит вводную информацию или навигационные ссылки (обычно в верхней части страницы или раздела).</p>
+            <p><code>&lt;footer&gt;</code> содержит информацию о авторе, copyright, контакты и т.д. (обычно в нижней части страницы или раздела).</p>
+        </div>
+        
+        <div class="question">
+            <h3>27. Для чего предназначены теги &lt;nav&gt; и &lt;main&gt;?</h3>
+        </div>
+        <div class="answer">
+            <p><code>&lt;nav&gt;</code> предназначен для основных навигационных ссылок по сайту.</p>
+            <p><code>&lt;main&gt;</code> содержит основной уникальный контент страницы (не должен повторяться на других страницах сайта).</p>
+        </div>
+        
+        <div class="question">
+            <h3>28. Какие элементы необходимы для построения формы?</h3>
+        </div>
+        <div class="answer">
+            <p>Для построения формы необходимы:</p>
+            <ul>
+                <li><code>&lt;form&gt;</code> - контейнер для формы</li>
+                <li><code>&lt;input&gt;</code> - поле ввода</li>
+                <li><code>&lt;textarea&gt;</code> - многострочное поле ввода</li>
+                <li><code>&lt;select&gt;</code> и <code>&lt;option&gt;</code> - выпадающий список</li>
+                <li><code>&lt;button&gt;</code> или <code>&lt;input type="submit"&gt;</code> - кнопка отправки</li>
+                <li><code>&lt;label&gt;</code> - метка для поля ввода</li>
+            </ul>
+        </div>
+        
+        <div class="question">
+            <h3>29. Назовите атрибут тега &lt;input&gt;, который определяет вид элемента формы.</h3>
+        </div>
+        <div class="answer">
+            <p>Атрибут <code>type</code> определяет вид элемента формы.</p>
+        </div>
+        
+        <div class="question">
+            <h3>30. Какие значения принимает атрибут type?</h3>
+        </div>
+        <div class="answer">
+            <p>Атрибут <code>type</code> может принимать следующие значения:</p>
+            <ul>
+                <li><code>text</code> - текстовое поле</li>
+                <li><code>password</code> - поле для пароля</li>
+                <li><code>email</code> - поле для email</li>
+                <li><code>number</code> - поле для чисел</li>
+                <li><code>checkbox</code> - флажок</li>
+                <li><code>radio</code> - переключатель</li>
+                <li><code>submit</code> - кнопка отправки</li>
+                <li><code>reset</code> - кнопка сброса</li>
+                <li><code>button</code> - обычная кнопка</li>
+                <li><code>file</code> - поле для загрузки файла</li>
+                <li><code>date</code> - поле для выбора даты</li>
+                <li>и другие</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

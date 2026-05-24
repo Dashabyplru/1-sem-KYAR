@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Основы HTML и CSS - Ответы на вопросы</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .questions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+            margin-bottom: 2rem;
+        }
+        
+        .question-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .question-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        .question-number {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .question-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 0.5rem;
+        }
+        
+        .answer {
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .code-block {
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 5px 5px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+        
+        .note {
+            background: #e8f4fd;
+            border-left: 4px solid #3498db;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1rem;
+            color: #7f8c8d;
+            border-top: 1px solid #eee;
+        }
+        
+        @media (max-width: 768px) {
+            .questions-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Основы HTML и CSS</h1>
+            <p class="subtitle">Ответы на вопросы по веб-разработке</p>
+        </header>
+        
+        <div class="questions-grid">
+            <!-- Вопрос 1 -->
+            <div class="question-card">
+                <div class="question-title">
+                    <span class="question-number">1</span>
+                    Что представляет из себя абсолютная адресация?
+                </div>
+                <div class="answer">
+                    <p><strong>Абсолютная адресация</strong> - это полный путь к ресурсу в интернете, включая протокол, доменное имя и полный путь к файлу.</p>
+                    <div class="code-block">
+                        http://www.megasite.ru/hzchd/images/labuda.gif
+                    </div>
+                    <p>Абсолютные ссылки используются для ссылок на внешние ресурсы и всегда начинаются с указания протокола (http:// или https://).</p>
+                </div>
+            </div>
+            
+            <!-- Вопрос 2 -->
+            <div class="question-card">
+                <div class="question-title">
+                    <span class="question-number">2</span>
+                    В чем суть относительной адресации?
+                </div>
+                <div class="answer">
+                    <p><strong>Относительная адресация</strong> указывает путь к ресурсу относительно текущего местоположения документа.</p>
+                    <div class="code-block">
+                        images/labuda.gif
+                    </div>
+                    <p>Если текущая страница находится в папке <code>hzchd</code>, то браузер будет искать изображение по пути <code>hzchd/images/labuda.gif</code>.</p>
+                    <div class="note">
+                        Относительные пути короче и удобнее при разработке, так как не требуют изменения при переносе сайта на другой домен.
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Вопрос 3 -->
+            <div class="question-card">
+                <div class="question-title">
+                    <span class="question-number">3</span>
+                    Что такое относительный путь от документа? от корневого каталога?
+                </div>
+                <div class="answer">
+                    <p><strong>Относительный путь от документа</strong> - путь, который отсчитывается от местоположения текущего HTML-документа.</p>
+                    <div class="code-block">
+                        ../images/photo.jpg  <!-- На уровень выше -->
+                        images/icon.png      <!-- В папке images -->
+                    </div>
+                    
+                    <p><strong>Относительный путь от корневого каталога</strong> - путь, который отсчитывается от корневой папки сайта (начинается с /).</p>
+                    <div class="code-block">
+                        /images/logo.png
+                        /css/styles.css
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Вопрос 4 -->
+            <div class="question-card">
+                <div class="question-title">
+                    <span class="question-number">4</span>
+                    Каким образом создать линейный градиент?
+                </div>
+                <div class="answer">
+                    <p>Линейный градиент создается с помощью CSS-функции <code>linear-gradient()</code>.</p>
+                    <div class="code-block">
+                        background: linear-gradient(направление, цвет1, цвет2, ...);
+                    </div>
+                    <p>Примеры:</p>
+                    <div class="code-block">
+                        /* Сверху вниз */
+                        background: linear-gradient(blue, red);
+                        
+                        /* Слева направо */
+                        background: linear-gradient(to right, blue, red);
+                        
+                        /* Диагональный градиент */
+                        background: linear-gradient(45deg, blue, red);
+                        
+                        /* С несколькими цветами */
+                        background: linear-gradient(to right, red, orange, yellow, green, blue);
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Вопрос 5 -->
+            <div class="question-card">
+                <div class="question-title">
+                    <span class="question-number">5</span>
+                    Поясните, как создать радиальный градиент.
+                </div>
+                <div class="answer">
+                    <p>Радиальный градиент создается с помощью CSS-функции <code>radial-gradient()</code>.</p>
+                    <div class="code-block">
+                        background: radial-gradient(форма размер позиция, цвет1, цвет2, ...);
+                    </div>
+                    <p>Примеры:</p>
+                    <div class="code-block">
+                        /* Простой радиальный градиент */
+                        background: radial-gradient(red, blue);
+                        
+                        /* Круглый градиент в центре */
+                        background: radial-gradient(circle, red, blue);
+                        
+                        /* Эллиптический градиент */
+                        background: radial-gradient(ellipse, red, blue);
+                        
+                        /* С указанием позиции */
+                        background: radial-gradient(circle at top left, red, blue);
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Вопрос 6 -->
+            <div class="question-card">
+                <div class="question-title">
+                    <span class="question-number">6</span>
+                    Каким образом создать обтекание изображения текстом?
+                </div>
+                <div class="answer">
+                    <p>Обтекание изображения текстом создается с помощью CSS-свойства <code>float</code>.</p>
+                    <div class="code-block">
+                        img {
+                            float: left;    /* Обтекание слева */
+                            margin: 10px;   /* Отступ вокруг изображения */
+                        }
+                    </div>
+                    <p>Также можно использовать:</p>
+                    <div class="code-block">
+                        img {
+                            float: right;   /* Обтекание справа */
+                            margin: 10px;
+                        }
+                    </div>
+                    <div class="note">
+                        Для отмены обтекания используйте свойство <code>clear: both;</code> на элементе, который должен находиться под обтекаемым элементом.
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Вопрос 7 -->
+            <div class="question-card">
+                <div class="question-title">
+                    <span class="question-number">7</span>
+                    Создайте веб-страницу, на которой обтекание изображения происходит текстом слева.
+                </div>
+                <div class="answer">
+                    <p>Пример HTML и CSS для обтекания изображения текстом слева:</p>
+                    <div class="code-block">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ru"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Обтекание изображения&lt;/title&gt;
+    &lt;style&gt;
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .float-left {
+            float: left;
+            margin: 0 15px 15px 0;
+            max-width: 300px;
+        }
+        
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="container clearfix"&gt;
+        &lt;img src="image.jpg" alt="Пример изображения" class="float-left"&gt;
+        &lt;p&gt;Текст будет обтекать изображение слева...&lt;/p&gt;
+        &lt;!-- Добавьте больше текста для демонстрации --&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Вопрос 8 -->
+            <div class="question-card">
+                <div class="question-title">
+                    <span class="question-number">8</span>
+                    Для чего необходимо свойство background-repeat?
+                </div>
+                <div class="answer">
+                    <p>Свойство <code>background-repeat</code> определяет, как фоновое изображение будет повторяться на элементе.</p>
+                    <p>Возможные значения:</p>
+                    <div class="code-block">
+                        background-repeat: repeat;     /* Повторяется по обеим осям (по умолчанию) */
+                        background-repeat: repeat-x;   /* Повторяется только по горизонтали */
+                        background-repeat: repeat-y;   /* Повторяется только по вертикали */
+                        background-repeat: no-repeat;  /* Не повторяется */
+                        background-repeat: space;      /* Повторяется с равными промежутками */
+                        background-repeat: round;      /* Повторяется и масштабируется */
+                    </div>
+                    <div class="note">
+                        Это свойство особенно полезно при использовании небольших фоновых изображений, которые должны заполнять всю область элемента.
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Вопрос 9 -->
+            <div class="question-card">
+                <div class="question-title">
+                    <span class="question-number">9</span>
+                    Какие форматы изображений можно загружать на веб-страницу?
+                </div>
+                <div class="answer">
+                    <p>На веб-страницы можно загружать различные форматы изображений:</p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>JPEG/JPG</strong> - для фотографий и изображений с множеством цветов</li>
+                        <li><strong>PNG</strong> - для изображений с прозрачностью и графики</li>
+                        <li><strong>GIF</strong> - для простой анимации и изображений с ограниченной палитрой</li>
+                        <li><strong>SVG</strong> - векторная графика, масштабируется без потери качества</li>
+                        <li><strong>WebP</strong> - современный формат с лучшим сжатием</li>
+                        <li><strong>BMP</strong> - без сжатия, не рекомендуется для веба</li>
+                    </ul>
+                    <div class="note">
+                        Для видеофайлов поддерживаются форматы MP4, WEBM и OGG, как указано в лекции в теге &lt;video&gt;.
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Вопрос 10 -->
+            <div class="question-card">
+                <div class="question-title">
+                    <span class="question-number">10</span>
+                    Для чего используется свойство background-image? Какие значения оно может принимать?
+                </div>
+                <div class="answer">
+                    <p>Свойство <code>background-image</code> устанавливает фоновое изображение для элемента.</p>
+                    <p>Значения:</p>
+                    <div class="code-block">
+                        background-image: url("image.jpg");       /* Путь к изображению */
+                        background-image: linear-gradient(red, blue); /* Градиент */
+                        background-image: none;                  /* Без фонового изображения */
+                        background-image: url("image1.jpg"), url("image2.jpg"); /* Несколько изображений */
+                    </div>
+                    <p>Примеры использования:</p>
+                    <div class="code-block">
+                        body {
+                            background-image: url("background.jpg");
+                        }
+                        
+                        .hero {
+                            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                                            url("hero-image.jpg");
+                        }
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Вопрос 11 -->
+            <div class="question-card">
+                <div class="question-title">
+                    <span class="question-number">11</span>
+                    Каким образом изменить размер изображения в CSS?
+                </div>
+                <div class="answer">
+                    <p>Размер изображения в CSS можно изменить несколькими способами:</p>
+                    <div class="code-block">
+                        /* Для тега img */
+                        img {
+                            width: 300px;           /* Фиксированная ширина */
+                            height: 200px;          /* Фиксированная высота */
+                            max-width: 100%;        /* Максимальная ширина */
+                        }
+                        
+                        /* Для фонового изображения */
+                        .element {
+                            background-image: url("image.jpg");
+                            background-size: cover;        /* Заполняет весь элемент */
+                            background-size: contain;      /* Вписывает в элемент */
+                            background-size: 50% 50%;      /* Процентные значения */
+                            background-size: 300px 200px;  /* Фиксированные размеры */
+                        }
+                    </div>
+                    <div class="note">
+                        Используйте <code>object-fit: cover;</code> для тега &lt;img&gt; чтобы изображение заполнило контейнер без искажений.
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Вопрос 12 -->
+            <div class="question-card">
+                <div class="question-title">
+                    <span class="question-number">12</span>
+                    Для чего предназначены префиксы?
+                </div>
+                <div class="answer">
+                    <p><strong>Вендорные префиксы</strong> используются для добавления экспериментальных или нестандартных CSS-свойств в разных браузерах.</p>
+                    <p>Основные префиксы:</p>
+                    <div class="code-block">
+                        -webkit-  /* Chrome, Safari, новые версии Opera */
+                        -moz-     /* Firefox */
+                        -ms-      /* Internet Explorer */
+                        -o-       /* Старые версии Opera */
+                    </div>
+                    <p>Пример использования:</p>
+                    <div class="code-block">
+                        .element {
+                            -webkit-border-radius: 10px;
+                            -moz-border-radius: 10px;
+                            border-radius: 10px;
+                            
+                            -webkit-transition: all 0.3s;
+                            -moz-transition: all 0.3s;
+                            transition: all 0.3s;
+                        }
+                    </div>
+                    <div class="note">
+                        Современные браузеры все меньше требуют префиксы, так как многие свойства уже стандартизированы.
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Вопрос 13 -->
+            <div class="question-card">
+                <div class="question-title">
+                    <span class="question-number">13</span>
+                    Каким образом зафиксировать фоновое изображение?
+                </div>
+                <div class="answer">
+                    <p>Чтобы зафиксировать фоновое изображение (оно не будет прокручиваться с контентом), используйте свойство <code>background-attachment</code>.</p>
+                    <div class="code-block">
+                        body {
+                            background-image: url("background.jpg");
+                            background-attachment: fixed;  /* Фиксированное положение */
+                        }
+                    </div>
+                    <p>Другие значения:</p>
+                    <div class="code-block">
+                        background-attachment: scroll;  /* Прокручивается с контентом (по умолчанию) */
+                        background-attachment: local;   /* Прокручивается с содержимым элемента */
+                        background-attachment: fixed;   /* Фиксировано относительно окна просмотра */
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Вопрос 14 -->
+            <div class="question-card">
+                <div class="question-title">
+                    <span class="question-number">14</span>
+                    Для чего используется свойство background-blend-mode? Назовите значения свойства.
+                </div>
+                <div class="answer">
+                    <p>Свойство <code>background-blend-mode</code> определяет, как фоновое изображение должно смешиваться с фоновым цветом или другими фоновыми изображениями.</p>
+                    <p>Основные значения:</p>
+                    <div class="code-block">
+                        background-blend-mode: normal;      /* Обычное наложение */
+                        background-blend-mode: multiply;    /* Умножение */
+                        background-blend-mode: screen;      /* Экран */
+                        background-blend-mode: overlay;     /* Перекрытие */
+                        background-blend-mode: darken;      /* Затемнение */
+                        background-blend-mode: lighten;     /* Осветление */
+                        background-blend-mode: color-dodge; /* Осветление основы */
+                        background-blend-mode: color-burn;  /* Затемнение основы */
+                        background-blend-mode: difference;  /* Разница */
+                        background-blend-mode: exclusion;   /* Исключение */
+                    </div>
+                    <p>Пример:</p>
+                    <div class="code-block">
+                        .element {
+                            background-image: url("image.jpg");
+                            background-color: blue;
+                            background-blend-mode: multiply;
+                        }
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Вопрос 15 -->
+            <div class="question-card">
+                <div class="question-title">
+                    <span class="question-number">15</span>
+                    С какой целью применяется transparent?
+                </div>
+                <div class="answer">
+                    <p>Значение <code>transparent</code> используется для указания полностью прозрачного цвета.</p>
+                    <p>Примеры применения:</p>
+                    <div class="code-block">
+                        /* Прозрачный фон */
+                        .element {
+                            background-color: transparent;
+                        }
+                        
+                        /* Прозрачная граница */
+                        .button {
+                            border: 2px solid transparent;
+                        }
+                        
+                        /* Прозрачный цвет текста */
+                        .text {
+                            color: transparent;
+                        }
+                    </div>
+                    <div class="note">
+                        <code>transparent</code> является синонимом для <code>rgba(0,0,0,0)</code> - полностью прозрачного черного цвета.
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Вопрос 16 -->
+            <div class="question-card">
+                <div class="question-title">
+                    <span class="question-number">16</span>
+                    Что такое карта-изображение?
+                </div>
+                <div class="answer">
+                    <p><strong>Карта-изображение</strong> (image map) - это изображение с определенными активными областями, при нажатии на которые происходит активация ссылок.</p>
+                    <p>Создается с помощью тегов:</p>
+                    <div class="code-block">
+                        &lt;img src="image.jpg" alt="Карта" usemap="#mapname"&gt;
+                        &lt;map name="mapname"&gt;
+                            &lt;area shape="rect" coords="x1,y1,x2,y2" href="link1.html" alt="Описание"&gt;
+                            &lt;area shape="circle" coords="x,y,radius" href="link2.html" alt="Описание"&gt;
+                            &lt;area shape="poly" coords="x1,y1,x2,y2,x3,y3,..." href="link3.html" alt="Описание"&gt;
+                        &lt;/map&gt;
+                    </div>
+                    <p>Как указано в лекции, карта изображений создает зоны обычного изображения, при нажатии на которые происходит активация ссылок.</p>
+                </div>
+            </div>
+            
+            <!-- Вопрос 17 -->
+            <div class="question-card">
+                <div class="question-title">
+                    <span class="question-number">17</span>
+                    Как сделать вид маркера графическим?
+                </div>
+                <div class="answer">
+                    <p>Чтобы сделать вид маркера списка графическим, используйте свойство <code>list-style-image</code>.</p>
+                    <div class="code-block">
+                        ul {
+                            list-style-image: url('marker.png');
+                        }
+                    </div>
+                    <p>Или с помощью псевдоэлементов для большего контроля:</p>
+                    <div class="code-block">
+                        ul {
+                            list-style: none;
+                        }
+                        
+                        li::before {
+                            content: "";
+                            display: inline-block;
+                            width: 16px;
+                            height: 16px;
+                            background-image: url('marker.png');
+                            background-size: contain;
+                            margin-right: 10px;
+                        }
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Вопрос 18 -->
+            <div class="question-card">
+                <div class="question-title">
+                    <span class="question-number">18</span>
+                    Для чего необходимо свойство background-origin?
+                </div>
+                <div class="answer">
+                    <p>Свойство <code>background-origin</code> определяет область позиционирования фонового изображения.</p>
+                    <p>Значения:</p>
+                    <div class="code-block">
+                        background-origin: padding-box;  /* Отступы включены (по умолчанию) */
+                        background-origin: border-box;   /* Граница включена */
+                        background-origin: content-box;  /* Только содержимое */
+                    </div>
+                    <p>Пример:</p>
+                    <div class="code-block">
+                        .element {
+                            border: 10px solid rgba(0,0,0,0.3);
+                            padding: 20px;
+                            background-image: url('pattern.png');
+                            background-origin: content-box;
+                            background-repeat: no-repeat;
+                        }
+                    </div>
+                    <div class="note">
+                        Это свойство работает в сочетании с <code>background-position</code> и определяет, от какой части элемента отсчитывается позиция фона.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Основано на материалах лекции по HTML и CSS</p>
+            <p>Рекомендация: Проверяйте синтаксис своих веб-страниц с помощью <a href="https://validator.w3.org/" target="_blank">W3C-валидатора</a></p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>4 задание</title>
+	<style>
+        nav li a {
+            background: url(facultet.png) no-repeat 0 0;
+        }
+        nav .pim a:hover {
+            background-position: 0 -90px;
+        }
+        nav .xtit a:hover {
+            background-position: 0 -63px;
+        }
+        nav .fit a:hover {
+            background-position: 0 -30px;            
+        }
+        ul {
+            list-style-type: none;
+            display: block;
+        }
+        li {
+            float: left;
+            margin-right:2% ;                   
+        }
+        li a {
+            display: inline-block;
+
+            border: 1px solid black;
+            padding: 5px 15px 5px 35px;
+            text-decoration: none;
+            color: purple;
+            width: 150px;
+            text-align: center;   
+        }
+        nav  ul{
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }   
+        nav>ul>li {
+            width: 150  px;
+            position: relative;
+        }
+        nav li a {
+            display: block;
+            text-decoration: none;
+        }
+        li .kafedra {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0px;       
+        }
+        li:hover .kafedra {
+            display: block;
+        }
+        li .kafedra a {
+            border: 1px solid black;
+            background: none;
+            height: 15px;
+        }    
+	</style>
+</head>
+<body>
+	<nav>
+		<ul class="bstu">
+			<li class="bstu">
+				<a href="https://belstu.by/">БГТУ</a>
+			</li>
+			<li class="fit">
+				<a href="https://it.belstu.by/">ИТ</a>
+				<ul class="kafedra">
+					<li>
+						<a>Кафедра ИСиТ </a>
+					</li>
+					<li>
+						<a>Кафедра ИиВД</a>
+					</li>
+					<li>
+						<a>Кафедра ПИ</a>
+					</li>
+				</ul>
+			</li>
+			<li class="pim">
+				<a href="https://youtu.be/dQw4w9WgXcQ?si=nYfsDNY8AHVnW0Mx">ПиМ</a>
+			</li>
+			<li class="xtit">
+				<a href="https://youtu.be/dQw4w9WgXcQ?si=nYfsDNY8AHVnW0Mx">ХТиТ</a>
+			</li>
+		</ul>
+	</nav>
+</body>
+</html>

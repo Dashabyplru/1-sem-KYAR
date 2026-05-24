@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Границы абзацев</title>
+    <style>
+        p {
+            padding: 10px;
+            margin: 15px;
+        }
+
+        p:nth-child(1) {
+            border-left: solid brown;
+            border-bottom: solid yellow;
+            border-right: solid darkblue;
+            border-top: solid orange;
+        }
+
+        p:nth-child(2) {
+            border-left: solid #007BA7;
+            border-right: solid #007BA7;
+        }
+
+        p:nth-child(3) {
+            border-top: solid rgb(229, 43, 80);
+            border-left: dashed lightblue;
+            border-right: dashed lightblue;
+            border-bottom: dashed lightblue;
+        }
+
+        p:nth-child(4) {
+            border: 1px dotted orange;
+        }
+
+        p:nth-child(5) {
+            border-top: 2px solid darkblue;
+            border-bottom: 2px solid darkblue;
+            border-left: 2px dashed maroon;
+            border-right: 2px dashed maroon;
+        }
+
+        p:nth-child(6) {
+            border: double #B3446C;
+        }
+
+        p:nth-child(7) {
+            border-top: 1px dashed #808000;
+            border-bottom: 3px solid #FF7518;
+        }
+
+        p:nth-child(8) {
+            border-left: double #CC7722;
+            border-bottom: double #CC7722;
+        }
+
+        p:nth-child(9) {
+            border-right: ridge #B5A642;
+            border-top: ridge #B5A642;
+        }
+
+        p:nth-child(10) {
+            border-left: 5px dotted rgb(0, 40, 0);
+            border-right: 5px dotted rgb(0, 40, 0);
+            border-bottom: 5px dotted rgb(0, 40, 0);
+        }
+    </style>
+</head>
+<body>
+    <p>Cплошная граница коричневого цвета слева, внизу желтая, справа темно-синяя, вверху оранжевая.</p>
+    <p>Слева и справа сплошная линия #007BA7</p>
+    <p>Сплошную границу (229 43 80) сверху, и пунктирную границу голубого цвета слева, справа и снизу.</p>
+    <p>Точечная граница оранжевого цвета 1 пиксель</p>
+    <p>Граница темно-синего цвета толщиной 2 пикселя сверху и снизу и пунктирную границу бордового цвета слева и справа</p>
+    <p>Двойная сплошная граница #B3446C цвета</p> 
+    <p>Пунктирную границу #808000 цвета и толщиной 1 пиксель сверху и сплошную границу #FF7518 цвета толщиной 3 пикселя снизу.</p>
+    <p>Двойная сплошная граница #CC7722 цвета слева и внизу</p>
+    <p>Граница гребень #B5A642 цвета справа и сверху</p>
+    <p>Точечная граница слева, справа, снизу толщиной 5px и (0 40 0) цвета</p>
+</body>
+</html>

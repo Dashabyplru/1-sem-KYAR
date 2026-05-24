@@ -1,0 +1,1903 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XML - язык разметки для хранения и передачи данных</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #2c8c3f;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+        }
+        
+        h2 {
+            color: #2c8c3f;
+            margin: 40px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+        
+        h3 {
+            color: #27ae60;
+            margin: 25px 0 15px;
+        }
+        
+        .lecture-ref {
+            display: inline-block;
+            background-color: #e8f4fc;
+            color: #3498db;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        
+        .question {
+            background-color: #f8fafc;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-left: 5px solid #2c8c3f;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        
+        .question:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            transform: translateY(-2px);
+        }
+        
+        .answer {
+            background-color: #eaf7ee;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            border: 1px solid #d4efdf;
+        }
+        
+        .demo-section {
+            background-color: #f9f9f9;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .demo-title {
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+        
+        /* XML подсветка */
+        .xml-demo {
+            margin: 20px 0;
+            background-color: #2c3e50;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        
+        .xml-code {
+            color: white;
+            font-family: 'Courier New', monospace;
+            padding: 20px;
+            overflow-x: auto;
+        }
+        
+        .xml-tag {
+            color: #3498db;
+        }
+        
+        .xml-attr {
+            color: #2ecc71;
+        }
+        
+        .xml-value {
+            color: #e74c3c;
+        }
+        
+        .xml-comment {
+            color: #95a5a6;
+        }
+        
+        .xml-declaration {
+            color: #9b59b6;
+        }
+        
+        /* Сравнение DTD и XML Schema */
+        .comparison {
+            display: flex;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .dtd-side, .schema-side {
+            flex: 1;
+            background-color: #2c3e50;
+            padding: 15px;
+            border-radius: 6px;
+            color: white;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .comparison-title {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2c8c3f;
+        }
+        
+        /* Примеры валидации */
+        .validation-demo {
+            margin: 20px 0;
+        }
+        
+        .valid-example, .invalid-example {
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .valid-example {
+            background-color: #d5f4e6;
+            border-left: 4px solid #2ecc71;
+        }
+        
+        .invalid-example {
+            background-color: #fadbd8;
+            border-left: 4px solid #e74c3c;
+        }
+        
+        /* Информационные блоки */
+        .info-box {
+            background-color: #e8f6f3;
+            border-left: 4px solid #1abc9c;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .warning-box {
+            background-color: #fef9e7;
+            border-left: 4px solid #f39c12;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        /* Список преимуществ */
+        .advantages-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .advantage-item {
+            background-color: #eaf7ee;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid #d4efdf;
+        }
+        
+        code {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        pre {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+        
+        .xml-keyword {
+            color: #3498db;
+        }
+        
+        .dtd-keyword {
+            color: #e74c3c;
+        }
+        
+        .schema-keyword {
+            color: #9b59b6;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #ecf0f1;
+            color: #7f8c8d;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .comparison {
+                flex-direction: column;
+            }
+            
+            .advantages-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>XML - язык разметки для хранения и передачи данных</h1>
+            <p class="subtitle">Ответы на вопросы по языку XML на основе материалов Лекции 10</p>
+        </header>
+        
+        <section>
+            <h2>Основы XML</h2>
+            
+            <div class="question">
+                <h3>1. Что такое XML? <span class="lecture-ref">Лекция 10</span></h3>
+            </div>
+            <div class="answer">
+                <p><strong>XML (eXtensible Markup Language)</strong> — это язык разметки, созданный для хранения, транспортировки и обмена данными между различными системами. XML является подмножеством SGML (Standard Generalized Markup Language).</p>
+                
+                <div class="info-box">
+                    <p><strong>Из Лекции 10:</strong> "Открытый язык разметки (Extensible Markup Language, XML) представляет собой подмножество SGML и полностью описывается в спецификации от 10 февраля 1998 (XML 1.0)."</p>
+                </div>
+                
+                <div class="demo-section">
+                    <p class="demo-title">Ключевые характеристики XML:</p>
+                    <ul>
+                        <li><strong>Расширяемый</strong> — можно создавать собственные теги</li>
+                        <li><strong>Структурированный</strong> — данные организованы в древовидную структуру</li>
+                        <li><strong>Самодокументируемый</strong> — имена тегов описывают содержание</li>
+                        <li><strong>Независимый от платформы</strong> — работает на любых системах</li>
+                        <li><strong>Поддерживается всеми современными языками программирования</strong></li>
+                    </ul>
+                </div>
+                
+                <div class="demo-section">
+                    <p class="demo-title">Пример XML-документа:</p>
+                    <div class="xml-demo">
+                        <div class="xml-code">
+                            <span class="xml-declaration">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><br>
+                            <span class="xml-comment">&lt;!-- Это комментарий в XML --&gt;</span><br>
+                            <span class="xml-tag">&lt;книга&gt;</span><br>
+                            &nbsp;&nbsp;<span class="xml-tag">&lt;название</span> <span class="xml-attr">язык</span>=<span class="xml-value">"ru"</span><span class="xml-tag">&gt;</span>Война и мир<span class="xml-tag">&lt;/название&gt;</span><br>
+                            &nbsp;&nbsp;<span class="xml-tag">&lt;автор&gt;</span>Лев Толстой<span class="xml-tag">&lt;/автор&gt;</span><br>
+                            &nbsp;&nbsp;<span class="xml-tag">&lt;год</span> <span class="xml-attr">издания</span>=<span class="xml-value">"1869"</span> <span class="xml-attr">тип</span>=<span class="xml-value">"первое"</span><span class="xml-tag">/&gt;</span><br>
+                            <span class="xml-tag">&lt;/книга&gt;</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>2. Чем является первая строка в коде XML-документа? <span class="lecture-ref">Лекция 10</span></h3>
+            </div>
+            <div class="answer">
+                <p>Первая строка в XML-документе называется <strong>XML-декларацией (XML declaration)</strong> или прологом документа. Она сообщает парсеру XML, что это XML-документ и какой версии.</p>
+                
+                <div class="info-box">
+                    <p><strong>Из Лекции 10:</strong> "Первые строки до корневого элемента называются прологом документа и сообщает о том, что документ XML и какой версии."</p>
+                </div>
+                
+                <div class="demo-section">
+                    <p class="demo-title">Синтаксис XML-декларации:</p>
+                    <pre><code><span class="xml-declaration">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;</span></code></pre>
+                    
+                    <p><strong>Атрибуты XML-декларации:</strong></p>
+                    <ul>
+                        <li><code>version</code> — версия XML (обязательный атрибут)</li>
+                        <li><code>encoding</code> — кодировка символов (например, UTF-8, Windows-1251)</li>
+                        <li><code>standalone</code> — указывает, зависит ли документ от внешних источников</li>
+                    </ul>
+                    
+                    <div class="demo-section">
+                        <p class="demo-title">Примеры XML-деклараций:</p>
+                        <div class="xml-demo">
+                            <div class="xml-code">
+                                <span class="xml-comment">&lt;!-- Минимальная декларация --&gt;</span><br>
+                                <span class="xml-declaration">&lt;?xml version="1.0"?&gt;</span><br><br>
+                                
+                                <span class="xml-comment">&lt;!-- С указанием кодировки --&gt;</span><br>
+                                <span class="xml-declaration">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><br><br>
+                                
+                                <span class="xml-comment">&lt;!-- Полная декларация --&gt;</span><br>
+                                <span class="xml-declaration">&lt;?xml version="1.0" encoding="Windows-1251" standalone="yes"?&gt;</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>3. Назовите правила синтаксиса XML-документа. <span class="lecture-ref">Лекция 10</span></h3>
+            </div>
+            <div class="answer">
+                <p>XML-документы должны следовать строгим правилам синтаксиса:</p>
+                
+                <div class="info-box">
+                    <p><strong>Из Лекции 10:</strong> В лекции представлен раздел "Правила синтаксиса XML" с перечислением 6 основных правил.</p>
+                </div>
+                
+                <div class="demo-section">
+                    <p class="demo-title">Основные правила синтаксиса XML:</p>
+                    
+                    <div class="advantages-list">
+                        <div class="advantage-item">
+                            <h4>1. Закрывающие теги</h4>
+                            <p>Все элементы должны иметь закрывающий тег. Пустые элементы могут использовать сокращенную форму: <code>&lt;empty/&gt;</code></p>
+                        </div>
+                        
+                        <div class="advantage-item">
+                            <h4>2. Регистрозависимость</h4>
+                            <p>Имена элементов регистрозависимы: <code>&lt;Book&gt;</code> и <code>&lt;book&gt;</code> — разные элементы</p>
+                        </div>
+                        
+                        <div class="advantage-item">
+                            <h4>3. Корректная вложенность</h4>
+                            <p>Элементы должны быть правильно вложены: <code>&lt;a&gt;&lt;b&gt;&lt;/b&gt;&lt;/a&gt;</code></p>
+                        </div>
+                        
+                        <div class="advantage-item">
+                            <h4>4. Корневой элемент</h4>
+                            <p>Документ должен содержать ровно один корневой элемент</p>
+                        </div>
+                        
+                        <div class="advantage-item">
+                            <h4>5. Кавычки для атрибутов</h4>
+                            <p>Значения атрибутов должны заключаться в кавычки (одинарные или двойные)</p>
+                        </div>
+                        
+                        <div class="advantage-item">
+                            <h4>6. Комментарии</h4>
+                            <p>Комментарии помещаются между <code>&lt;!--</code> и <code>--&gt;</code>, но не перед XML-декларацией</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="demo-section">
+                    <p class="demo-title">Пример правильного и неправильного синтаксиса:</p>
+                    
+                    <div class="comparison">
+                        <div class="valid-example">
+                            <p><strong>Правильно:</strong></p>
+                            <pre><code>&lt;?xml version="1.0"?&gt;
+&lt;book&gt;
+  &lt;title lang="en"&gt;XML Guide&lt;/title&gt;
+  &lt;author&gt;John Doe&lt;/author&gt;
+  &lt;year&gt;2023&lt;/year&gt;
+&lt;/book&gt;</code></pre>
+                        </div>
+                        
+                        <div class="invalid-example">
+                            <p><strong>Неправильно:</strong></p>
+                            <pre><code>&lt;?xml version="1.0"?&gt;
+&lt;book&gt;
+  &lt;title lang=en&gt;XML Guide  <span class="dtd-keyword">← Нет кавычек</span>
+  <span class="dtd-keyword">← Нет закрывающего тега</span>
+  &lt;author&gt;John Doe
+  &lt;year&gt;2023&lt;/YEAR&gt; <span class="dtd-keyword">← Разный регистр</span>
+&lt;/book&gt;</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>4. Какие должны быть имена элементов? <span class="lecture-ref">Лекция 10</span></h3>
+            </div>
+            <div class="answer">
+                <p>Имена элементов XML должны следовать определенным правилам:</p>
+                
+                <div class="info-box">
+                    <p><strong>Из Лекции 10:</strong> "XML элементы должны следовать следующим правилам написания имен..."</p>
+                </div>
+                
+                <div class="demo-section">
+                    <p class="demo-title">Правила именования элементов XML:</p>
+                    
+                    <div class="comparison">
+                        <div class="valid-example" style="flex: 1;">
+                            <p><strong>Допустимые имена:</strong></p>
+                            <ul>
+                                <li><code>&lt;book&gt;</code></li>
+                                <li><code>&lt;book_title&gt;</code></li>
+                                <li><code>&lt;Book1&gt;</code></li>
+                                <li><code>&lt;книга&gt;</code> (кириллица)</li>
+                                <li><code>&lt;_book&gt;</code></li>
+                                <li><code>&lt;book-title&gt;</code></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="invalid-example" style="flex: 1;">
+                            <p><strong>Недопустимые имена:</strong></p>
+                            <ul>
+                                <li><code>&lt;1book&gt;</code> (начинается с цифры)</li>
+                                <li><code>&lt;xml&gt;</code> (начинается с "xml")</li>
+                                <li><code>&lt;book title&gt;</code> (пробел внутри)</li>
+                                <li><code>&lt;book&gt;</code> (спецсимвол)</li>
+                                <li><code>&lt;book&gt;</code> (спецсимвол)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <p><strong>Полные правила из лекции:</strong></p>
+                        <ol>
+                            <li>Имена могут содержать буквы, цифры и другие символы</li>
+                            <li>Имена не могут начинаться с цифры или символа пунктуации</li>
+                            <li>Имена не могут начинаться с сочетания "xml" (или XML, или Xml и т.п.)</li>
+                            <li>Имена не могут содержать пробельные символы</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>5. Как вы понимаете правило соблюдения корректной вложенности? <span class="lecture-ref">Лекция 10</span></h3>
+            </div>
+            <div class="answer">
+                <p>Правило корректной вложенности означает, что элементы XML должны быть правильно вложены друг в друга — внутренние элементы должны полностью находиться внутри внешних элементов, без пересечений.</p>
+                
+                <div class="info-box">
+                    <p><strong>Из Лекции 10:</strong> "XML элементы должны соблюдать корректную вложенность" (правило синтаксиса №3).</p>
+                </div>
+                
+                <div class="demo-section">
+                    <p class="demo-title">Примеры вложенности:</p>
+                    
+                    <div class="comparison">
+                        <div class="valid-example" style="flex: 1;">
+                            <p><strong>Корректная вложенность:</strong></p>
+                            <pre><code>&lt;library&gt;
+  &lt;book&gt;
+    &lt;title&gt;XML Guide&lt;/title&gt;
+    &lt;author&gt;
+      &lt;name&gt;John&lt;/name&gt;
+      &lt;surname&gt;Doe&lt;/surname&gt;
+    &lt;/author&gt;
+  &lt;/book&gt;
+&lt;/library&gt;</code></pre>
+                            <p>Каждый элемент полностью находится внутри родительского элемента.</p>
+                        </div>
+                        
+                        <div class="invalid-example" style="flex: 1;">
+                            <p><strong>Некорректная вложенность:</strong></p>
+                            <pre><code>&lt;library&gt;
+  &lt;book&gt;
+    &lt;title&gt;XML Guide
+      &lt;author&gt; <span class="dtd-keyword">← Начинается внутри title</span>
+    &lt;/title&gt; <span class="dtd-keyword">← Закрывается до author</span>
+      &lt;name&gt;John&lt;/name&gt;
+    &lt;/author&gt; <span class="dtd-keyword">← Закрывается после title</span>
+  &lt;/book&gt;
+&lt;/library&gt;</code></pre>
+                            <p>Элементы пересекаются — <code>&lt;author&gt;</code> начинается внутри <code>&lt;title&gt;</code>, но заканчивается после него.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <p><strong>Аналогия:</strong> Представьте матрешки — меньшая кукла должна быть полностью внутри большей. Нельзя, чтобы одна матрешка начинала открываться внутри другой, но заканчивалась вне её.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>6. Какие элементы являются корневыми в XML-документе? <span class="lecture-ref">Лекция 10</span></h3>
+            </div>
+            <div class="answer">
+                <p>Корневой элемент — это элемент самого верхнего уровня в XML-документе, который содержит все остальные элементы. В XML-документе может быть только <strong>один корневой элемент</strong>.</p>
+                
+                <div class="info-box">
+                    <p><strong>Из Лекции 10:</strong> "XML документ должен содержать корневой документ" (правило синтаксиса №4).</p>
+                </div>
+                
+                <div class="demo-section">
+                    <p class="demo-title">Примеры корневых элементов:</p>
+                    
+                    <div class="xml-demo">
+                        <div class="xml-code">
+                            <span class="xml-declaration">&lt;?xml version="1.0"?&gt;</span><br>
+                            <span class="xml-comment">&lt;!-- &lt;catalog&gt; - корневой элемент --&gt;</span><br>
+                            <span class="xml-tag">&lt;catalog&gt;</span><br>
+                            &nbsp;&nbsp;<span class="xml-tag">&lt;book</span> <span class="xml-attr">id</span>=<span class="xml-value">"1"</span><span class="xml-tag">&gt;</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="xml-tag">&lt;title&gt;</span>XML Basics<span class="xml-tag">&lt;/title&gt;</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="xml-tag">&lt;author&gt;</span>John Smith<span class="xml-tag">&lt;/author&gt;</span><br>
+                            &nbsp;&nbsp;<span class="xml-tag">&lt;/book&gt;</span><br>
+                            &nbsp;&nbsp;<span class="xml-tag">&lt;book</span> <span class="xml-attr">id</span>=<span class="xml-value">"2"</span><span class="xml-tag">&gt;</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="xml-tag">&lt;title&gt;</span>Advanced XML<span class="xml-tag">&lt;/title&gt;</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="xml-tag">&lt;author&gt;</span>Jane Doe<span class="xml-tag">&lt;/author&gt;</span><br>
+                            &nbsp;&nbsp;<span class="xml-tag">&lt;/book&gt;</span><br>
+                            <span class="xml-tag">&lt;/catalog&gt;</span>
+                        </div>
+                    </div>
+                    
+                    <div class="warning-box">
+                        <p><strong>Ошибка: несколько корневых элементов</strong></p>
+                        <pre><code><span class="xml-declaration">&lt;?xml version="1.0"?&gt;</span>
+&lt;book&gt;Книга 1&lt;/book&gt;  <span class="dtd-keyword">← Первый корневой элемент</span>
+&lt;book&gt;Книга 2&lt;/book&gt;  <span class="dtd-keyword">← Второй корневой элемент - ОШИБКА!</span></code></pre>
+                        <p>Такой документ не является well-formed (правильно сформированным).</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>7. Для чего необходима валидация XML-документа? <span class="lecture-ref">Лекция 10</span></h3>
+            </div>
+            <div class="answer">
+                <p>Валидация XML-документа — это процесс проверки документа на соответствие определенной структуре и правилам, описанным в DTD (Document Type Definition) или XML Schema.</p>
+                
+                <div class="info-box">
+                    <p><strong>Из Лекции 10:</strong> "DTD описывает: Какие элементы могут присутствовать в документе; Вхождение элементов; Возможные атрибуты элементов; и т.д."</p>
+                </div>
+                
+                <div class="demo-section">
+                    <p class="demo-title">Цели валидации XML:</p>
+                    
+                    <div class="advantages-list">
+                        <div class="advantage-item">
+                            <h4>1. Проверка структуры</h4>
+                            <p>Убедиться, что документ содержит все необходимые элементы в правильном порядке</p>
+                        </div>
+                        
+                        <div class="advantage-item">
+                            <h4>2. Обеспечение совместимости</h4>
+                            <p>Гарантировать, что разные системы будут одинаково интерпретировать документ</p>
+                        </div>
+                        
+                        <div class="advantage-item">
+                            <h4>3. Обнаружение ошибок</h4>
+                            <p>Найти ошибки в данных до их обработки приложением</p>
+                        </div>
+                        
+                        <div class="advantage-item">
+                            <h4>4. Контроль качества данных</h4>
+                            <p>Обеспечить целостность и корректность передаваемых данных</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="demo-section">
+                    <p class="demo-title">Типы валидных XML-документов:</p>
+                    
+                    <div class="info-box">
+                        <p><strong>Из Лекции 10:</strong> "Первое правило для валидного XML документа то, что он должен быть синтаксически верным. Второе правило — валидный XML документ должен соответствовать определенному типу документов."</p>
+                    </div>
+                    
+                    <ol>
+                        <li><strong>Well-formed (правильно сформированный)</strong> — следует базовым правилам синтаксиса XML</li>
+                        <li><strong>Valid (валидный)</strong> — следует правилам, определенным в DTD или XML Schema</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>XML Schema и DTD</h2>
+            
+            <div class="question">
+                <h3>8. В чем заключается разница между простыми и комплексными типами элементов в XML Schema? <span class="lecture-ref">Лекция 10</span></h3>
+            </div>
+            <div class="answer">
+                <p>В XML Schema элементы разделяются на простые и комплексные типы в зависимости от их содержимого.</p>
+                
+                <div class="demo-section">
+                    <p class="demo-title">Сравнение простых и комплексных типов:</p>
+                    
+                    <div class="comparison">
+                        <div class="valid-example" style="flex: 1;">
+                            <p><strong>Простой тип (simpleType)</strong></p>
+                            <ul>
+                                <li>Содержит только текстовые данные</li>
+                                <li>Не может иметь дочерних элементов</li>
+                                <li>Может иметь атрибуты (только если определен как complexType с simpleContent)</li>
+                                <li>Примеры: строки, числа, даты</li>
+                            </ul>
+                            <pre><code><span class="schema-keyword">&lt;xs:element name="title" type="xs:string"/&gt;</span>
+<span class="schema-keyword">&lt;xs:element name="price" type="xs:decimal"/&gt;</span>
+<span class="schema-keyword">&lt;xs:element name="year" type="xs:integer"/&gt;</span></code></pre>
+                        </div>
+                        
+                        <div class="valid-example" style="flex: 1;">
+                            <p><strong>Комплексный тип (complexType)</strong></p>
+                            <ul>
+                                <li>Может содержать дочерние элементы</li>
+                                <li>Может содержать атрибуты</li>
+                                <li>Может содержать смешанный контент (текст + элементы)</li>
+                                <li>Определяет структуру элемента</li>
+                            </ul>
+                            <pre><code><span class="schema-keyword">&lt;xs:element name="book"&gt;</span>
+  <span class="schema-keyword">&lt;xs:complexType&gt;</span>
+    <span class="schema-keyword">&lt;xs:sequence&gt;</span>
+      <span class="schema-keyword">&lt;xs:element name="title" type="xs:string"/&gt;</span>
+      <span class="schema-keyword">&lt;xs:element name="author" type="xs:string"/&gt;</span>
+    <span class="schema-keyword">&lt;/xs:sequence&gt;</span>
+    <span class="schema-keyword">&lt;xs:attribute name="id" type="xs:integer"/&gt;</span>
+  <span class="schema-keyword">&lt;/xs:complexType&gt;</span>
+<span class="schema-keyword">&lt;/xs:element&gt;</span></code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>9. Перечислите преимущества XML Schema перед DTD. <span class="lecture-ref">Лекция 10</span></h3>
+            </div>
+            <div class="answer">
+                <p>XML Schema имеет несколько важных преимуществ перед DTD:</p>
+                
+                <div class="info-box">
+                    <p><strong>Из Лекции 10:</strong> В разделе "Преимущества XML Schema" перечислены ключевые преимущества.</p>
+                </div>
+                
+                <div class="demo-section">
+                    <p class="demo-title">Преимущества XML Schema:</p>
+                    
+                    <div class="advantages-list">
+                        <div class="advantage-item">
+                            <h4>1. Написана на XML</h4>
+                            <p>XML Schema сама является XML-документом, что позволяет обрабатывать её теми же инструментами</p>
+                        </div>
+                        
+                        <div class="advantage-item">
+                            <h4>2. Поддержка типов данных</h4>
+                            <p>Имеет богатую систему типов данных (строки, числа, даты, пользовательские типы)</p>
+                        </div>
+                        
+                        <div class="advantage-item">
+                            <h4>3. Пространства имен</h4>
+                            <p>Полная поддержка XML Namespaces для избежания конфликтов имен</p>
+                        </div>
+                        
+                        <div class="advantage-item">
+                            <h4>4. Расширяемость</h4>
+                            <p>Легко расширяется и наследуется</p>
+                        </div>
+                        
+                        <div class="advantage-item">
+                            <h4>5. Богатые возможности</h4>
+                            <p>Поддержка ограничений, шаблонов, уникальности, ключей и ссылок</p>
+                        </div>
+                        
+                        <div class="advantage-item">
+                            <h4>6. Современный стандарт</h4>
+                            <p>Рекомендован W3C как современная замена DTD</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="demo-section">
+                    <p class="demo-title">Сравнение DTD и XML Schema:</p>
+                    
+                    <div class="comparison">
+                        <div class="dtd-side">
+                            <p class="comparison-title">DTD</p>
+                            <pre><code><span class="dtd-keyword">&lt;!ELEMENT book (title, author, year)&gt;</span>
+<span class="dtd-keyword">&lt;!ELEMENT title (#PCDATA)&gt;</span>
+<span class="dtd-keyword">&lt;!ELEMENT author (#PCDATA)&gt;</span>
+<span class="dtd-keyword">&lt;!ELEMENT year (#PCDATA)&gt;</span>
+<span class="dtd-keyword">&lt;!ATTLIST book
+  id CDATA #REQUIRED
+  category CDATA #IMPLIED&gt;</span></code></pre>
+                            <p>• Собственный синтаксис</p>
+                            <p>• Ограниченные типы данных</p>
+                            <p>• Нет поддержки пространств имен</p>
+                        </div>
+                        
+                        <div class="schema-side">
+                            <p class="comparison-title">XML Schema</p>
+                            <pre><code><span class="schema-keyword">&lt;xs:element name="book"&gt;</span>
+  <span class="schema-keyword">&lt;xs:complexType&gt;</span>
+    <span class="schema-keyword">&lt;xs:sequence&gt;</span>
+      <span class="schema-keyword">&lt;xs:element name="title" </span>
+                 <span class="schema-keyword">type="xs:string"</span>
+                 <span class="schema-keyword">minOccurs="1" maxOccurs="1"/&gt;</span>
+      <span class="schema-keyword">&lt;xs:element name="author" type="xs:string"/&gt;</span>
+      <span class="schema-keyword">&lt;xs:element name="year" </span>
+                 <span class="schema-keyword">type="xs:integer"</span>
+                 <span class="schema-keyword">minInclusive="1900"</span>
+                 <span class="schema-keyword">maxInclusive="2023"/&gt;</span>
+    <span class="schema-keyword">&lt;/xs:sequence&gt;</span>
+    <span class="schema-keyword">&lt;xs:attribute name="id" type="xs:ID"</span>
+                 <span class="schema-keyword">use="required"/&gt;</span>
+  <span class="schema-keyword">&lt;/xs:complexType&gt;</span>
+<span class="schema-keyword">&lt;/xs:element&gt;</span></code></pre>
+                            <p>• Синтаксис XML</p>
+                            <p>• Богатая система типов</p>
+                            <p>• Поддержка пространств имен</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>10. Какие типы элементов XML Schema вы знаете? <span class="lecture-ref">Лекция 10</span></h3>
+            </div>
+            <div class="answer">
+                <p>XML Schema поддерживает различные типы элементов для определения структуры документа:</p>
+                
+                <div class="demo-section">
+                    <p class="demo-title">Основные типы элементов в XML Schema:</p>
+                    
+                    <div class="advantages-list">
+                        <div class="advantage-item">
+                            <h4>1. Простые элементы</h4>
+                            <p>Содержат только текстовые данные определенного типа</p>
+                            <pre><code><span class="schema-keyword">&lt;xs:element name="name" type="xs:string"/&gt;</span></code></pre>
+                        </div>
+                        
+                        <div class="advantage-item">
+                            <h4>2. Комплексные элементы</h4>
+                            <p>Содержат другие элементы и/или атрибуты</p>
+                            <pre><code><span class="schema-keyword">&lt;xs:element name="person"&gt;</span>
+  <span class="schema-keyword">&lt;xs:complexType&gt;...&lt;/xs:complexType&gt;</span>
+<span class="schema-keyword">&lt;/xs:element&gt;</span></code></pre>
+                        </div>
+                        
+                        <div class="advantage-item">
+                            <h4>3. Глобальные элементы</h4>
+                            <p>Определены на корневом уровне схемы, могут использоваться многократно</p>
+                            <pre><code><span class="schema-keyword">&lt;xs:element name="address" type="addressType"/&gt;</span></code></pre>
+                        </div>
+                        
+                        <div class="advantage-item">
+                            <h4>4. Локальные элементы</h4>
+                            <p>Определены внутри complexType, видны только в его контексте</p>
+                            <pre><code><span class="schema-keyword">&lt;xs:complexType name="bookType"&gt;</span>
+  <span class="schema-keyword">&lt;xs:sequence&gt;</span>
+    <span class="schema-keyword">&lt;xs:element name="title" type="xs:string"/&gt;</span>
+  <span class="schema-keyword">&lt;/xs:sequence&gt;</span>
+<span class="schema-keyword">&lt;/xs:complexType&gt;</span></code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>11. Что означает xs:element? <span class="lecture-ref">Лекция 10</span></h3>
+            </div>
+            <div class="answer">
+                <p><code>xs:element</code> — это элемент XML Schema, который используется для объявления элемента в XML-документе. Префикс <code>xs</code> указывает на пространство имен XML Schema.</p>
+                
+                <div class="demo-section">
+                    <p class="demo-title">Использование xs:element:</p>
+                    
+                    <pre><code><span class="xml-declaration">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="schema-keyword">&lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"&gt;</span>
+
+  <span class="xml-comment">&lt;!-- Простое определение элемента --&gt;</span>
+  <span class="schema-keyword">&lt;xs:element name="title" type="xs:string"/&gt;</span>
+
+  <span class="xml-comment">&lt;!-- Комплексное определение элемента --&gt;</span>
+  <span class="schema-keyword">&lt;xs:element name="book"&gt;</span>
+    <span class="schema-keyword">&lt;xs:complexType&gt;</span>
+      <span class="schema-keyword">&lt;xs:sequence&gt;</span>
+        <span class="schema-keyword">&lt;xs:element ref="title"/&gt;</span> <span class="xml-comment">&lt;!-- Ссылка на элемент выше --&gt;</span>
+        <span class="schema-keyword">&lt;xs:element name="author" type="xs:string"/&gt;</span>
+      <span class="schema-keyword">&lt;/xs:sequence&gt;</span>
+    <span class="schema-keyword">&lt;/xs:complexType&gt;</span>
+  <span class="schema-keyword">&lt;/xs:element&gt;</span>
+
+<span class="schema-keyword">&lt;/xs:schema&gt;</span></code></pre>
+                    
+                    <div class="info-box">
+                        <p><strong>Атрибуты xs:element:</strong></p>
+                        <ul>
+                            <li><code>name</code> — имя элемента в XML-документе</li>
+                            <li><code>type</code> — тип данных элемента</li>
+                            <li><code>ref</code> — ссылка на глобальное определение элемента</li>
+                            <li><code>minOccurs</code> — минимальное количество вхождений (по умолчанию 1)</li>
+                            <li><code>maxOccurs</code> — максимальное количество вхождений (по умолчанию 1, unbounded — неограниченно)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>12. Поясните, что означает xs:complexType. <span class="lecture-ref">Лекция 10</span></h3>
+            </div>
+            <div class="answer">
+                <p><code>xs:complexType</code> — элемент XML Schema, который определяет комплексный тип данных. Комплексные типы могут содержать дочерние элементы, атрибуты и смешанный контент.</p>
+                
+                <div class="demo-section">
+                    <p class="demo-title">Примеры xs:complexType:</p>
+                    
+                    <div class="comparison">
+                        <div class="valid-example" style="flex: 1;">
+                            <p><strong>complexType с дочерними элементами:</strong></p>
+                            <pre><code><span class="schema-keyword">&lt;xs:complexType name="bookType"&gt;</span>
+  <span class="schema-keyword">&lt;xs:sequence&gt;</span>
+    <span class="schema-keyword">&lt;xs:element name="title" type="xs:string"/&gt;</span>
+    <span class="schema-keyword">&lt;xs:element name="author" type="xs:string"/&gt;</span>
+    <span class="schema-keyword">&lt;xs:element name="year" type="xs:integer"/&gt;</span>
+  <span class="schema-keyword">&lt;/xs:sequence&gt;</span>
+<span class="schema-keyword">&lt;/xs:complexType&gt;</span></code></pre>
+                        </div>
+                        
+                        <div class="valid-example" style="flex: 1;">
+                            <p><strong>complexType с атрибутами:</strong></p>
+                            <pre><code><span class="schema-keyword">&lt;xs:complexType name="personType"&gt;</span>
+  <span class="schema-keyword">&lt;xs:simpleContent&gt;</span>
+    <span class="schema-keyword">&lt;xs:extension base="xs:string"&gt;</span>
+      <span class="schema-keyword">&lt;xs:attribute name="age" type="xs:integer"/&gt;</span>
+      <span class="schema-keyword">&lt;xs:attribute name="gender" type="xs:string"/&gt;</span>
+    <span class="schema-keyword">&lt;/xs:extension&gt;</span>
+  <span class="schema-keyword">&lt;/xs:simpleContent&gt;</span>
+<span class="schema-keyword">&lt;/xs:complexType&gt;</span></code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <p><strong>Типы содержимого complexType:</strong></p>
+                        <ul>
+                            <li><code>xs:sequence</code> — элементы в строгом порядке</li>
+                            <li><code>xs:choice</code> — выбор одного из элементов</li>
+                            <li><code>xs:all</code> — элементы в любом порядке</li>
+                            <li><code>xs:simpleContent</code> — только текст + атрибуты</li>
+                            <li><code>xs:complexContent</code> — наследование от другого complexType</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>13. В чем заключается предназначение xs:sequence? <span class="lecture-ref">Лекция 10</span></h3>
+            </div>
+            <div class="answer">
+                <p><code>xs:sequence</code> — элемент XML Schema, который указывает, что дочерние элементы должны появляться в строго определенной последовательности.</p>
+                
+                <div class="demo-section">
+                    <p class="demo-title">Пример использования xs:sequence:</p>
+                    
+                    <pre><code><span class="schema-keyword">&lt;xs:complexType name="bookType"&gt;</span>
+  <span class="schema-keyword">&lt;xs:sequence&gt;</span>
+    <span class="schema-keyword">&lt;xs:element name="title" type="xs:string"/&gt;</span>
+    <span class="schema-keyword">&lt;xs:element name="author" type="xs:string"/&gt;</span>
+    <span class="schema-keyword">&lt;xs:element name="year" type="xs:integer"/&gt;</span>
+    <span class="schema-keyword">&lt;xs:element name="publisher" type="xs:string"</span>
+               <span class="schema-keyword">minOccurs="0"/&gt;</span> <span class="xml-comment">&lt;!-- Необязательный --&gt;</span>
+  <span class="schema-keyword">&lt;/xs:sequence&gt;</span>
+<span class="schema-keyword">&lt;/xs:complexType&gt;</span></code></pre>
+                    
+                    <div class="info-box">
+                        <p><strong>Правила xs:sequence:</strong></p>
+                        <ul>
+                            <li>Элементы должны следовать в том же порядке, как указано в sequence</li>
+                            <li>Каждый элемент может иметь атрибуты <code>minOccurs</code> и <code>maxOccurs</code></li>
+                            <li>По умолчанию каждый элемент должен появляться ровно один раз</li>
+                            <li>sequence может содержать другие sequence, choice или all</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="demo-section">
+                        <p class="demo-title">Пример валидного и невалидного XML для этой схемы:</p>
+                        
+                        <div class="comparison">
+                            <div class="valid-example" style="flex: 1;">
+                                <p><strong>Валидный XML:</strong></p>
+                                <pre><code>&lt;book&gt;
+  &lt;title&gt;XML Guide&lt;/title&gt;
+  &lt;author&gt;John Doe&lt;/author&gt;
+  &lt;year&gt;2023&lt;/year&gt;
+  <span class="xml-comment">&lt;!-- publisher может отсутствовать --&gt;</span>
+&lt;/book&gt;</code></pre>
+                            </div>
+                            
+                            <div class="invalid-example" style="flex: 1;">
+                                <p><strong>Невалидный XML:</strong></p>
+                                <pre><code>&lt;book&gt;
+  &lt;author&gt;John Doe&lt;/author&gt; <span class="dtd-keyword">← Должен быть после title!</span>
+  &lt;title&gt;XML Guide&lt;/title&gt;
+  &lt;year&gt;2023&lt;/year&gt;
+&lt;/book&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>14. Для чего используется xs:attribute? <span class="lecture-ref">Лекция 10</span></h3>
+            </div>
+            <div class="answer">
+                <p><code>xs:attribute</code> — элемент XML Schema, который определяет атрибут для элемента. Атрибуты предоставляют дополнительную информацию об элементах.</p>
+                
+                <div class="demo-section">
+                    <p class="demo-title">Примеры использования xs:attribute:</p>
+                    
+                    <pre><code><span class="schema-keyword">&lt;xs:complexType name="bookType"&gt;</span>
+  <span class="schema-keyword">&lt;xs:sequence&gt;</span>
+    <span class="schema-keyword">&lt;xs:element name="title" type="xs:string"/&gt;</span>
+    <span class="schema-keyword">&lt;xs:element name="author" type="xs:string"/&gt;</span>
+  <span class="schema-keyword">&lt;/xs:sequence&gt;</span>
+  <span class="xml-comment">&lt;!-- Определение атрибутов --&gt;</span>
+  <span class="schema-keyword">&lt;xs:attribute name="id" type="xs:ID" use="required"/&gt;</span>
+  <span class="schema-keyword">&lt;xs:attribute name="language" type="xs:string"</span>
+                 <span class="schema-keyword">default="en"/&gt;</span>
+  <span class="schema-keyword">&lt;xs:attribute name="category" type="xs:string"</span>
+                 <span class="schema-keyword">use="optional"/&gt;</span>
+<span class="schema-keyword">&lt;/xs:complexType&gt;</span></code></pre>
+                    
+                    <div class="info-box">
+                        <p><strong>Атрибуты xs:attribute:</strong></p>
+                        <ul>
+                            <li><code>name</code> — имя атрибута</li>
+                            <li><code>type</code> — тип данных атрибута</li>
+                            <li><code>use</code> — обязательность (required, optional, prohibited)</li>
+                            <li><code>default</code> — значение по умолчанию</li>
+                            <li><code>fixed</code> — фиксированное значение</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="demo-section">
+                        <p class="demo-title">Соответствующий XML-документ:</p>
+                        
+                        <div class="xml-demo">
+                            <div class="xml-code">
+                                <span class="xml-tag">&lt;book</span> <span class="xml-attr">id</span>=<span class="xml-value">"b123"</span> <span class="xml-attr">language</span>=<span class="xml-value">"en"</span> <span class="xml-attr">category</span>=<span class="xml-value">"technical"</span><span class="xml-tag">&gt;</span><br>
+                                &nbsp;&nbsp;<span class="xml-tag">&lt;title&gt;</span>XML Schema Guide<span class="xml-tag">&lt;/title&gt;</span><br>
+                                &nbsp;&nbsp;<span class="xml-tag">&lt;author&gt;</span>Jane Smith<span class="xml-tag">&lt;/author&gt;</span><br>
+                                <span class="xml-tag">&lt;/book&gt;</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>DTD и сущности</h2>
+            
+            <div class="question">
+                <h3>15. Каково предназначение ENTITY? <span class="lecture-ref">Лекция 10</span></h3>
+            </div>
+            <div class="answer">
+                <p><strong>ENTITY</strong> в DTD — это сущность, которая представляет собой именованное значение или фрагмент контента, который можно повторно использовать в XML-документе.</p>
+                
+                <div class="info-box">
+                    <p><strong>Из Лекции 10:</strong> "Инструкция ENTITY используется для определения сущностей в DTD с целью их использования как в связанном с DTD XML-документе, так и собственно в DTD."</p>
+                </div>
+                
+                <div class="demo-section">
+                    <p class="demo-title">Типы сущностей ENTITY:</p>
+                    
+                    <div class="comparison">
+                        <div class="valid-example" style="flex: 1;">
+                            <p><strong>Внутренние сущности:</strong></p>
+                            <pre><code><span class="dtd-keyword">&lt;!ENTITY company "Microsoft Corporation"&gt;</span>
+<span class="dtd-keyword">&lt;!ENTITY copyright "© 2023 Все права защищены"&gt;</span>
+<span class="dtd-keyword">&lt;!ENTITY email "info@example.com"&gt;</span></code></pre>
+                            <p>Определяются прямо в DTD, содержат текстовые значения.</p>
+                        </div>
+                        
+                        <div class="valid-example" style="flex: 1;">
+                            <p><strong>Внешние сущности:</strong></p>
+                            <pre><code><span class="dtd-keyword">&lt;!ENTITY chapter1 SYSTEM "chapter1.xml"&gt;</span>
+<span class="dtd-keyword">&lt;!ENTITY logo SYSTEM "logo.png" NDATA png&gt;</span>
+<span class="dtd-keyword">&lt;!ENTITY disclaimer PUBLIC 
+  "-//Example//TEXT Disclaimer//EN"
+  "disclaimer.txt"&gt;</span></code></pre>
+                            <p>Ссылаются на внешние файлы или ресурсы.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="demo-section">
+                        <p class="demo-title">Использование сущностей в XML:</p>
+                        
+                        <div class="xml-demo">
+                            <div class="xml-code">
+                                <span class="xml-declaration">&lt;?xml version="1.0"?&gt;</span><br>
+                                <span class="dtd-keyword">&lt;!DOCTYPE document [</span><br>
+                                &nbsp;&nbsp;<span class="dtd-keyword">&lt;!ENTITY author "Иван Иванов"&gt;</span><br>
+                                &nbsp;&nbsp;<span class="dtd-keyword">&lt;!ENTITY company "ООО 'Технологии'"&gt;</span><br>
+                                &nbsp;&nbsp;<span class="dtd-keyword">&lt;!ENTITY year "2023"&gt;</span><br>
+                                <span class="dtd-keyword">]&gt;</span><br>
+                                <span class="xml-tag">&lt;document&gt;</span><br>
+                                &nbsp;&nbsp;<span class="xml-tag">&lt;header&gt;</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="xml-tag">&lt;title&gt;</span>Документация<span class="xml-tag">&lt;/title&gt;</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="xml-tag">&lt;author&gt;</span>&amp;author;<span class="xml-tag">&lt;/author&gt;</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="xml-tag">&lt;company&gt;</span>&amp;company;<span class="xml-tag">&lt;/company&gt;</span><br>
+                                &nbsp;&nbsp;<span class="xml-tag">&lt;/header&gt;</span><br>
+                                &nbsp;&nbsp;<span class="xml-tag">&lt;footer&gt;</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&amp;company; &amp;copy; &amp;year;<br>
+                                &nbsp;&nbsp;<span class="xml-tag">&lt;/footer&gt;</span><br>
+                                <span class="xml-tag">&lt;/document&gt;</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>16. Что такое сущности? Каким образом вы использовали сущности? <span class="lecture-ref">Лекция 10</span></h3>
+            </div>
+            <div class="answer">
+                <p><strong>Сущности (entities)</strong> в XML — это именованные фрагменты данных, которые можно повторно использовать в документе. Они действуют как макросы или переменные.</p>
+                
+                <div class="info-box">
+                    <p><strong>Из Лекции 10:</strong> "Сущность (entity) является заместителем содержания, которую можно однажды объявить и многократно использовать почти в любом месте документа."</p>
+                </div>
+                
+                <div class="demo-section">
+                    <p class="demo-title">Способы использования сущностей:</p>
+                    
+                    <div class="advantages-list">
+                        <div class="advantage-item">
+                            <h4>1. Для повторяющегося текста</h4>
+                            <pre><code><span class="dtd-keyword">&lt;!ENTITY legal "Все права защищены"&gt;</span>
+...
+&lt;footer&gt;&amp;legal;&lt;/footer&gt;</code></pre>
+                        </div>
+                        
+                        <div class="advantage-item">
+                            <h4>2. Для специальных символов</h4>
+                            <pre><code>&lt;price&gt;100&amp;euro;&lt;/price&gt;
+&lt;text&gt;5&amp;gt;3&lt;/text&gt;</code></pre>
+                        </div>
+                        
+                        <div class="advantage-item">
+                            <h4>3. Для внешних файлов</h4>
+                            <pre><code><span class="dtd-keyword">&lt;!ENTITY chapter1 SYSTEM "ch1.xml"&gt;</span>
+...
+&lt;chapter&gt;&amp;chapter1;&lt;/chapter&gt;</code></pre>
+                        </div>
+                        
+                        <div class="advantage-item">
+                            <h4>4. Для параметрических сущностей</h4>
+                            <pre><code><span class="dtd-keyword">&lt;!ENTITY % blocks "(p|div|section)"&gt;</span>
+<span class="dtd-keyword">&lt;!ELEMENT content %blocks;></span></code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="demo-section">
+                    <p class="demo-title">Практический пример использования сущностей:</p>
+                    
+                    <div class="xml-demo">
+                        <div class="xml-code">
+                            <span class="xml-declaration">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><br>
+                            <span class="dtd-keyword">&lt;!DOCTYPE report [</span><br>
+                            &nbsp;&nbsp;<span class="xml-comment">&lt;!-- Определение сущностей --&gt;</span><br>
+                            &nbsp;&nbsp;<span class="dtd-keyword">&lt;!ENTITY company "TechSolutions Inc."&gt;</span><br>
+                            &nbsp;&nbsp;<span class="dtd-keyword">&lt;!ENTITY address "123 Main St, New York"&gt;</span><br>
+                            &nbsp;&nbsp;<span class="dtd-keyword">&lt;!ENTITY phone "+1 (555) 123-4567"&gt;</span><br>
+                            &nbsp;&nbsp;<span class="dtd-keyword">&lt;!ENTITY email "info@techsolutions.com"&gt;</span><br>
+                            &nbsp;&nbsp;<span class="dtd-keyword">&lt;!ENTITY copyright "© 2023 TechSolutions Inc."&gt;</span><br>
+                            <span class="dtd-keyword">]&gt;</span><br>
+                            <span class="xml-tag">&lt;report&gt;</span><br>
+                            &nbsp;&nbsp;<span class="xml-tag">&lt;header&gt;</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="xml-tag">&lt;company&gt;</span>&amp;company;<span class="xml-tag">&lt;/company&gt;</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="xml-tag">&lt;contact&gt;</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="xml-tag">&lt;address&gt;</span>&amp;address;<span class="xml-tag">&lt;/address&gt;</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="xml-tag">&lt;phone&gt;</span>&amp;phone;<span class="xml-tag">&lt;/phone&gt;</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="xml-tag">&lt;email&gt;</span>&amp;email;<span class="xml-tag">&lt;/email&gt;</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="xml-tag">&lt;/contact&gt;</span><br>
+                            &nbsp;&nbsp;<span class="xml-tag">&lt;/header&gt;</span><br>
+                            &nbsp;&nbsp;<span class="xml-tag">&lt;content&gt;</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="xml-comment">&lt;!-- Содержимое отчета --&gt;</span><br>
+                            &nbsp;&nbsp;<span class="xml-tag">&lt;/content&gt;</span><br>
+                            &nbsp;&nbsp;<span class="xml-tag">&lt;footer&gt;</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&amp;copyright;<br>
+                            &nbsp;&nbsp;<span class="xml-tag">&lt;/footer&gt;</span><br>
+                            <span class="xml-tag">&lt;/report&gt;</span>
+                        </div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <p><strong>Преимущества использования сущностей:</strong></p>
+                        <ul>
+                            <li>Централизованное управление повторяющимися данными</li>
+                            <li>Упрощение обновления информации (изменение в одном месте)</li>
+                            <li>Сокращение объема документа</li>
+                            <li>Улучшение читаемости и поддерживаемости</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>17. Какие встроенные сущности вы знаете? <span class="lecture-ref">Лекция 10</span></h3>
+            </div>
+            <div class="answer">
+                <p>Встроенные (предопределенные) сущности XML — это специальные символы, которые имеют заранее определенные имена в XML. Они используются для представления символов, которые имеют специальное значение в XML.</p>
+                
+                <div class="info-box">
+                    <p><strong>Из Лекции 10:</strong> В разделе "Встроенные (предопределенные) сущности XML" перечислены основные сущности.</p>
+                </div>
+                
+                <div class="demo-section">
+                    <p class="demo-title">Основные встроенные сущности XML:</p>
+                    
+                    <table style="width: 100%; border-collapse: collapse; margin: 15px 0;">
+                        <thead>
+                            <tr style="background-color: #2c3e50; color: white;">
+                                <th style="padding: 10px; text-align: left;">Сущность</th>
+                                <th style="padding: 10px; text-align: left;">Символ</th>
+                                <th style="padding: 10px; text-align: left;">Описание</th>
+                                <th style="padding: 10px; text-align: left;">Пример</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom: 1px solid #eee;">
+                                <td style="padding: 10px;"><code>&amp;lt;</code></td>
+                                <td style="padding: 10px;"><strong>&lt;</strong></td>
+                                <td style="padding: 10px;">Знак "меньше"</td>
+                                <td style="padding: 10px;"><code>5 &amp;lt; 10</code> → 5 &lt; 10</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #eee;">
+                                <td style="padding: 10px;"><code>&amp;gt;</code></td>
+                                <td style="padding: 10px;"><strong>&gt;</strong></td>
+                                <td style="padding: 10px;">Знак "больше"</td>
+                                <td style="padding: 10px;"><code>10 &amp;gt; 5</code> → 10 &gt; 5</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #eee;">
+                                <td style="padding: 10px;"><code>&amp;amp;</code></td>
+                                <td style="padding: 10px;"><strong>&amp;</strong></td>
+                                <td style="padding: 10px;">Амперсанд</td>
+                                <td style="padding: 10px;"><code>Smith &amp;amp; Sons</code> → Smith &amp; Sons</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #eee;">
+                                <td style="padding: 10px;"><code>&amp;apos;</code></td>
+                                <td style="padding: 10px;"><strong>'</strong></td>
+                                <td style="padding: 10px;">Апостроф</td>
+                                <td style="padding: 10px;"><code>Don&apos;t</code> → Don't</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #eee;">
+                                <td style="padding: 10px;"><code>&amp;quot;</code></td>
+                                <td style="padding: 10px;"><strong>"</strong></td>
+                                <td style="padding: 10px;">Кавычка</td>
+                                <td style="padding: 10px;"><code>&amp;quot;Hello&amp;quot;</code> → "Hello"</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="demo-section">
+                        <p class="demo-title">Пример использования встроенных сущностей:</p>
+                        
+                        <div class="xml-demo">
+                            <div class="xml-code">
+                                <span class="xml-tag">&lt;math&gt;</span><br>
+                                &nbsp;&nbsp;<span class="xml-tag">&lt;expression&gt;</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;x &amp;lt; y &amp;amp; y &amp;gt; z<br>
+                                &nbsp;&nbsp;<span class="xml-tag">&lt;/expression&gt;</span><br>
+                                &nbsp;&nbsp;<span class="xml-tag">&lt;description&gt;</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;Формула: a&amp;sup2; + b&amp;sup2; = c&amp;sup2;<br>
+                                &nbsp;&nbsp;<span class="xml-tag">&lt;/description&gt;</span><br>
+                                &nbsp;&nbsp;<span class="xml-tag">&lt;quote&gt;</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;Он сказал: &amp;quot;Hello, World!&amp;quot;<br>
+                                &nbsp;&nbsp;<span class="xml-tag">&lt;/quote&gt;</span><br>
+                                <span class="xml-tag">&lt;/math&gt;</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="warning-box">
+                        <p><strong>Важно:</strong> Символы <code>&lt;</code>, <code>&gt;</code> и <code>&amp;</code> всегда должны быть экранированы в XML, так как они имеют специальное значение (теги и начало сущностей).</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>18. Для чего используется ATTLIST? <span class="lecture-ref">Лекция 10</span></h3>
+            </div>
+            <div class="answer">
+                <p><strong>ATTLIST</strong> (Attribute List) — это инструкция DTD, которая используется для объявления атрибутов элементов и определения их свойств.</p>
+                
+                <div class="info-box">
+                    <p><strong>Из Лекции 10:</strong> "Инструкция ATTLIST используется для перечисления и объявления всех атрибутов, которые могут принадлежать элементу."</p>
+                </div>
+                
+                <div class="demo-section">
+                    <p class="demo-title">Синтаксис ATTLIST:</p>
+                    
+                    <pre><code><span class="dtd-keyword">&lt;!ATTLIST элемент
+  атрибут1 тип значение_по_умолчанию
+  атрибут2 тип значение_по_умолчанию
+  ...&gt;</span></code></pre>
+                    
+                    <div class="demo-section">
+                        <p class="demo-title">Пример использования ATTLIST:</p>
+                        
+                        <div class="xml-demo">
+                            <div class="xml-code">
+                                <span class="dtd-keyword">&lt;!ELEMENT book (title, author, year)&gt;</span><br>
+                                <span class="dtd-keyword">&lt;!ELEMENT title (#PCDATA)&gt;</span><br>
+                                <span class="dtd-keyword">&lt;!ELEMENT author (#PCDATA)&gt;</span><br>
+                                <span class="dtd-keyword">&lt;!ELEMENT year (#PCDATA)&gt;</span><br>
+                                <br>
+                                <span class="xml-comment">&lt;!-- Объявление атрибутов для элемента book --&gt;</span><br>
+                                <span class="dtd-keyword">&lt;!ATTLIST book</span><br>
+                                &nbsp;&nbsp;<span class="dtd-keyword">id ID #REQUIRED</span><br>
+                                &nbsp;&nbsp;<span class="dtd-keyword">category CDATA #IMPLIED</span><br>
+                                &nbsp;&nbsp;<span class="dtd-keyword">language CDATA "en"</span><br>
+                                &nbsp;&nbsp;<span class="dtd-keyword">available (yes|no) "yes"</span><br>
+                                <span class="dtd-keyword">&gt;</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <p><strong>Типы значений по умолчанию:</strong></p>
+                        <ul>
+                            <li><code>#REQUIRED</code> — атрибут обязателен</li>
+                            <li><code>#IMPLIED</code> — атрибут не обязателен</li>
+                            <li><code>#FIXED "значение"</code> — атрибут имеет фиксированное значение</li>
+                            <li><code>"значение"</code> — значение по умолчанию</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>19. Раскройте суть валидного XML-документа. Какие типы вы знаете? <span class="lecture-ref">Лекция 10</span></h3>
+            </div>
+            <div class="answer">
+                <p>Валидный XML-документ — это документ, который не только является well-formed (правильно сформированным), но и соответствует правилам, определенным в DTD или XML Schema.</p>
+                
+                <div class="info-box">
+                    <p><strong>Из Лекции 10:</strong> "Первое правило для валидного XML документа то, что он должен быть синтаксически верным. Второе правило — валидный XML документ должен соответствовать определенному типу документов."</p>
+                </div>
+                
+                <div class="demo-section">
+                    <p class="demo-title">Типы XML-документов:</p>
+                    
+                    <div class="advantages-list">
+                        <div class="advantage-item">
+                            <h4>1. Well-formed (правильно сформированный)</h4>
+                            <ul>
+                                <li>Следует базовым правилам синтаксиса XML</li>
+                                <li>Имеет один корневой элемент</li>
+                                <li>Все теги правильно закрыты</li>
+                                <li>Элементы правильно вложены</li>
+                                <li>Атрибуты в кавычках</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="advantage-item">
+                            <h4>2. Valid (валидный)</h4>
+                            <ul>
+                                <li>Является well-formed</li>
+                                <li>Соответствует DTD или XML Schema</li>
+                                <li>Содержит все обязательные элементы</li>
+                                <li>Элементы в правильном порядке</li>
+                                <li>Атрибуты имеют допустимые значения</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="demo-section">
+                    <p class="demo-title">Пример валидного XML-документа с DTD:</p>
+                    
+                    <div class="xml-demo">
+                        <div class="xml-code">
+                            <span class="xml-declaration">&lt;?xml version="1.0"?&gt;</span><br>
+                            <span class="dtd-keyword">&lt;!DOCTYPE catalog [</span><br>
+                            &nbsp;&nbsp;<span class="dtd-keyword">&lt;!ELEMENT catalog (book+)&gt;</span><br>
+                            &nbsp;&nbsp;<span class="dtd-keyword">&lt;!ELEMENT book (title, author, year)&gt;</span><br>
+                            &nbsp;&nbsp;<span class="dtd-keyword">&lt;!ATTLIST book id ID #REQUIRED&gt;</span><br>
+                            &nbsp;&nbsp;<span class="dtd-keyword">&lt;!ELEMENT title (#PCDATA)&gt;</span><br>
+                            &nbsp;&nbsp;<span class="dtd-keyword">&lt;!ELEMENT author (#PCDATA)&gt;</span><br>
+                            &nbsp;&nbsp;<span class="dtd-keyword">&lt;!ELEMENT year (#PCDATA)&gt;</span><br>
+                            <span class="dtd-keyword">]&gt;</span><br>
+                            <span class="xml-tag">&lt;catalog&gt;</span><br>
+                            &nbsp;&nbsp;<span class="xml-tag">&lt;book</span> <span class="xml-attr">id</span>=<span class="xml-value">"b1"</span><span class="xml-tag">&gt;</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="xml-tag">&lt;title&gt;</span>XML Basics<span class="xml-tag">&lt;/title&gt;</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="xml-tag">&lt;author&gt;</span>John Doe<span class="xml-tag">&lt;/author&gt;</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="xml-tag">&lt;year&gt;</span>2023<span class="xml-tag">&lt;/year&gt;</span><br>
+                            &nbsp;&nbsp;<span class="xml-tag">&lt;/book&gt;</span><br>
+                            <span class="xml-tag">&lt;/catalog&gt;</span>
+                        </div>
+                    </div>
+                    
+                    <p>Этот документ является <strong>валидным</strong>, потому что:</p>
+                    <ol>
+                        <li>Он <strong>well-formed</strong> (правильный синтаксис XML)</li>
+                        <li>Соответствует правилам в DTD (есть все обязательные элементы и атрибуты)</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>20. Что означает следующая запись &lt;!ENTITY name "Hello, world!"&gt;? <span class="lecture-ref">Лекция 10</span></h3>
+            </div>
+            <div class="answer">
+                <p>Эта запись определяет внутреннюю сущность в DTD с именем <code>name</code> и значением <code>"Hello, world!"</code>.</p>
+                
+                <div class="demo-section">
+                    <p class="demo-title">Разбор записи:</p>
+                    
+                    <pre><code><span class="dtd-keyword">&lt;!ENTITY</span> <span class="xml-keyword">name</span> <span class="xml-value">"Hello, world!"</span><span class="dtd-keyword">&gt;</span></code></pre>
+                    
+                    <ul>
+                        <li><code>&lt;!ENTITY</code> — начало объявления сущности</li>
+                        <li><code>name</code> — имя сущности (будет использоваться как <code>&amp;name;</code>)</li>
+                        <li><code>"Hello, world!"</code> — значение сущности</li>
+                        <li><code>&gt;</code> — конец объявления</li>
+                    </ul>
+                    
+                    <div class="demo-section">
+                        <p class="demo-title">Пример использования:</p>
+                        
+                        <div class="xml-demo">
+                            <div class="xml-code">
+                                <span class="xml-declaration">&lt;?xml version="1.0"?&gt;</span><br>
+                                <span class="dtd-keyword">&lt;!DOCTYPE greeting [</span><br>
+                                &nbsp;&nbsp;<span class="dtd-keyword">&lt;!ENTITY hello "Hello, world!"&gt;</span><br>
+                                <span class="dtd-keyword">]&gt;</span><br>
+                                <span class="xml-tag">&lt;greeting&gt;</span><br>
+                                &nbsp;&nbsp;<span class="xml-tag">&lt;message&gt;</span>&amp;hello;<span class="xml-tag">&lt;/message&gt;</span><br>
+                                &nbsp;&nbsp;<span class="xml-tag">&lt;repeat&gt;</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;Снова: &amp;hello;<br>
+                                &nbsp;&nbsp;<span class="xml-tag">&lt;/repeat&gt;</span><br>
+                                <span class="xml-tag">&lt;/greeting&gt;</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <p><strong>После обработки парсером XML будет выглядеть так:</strong></p>
+                        <pre><code>&lt;greeting&gt;
+  &lt;message&gt;Hello, world!&lt;/message&gt;
+  &lt;repeat&gt;
+    Снова: Hello, world!
+  &lt;/repeat&gt;
+&lt;/greeting&gt;</code></pre>
+                        <p>Парсер заменяет <code>&amp;hello;</code> на значение сущности <code>"Hello, world!"</code>.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>21. Поясните следующую запись &lt;!ELEMENT to (#PCDATA)&gt;. <span class="lecture-ref">Лекция 10</span></h3>
+            </div>
+            <div class="answer">
+                <p>Эта запись определяет элемент в DTD с именем <code>to</code>, который может содержать только текстовые данные (<strong>P</strong>arsed <strong>C</strong>haracter <strong>DATA</strong>).</p>
+                
+                <div class="info-box">
+                    <p><strong>Из Лекции 10:</strong> В примерах представлена именно эта запись: <code>&lt;!ELEMENT to (#PCDATA)&gt;</code></p>
+                </div>
+                
+                <div class="demo-section">
+                    <p class="demo-title">Разбор записи:</p>
+                    
+                    <pre><code><span class="dtd-keyword">&lt;!ELEMENT</span> <span class="xml-keyword">to</span> <span class="xml-value">(#PCDATA)</span><span class="dtd-keyword">&gt;</span></code></pre>
+                    
+                    <ul>
+                        <li><code>&lt;!ELEMENT</code> — начало объявления элемента</li>
+                        <li><code>to</code> — имя элемента</li>
+                        <li><code>(#PCDATA)</code> — тип содержимого: Parsed Character Data (текст, который будет обработан парсером)</li>
+                        <li><code>&gt;</code> — конец объявления</li>
+                    </ul>
+                    
+                    <div class="demo-section">
+                        <p class="demo-title">Пример использования:</p>
+                        
+                        <div class="xml-demo">
+                            <div class="xml-code">
+                                <span class="xml-declaration">&lt;?xml version="1.0"?&gt;</span><br>
+                                <span class="dtd-keyword">&lt;!DOCTYPE note [</span><br>
+                                &nbsp;&nbsp;<span class="dtd-keyword">&lt;!ELEMENT note (to, from, message)&gt;</span><br>
+                                &nbsp;&nbsp;<span class="dtd-keyword">&lt;!ELEMENT to (#PCDATA)&gt;</span><br>
+                                &nbsp;&nbsp;<span class="dtd-keyword">&lt;!ELEMENT from (#PCDATA)&gt;</span><br>
+                                &nbsp;&nbsp;<span class="dtd-keyword">&lt;!ELEMENT message (#PCDATA)&gt;</span><br>
+                                <span class="dtd-keyword">]&gt;</span><br>
+                                <span class="xml-tag">&lt;note&gt;</span><br>
+                                &nbsp;&nbsp;<span class="xml-tag">&lt;to&gt;</span>Иван Иванов<span class="xml-tag">&lt;/to&gt;</span><br>
+                                &nbsp;&nbsp;<span class="xml-tag">&lt;from&gt;</span>Петр Петров<span class="xml-tag">&lt;/from&gt;</span><br>
+                                &nbsp;&nbsp;<span class="xml-tag">&lt;message&gt;</span>Привет! Как дела?<span class="xml-tag">&lt;/message&gt;</span><br>
+                                <span class="xml-tag">&lt;/note&gt;</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <p><strong>Другие типы содержимого в DTD:</strong></p>
+                        <ul>
+                            <li><code>EMPTY</code> — элемент не может содержать ничего (например: <code>&lt;br/&gt;</code>)</li>
+                            <li><code>ANY</code> — элемент может содержать любой контент</li>
+                            <li><code>(child1, child2, ...)</code> — последовательность дочерних элементов</li>
+                            <li><code>(child1|child2|...)</code> — выбор одного из дочерних элементов</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>22. Какие параметры и значения имеет инструкция ATTLIST? <span class="lecture-ref">Лекция 10</span></h3>
+            </div>
+            <div class="answer">
+                <p>Инструкция ATTLIST имеет следующую структуру параметров:</p>
+                
+                <div class="info-box">
+                    <p><strong>Из Лекции 10:</strong> "Сначала указывается имя элемента (или элементов), к которому относится список атрибутов. Затем для всех атрибутов по очереди указывается имя, обязательность и символьные данные, допустимые в качестве значения."</p>
+                </div>
+                
+                <div class="demo-section">
+                    <p class="demo-title">Полный синтаксис ATTLIST:</p>
+                    
+                    <pre><code><span class="dtd-keyword">&lt;!ATTLIST имя-элемента
+  имя-атрибута1 тип-атрибута значение-по-умолчанию
+  имя-атрибута2 тип-атрибута значение-по-умолчанию
+  ...&gt;</span></code></pre>
+                    
+                    <div class="demo-section">
+                        <p class="demo-title">Типы атрибутов в DTD:</p>
+                        
+                        <table style="width: 100%; border-collapse: collapse; margin: 15px 0;">
+                            <thead>
+                                <tr style="background-color: #2c3e50; color: white;">
+                                    <th style="padding: 10px; text-align: left;">Тип</th>
+                                    <th style="padding: 10px; text-align: left;">Описание</th>
+                                    <th style="padding: 10px; text-align: left;">Пример</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid #eee;">
+                                    <td style="padding: 10px;"><code>CDATA</code></td>
+                                    <td style="padding: 10px;">Текстовые данные</td>
+                                    <td style="padding: 10px;"><code>name CDATA #IMPLIED</code></td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #eee;">
+                                    <td style="padding: 10px;"><code>ID</code></td>
+                                    <td style="padding: 10px;">Уникальный идентификатор</td>
+                                    <td style="padding: 10px;"><code>id ID #REQUIRED</code></td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #eee;">
+                                    <td style="padding: 10px;"><code>IDREF</code></td>
+                                    <td style="padding: 10px;">Ссылка на ID</td>
+                                    <td style="padding: 10px;"><code>ref IDREF #IMPLIED</code></td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #eee;">
+                                    <td style="padding: 10px;"><code>ENTITY</code></td>
+                                    <td style="padding: 10px;">Имя сущности</td>
+                                    <td style="padding: 10px;"><code>logo ENTITY #IMPLIED</code></td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #eee;">
+                                    <td style="padding: 10px;"><code>NMTOKEN</code></td>
+                                    <td style="padding: 10px;">Имя (без пробелов)</td>
+                                    <td style="padding: 10px;"><code>code NMTOKEN #REQUIRED</code></td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #eee;">
+                                    <td style="padding: 10px;"><code>(val1|val2|...)</code></td>
+                                    <td style="padding: 10px;">Перечисление значений</td>
+                                    <td style="padding: 10px;"><code>status (active|inactive) "active"</code></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="demo-section">
+                        <p class="demo-title">Примеры значений по умолчанию:</p>
+                        
+                        <div class="xml-demo">
+                            <div class="xml-code">
+                                <span class="dtd-keyword">&lt;!ATTLIST book</span><br>
+                                &nbsp;&nbsp;<span class="xml-comment">&lt;!-- Обязательный атрибут --&gt;</span><br>
+                                &nbsp;&nbsp;<span class="dtd-keyword">id ID #REQUIRED</span><br>
+                                <br>
+                                &nbsp;&nbsp;<span class="xml-comment">&lt;!-- Необязательный атрибут --&gt;</span><br>
+                                &nbsp;&nbsp;<span class="dtd-keyword">category CDATA #IMPLIED</span><br>
+                                <br>
+                                &nbsp;&nbsp;<span class="xml-comment">&lt;!-- Атрибут с значением по умолчанию --&gt;</span><br>
+                                &nbsp;&nbsp;<span class="dtd-keyword">language CDATA "en"</span><br>
+                                <br>
+                                &nbsp;&nbsp;<span class="xml-comment">&lt;!-- Атрибут с фиксированным значением --&gt;</span><br>
+                                &nbsp;&nbsp;<span class="dtd-keyword">version CDATA #FIXED "1.0"</span><br>
+                                <br>
+                                &nbsp;&nbsp;<span class="xml-comment">&lt;!-- Атрибут с перечислением значений --&gt;</span><br>
+                                &nbsp;&nbsp;<span class="dtd-keyword">status (new|used|damaged) "new"</span><br>
+                                <span class="dtd-keyword">&gt;</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>23. Назовите параметры, которые имеет инструкция ELEMENT. <span class="lecture-ref">Лекция 10</span></h3>
+            </div>
+            <div class="answer">
+                <p>Инструкция ELEMENT в DTD имеет следующие параметры:</p>
+                
+                <div class="info-box">
+                    <p><strong>Из Лекции 10:</strong> "Сначала инструкция объявляет имя элемента, а затем определяет, какое содержимое допустимо в элементе."</p>
+                </div>
+                
+                <div class="demo-section">
+                    <p class="demo-title">Синтаксис инструкции ELEMENT:</p>
+                    
+                    <pre><code><span class="dtd-keyword">&lt;!ELEMENT имя-элемента содержимое&gt;</span></code></pre>
+                    
+                    <div class="demo-section">
+                        <p class="demo-title">Типы содержимого элемента:</p>
+                        
+                        <div class="advantages-list">
+                            <div class="advantage-item">
+                                <h4>1. EMPTY</h4>
+                                <p>Элемент не содержит содержимого</p>
+                                <pre><code><span class="dtd-keyword">&lt;!ELEMENT br EMPTY&gt;</span></code></pre>
+                                <p>В XML: <code>&lt;br/&gt;</code></p>
+                            </div>
+                            
+                            <div class="advantage-item">
+                                <h4>2. ANY</h4>
+                                <p>Элемент может содержать любой контент</p>
+                                <pre><code><span class="dtd-keyword">&lt;!ELEMENT document ANY&gt;</span></code></pre>
+                            </div>
+                            
+                            <div class="advantage-item">
+                                <h4>3. (#PCDATA)</h4>
+                                <p>Только текстовое содержимое</p>
+                                <pre><code><span class="dtd-keyword">&lt;!ELEMENT title (#PCDATA)&gt;</span></code></pre>
+                            </div>
+                            
+                            <div class="advantage-item">
+                                <h4>4. (дочерние-элементы)</h4>
+                                <p>Определяет структуру дочерних элементов</p>
+                                <pre><code><span class="dtd-keyword">&lt;!ELEMENT book (title, author, year)&gt;</span></code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="demo-section">
+                        <p class="demo-title">Модификаторы в содержимом элементов:</p>
+                        
+                        <div class="xml-demo">
+                            <div class="xml-code">
+                                <span class="xml-comment">&lt;!-- Обязательный элемент (по умолчанию) --&gt;</span><br>
+                                <span class="dtd-keyword">&lt;!ELEMENT book (title, author, year)&gt;</span><br>
+                                <br>
+                                <span class="xml-comment">&lt;!-- Необязательный элемент (?) --&gt;</span><br>
+                                <span class="dtd-keyword">&lt;!ELEMENT book (title, author?, year)&gt;</span><br>
+                                <br>
+                                <span class="xml-comment">&lt;!-- Ноль или более раз (*) --&gt;</span><br>
+                                <span class="dtd-keyword">&lt;!ELEMENT book (title, author*, year)&gt;</span><br>
+                                <br>
+                                <span class="xml-comment">&lt;!-- Один или более раз (+) --&gt;</span><br>
+                                <span class="dtd-keyword">&lt;!ELEMENT catalog (book+)&gt;</span><br>
+                                <br>
+                                <span class="xml-comment">&lt;!-- Выбор одного из элементов (|) --&gt;</span><br>
+                                <span class="dtd-keyword">&lt;!ELEMENT contact (phone|email|address)&gt;</span><br>
+                                <br>
+                                <span class="xml-comment">&lt;!-- Группировка элементов --&gt;</span><br>
+                                <span class="dtd-keyword">&lt;!ELEMENT book (title, (author+|editor+), year)&gt;</span><br>
+                                <br>
+                                <span class="xml-comment">&lt;!-- Смешанное содержимое --&gt;</span><br>
+                                <span class="dtd-keyword">&lt;!ELEMENT paragraph (#PCDATA|emphasis|link)*&gt;</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>24. Что находится на http://www.w3.org/2001/XMLSchema? <span class="lecture-ref">Лекция 10</span></h3>
+            </div>
+            <div class="answer">
+                <p>На <code>http://www.w3.org/2001/XMLSchema</code> находится <strong>пространство имен XML Schema</strong>, которое содержит определения всех элементов и типов данных для создания XML-схем.</p>
+                
+                <div class="demo-section">
+                    <p class="demo-title">Значение этого URL:</p>
+                    
+                    <div class="info-box">
+                        <p><strong>Это не веб-страница для просмотра в браузере</strong>, а URI (Uniform Resource Identifier), который идентифицирует пространство имен XML Schema, определенное консорциумом W3C.</p>
+                    </div>
+                    
+                    <div class="demo-section">
+                        <p class="demo-title">Использование в XML Schema:</p>
+                        
+                        <div class="xml-demo">
+                            <div class="xml-code">
+                                <span class="xml-declaration">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><br>
+                                <span class="schema-keyword">&lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="schema-keyword">targetNamespace="http://www.example.com/myschema"</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="schema-keyword">elementFormDefault="qualified"&gt;</span><br>
+                                <br>
+                                &nbsp;&nbsp;<span class="xml-comment">&lt;!-- Здесь xs: относится к пространству имен XML Schema --&gt;</span><br>
+                                &nbsp;&nbsp;<span class="schema-keyword">&lt;xs:element name="book" type="bookType"/&gt;</span><br>
+                                <br>
+                                &nbsp;&nbsp;<span class="schema-keyword">&lt;xs:complexType name="bookType"&gt;</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="schema-keyword">&lt;xs:sequence&gt;</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="schema-keyword">&lt;xs:element name="title" type="xs:string"/&gt;</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="schema-keyword">&lt;xs:element name="author" type="xs:string"/&gt;</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="schema-keyword">&lt;/xs:sequence&gt;</span><br>
+                                &nbsp;&nbsp;<span class="schema-keyword">&lt;/xs:complexType&gt;</span><br>
+                                <br>
+                                <span class="schema-keyword">&lt;/xs:schema&gt;</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <p><strong>Что содержит пространство имен XML Schema:</strong></p>
+                        <ul>
+                            <li>Все элементы схемы: <code>xs:element</code>, <code>xs:complexType</code>, <code>xs:sequence</code> и т.д.</li>
+                            <li>Простые типы данных: <code>xs:string</code>, <code>xs:integer</code>, <code>xs:date</code></li>
+                            <li>Ограничения и фацеты: <code>xs:minLength</code>, <code>xs:maxInclusive</code></li>
+                            <li>Аннотации: <code>xs:annotation</code>, <code>xs:documentation</code></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>25. Каким образом можно объявить DTD? Как расшифровывается аббревиатура? <span class="лекция 10</span></h3>
+            </div>
+            <div class="answer">
+                <p><strong>DTD (Document Type Definition)</strong> — определение типа документа. Это набор правил, который определяет структуру и содержание XML-документа.</p>
+                
+                <div class="info-box">
+                    <p><strong>Из Лекции 10:</strong> "Document Type Definition (DTD) — это язык описания структуры XML-документа, который используется для проверки грамматики XML-документа и его соответствия определенному DTD."</p>
+                </div>
+                
+                <div class="demo-section">
+                    <p class="demo-title">Способы объявления DTD:</p>
+                    
+                    <div class="comparison">
+                        <div class="valid-example" style="flex: 1;">
+                            <p><strong>1. Внутреннее DTD (встроенное в XML)</strong></p>
+                            <pre><code><span class="xml-declaration">&lt;?xml version="1.0"?&gt;</span>
+<span class="dtd-keyword">&lt;!DOCTYPE note [</span>
+  <span class="dtd-keyword">&lt;!ELEMENT note (to,from,heading,body)&gt;</span>
+  <span class="dtd-keyword">&lt;!ELEMENT to (#PCDATA)&gt;</span>
+  <span class="dtd-keyword">&lt;!ELEMENT from (#PCDATA)&gt;</span>
+  <span class="dtd-keyword">&lt;!ELEMENT heading (#PCDATA)&gt;</span>
+  <span class="dtd-keyword">&lt;!ELEMENT body (#PCDATA)&gt;</span>
+<span class="dtd-keyword">]&gt;</span>
+&lt;note&gt;
+  &lt;to&gt;Иван&lt;/to&gt;
+  &lt;from&gt;Петр&lt;/from&gt;
+  &lt;heading&gt;Напоминание&lt;/heading&gt;
+  &lt;body&gt;Не забудь встречу!&lt;/body&gt;
+&lt;/note&gt;</code></pre>
+                        </div>
+                        
+                        <div class="valid-example" style="flex: 1;">
+                            <p><strong>2. Внешнее DTD (ссылка на файл)</strong></p>
+                            <pre><code><span class="xml-declaration">&lt;?xml version="1.0"?&gt;</span>
+<span class="dtd-keyword">&lt;!DOCTYPE note SYSTEM "note.dtd"&gt;</span>
+&lt;note&gt;
+  &lt;to&gt;Иван&lt;/to&gt;
+  &lt;from&gt;Петр&lt;/from&gt;
+  &lt;heading&gt;Напоминание&lt;/heading&gt;
+  &lt;body&gt;Не забудь встречу!&lt;/body&gt;
+&lt;/note&gt;</code></pre>
+                            <p><strong>Файл note.dtd:</strong></p>
+                            <pre><code><span class="dtd-keyword">&lt;!ELEMENT note (to,from,heading,body)&gt;</span>
+<span class="dtd-keyword">&lt;!ELEMENT to (#PCDATA)&gt;</span>
+<span class="dtd-keyword">&lt;!ELEMENT from (#PCDATA)&gt;</span>
+<span class="dtd-keyword">&lt;!ELEMENT heading (#PCDATA)&gt;</span>
+<span class="dtd-keyword">&lt;!ELEMENT body (#PCDATA)&gt;</span></code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="demo-section">
+                        <p class="demo-title">3. Публичное DTD (стандартное)</p>
+                        
+                        <pre><code><span class="xml-declaration">&lt;?xml version="1.0"?&gt;</span>
+<span class="dtd-keyword">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;</span>
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+  &lt;head&gt;
+    &lt;title&gt;Пример XHTML&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;p&gt;Привет, мир!&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                    </div>
+                    
+                    <div class="info-box">
+                        <p><strong>Расшифровка аббревиатуры DTD:</strong></p>
+                        <ul>
+                            <li><strong>D</strong>ocument — документ</li>
+                            <li><strong>T</strong>ype — тип</li>
+                            <li><strong>D</strong>efinition — определение</li>
+                        </ul>
+                        <p><strong>DTD = Document Type Definition = Определение Типа Документа</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <p>Материалы подготовлены на основе <strong>Лекции 10</strong> по языку XML</p>
+            <p>Все примеры основаны на реальных материалах лекции и демонстрируют ключевые концепции XML</p>
+        </footer>
+    </div>
+
+    <script>
+        // Интерактивная демонстрация XML-валидации
+        document.addEventListener('DOMContentLoaded', function() {
+            // Создаем интерактивный валидатор XML
+            const validatorDemo = document.createElement('div');
+            validatorDemo.innerHTML = `
+                <div style="position: fixed; bottom: 20px; left: 20px; z-index: 1000; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); max-width: 300px;">
+                    <h4 style="margin-bottom: 10px; color: #2c8c3f;">Интерактивный XML валидатор</h4>
+                    <textarea id="xmlInput" style="width: 100%; height: 100px; font-family: 'Courier New', monospace; font-size: 12px; padding: 8px; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 10px;" placeholder="Введите XML для проверки...">&lt;note&gt;
+  &lt;to&gt;Иван&lt;/to&gt;
+  &lt;from&gt;Петр&lt;/from&gt;
+  &lt;message&gt;Привет!&lt;/message&gt;
+&lt;/note&gt;</textarea>
+                    <div style="display: flex; gap: 10px;">
+                        <button id="validateBtn" style="flex: 1; background-color: #2c8c3f; color: white; border: none; padding: 8px; border-radius: 4px; cursor: pointer;">Проверить</button>
+                        <button id="exampleBtn" style="flex: 1; background-color: #3498db; color: white; border: none; padding: 8px; border-radius: 4px; cursor: pointer;">Пример</button>
+                    </div>
+                    <div id="validationResult" style="margin-top: 10px; padding: 10px; border-radius: 4px; display: none;"></div>
+                </div>
+            `;
+            document.body.appendChild(validatorDemo);
+            
+            // Простая проверка XML
+            function validateXML(xmlString) {
+                try {
+                    // Удаляем пробелы в начале и конце
+                    xmlString = xmlString.trim();
+                    
+                    // Базовые проверки
+                    if (!xmlString.startsWith('<?xml') && !xmlString.startsWith('<')) {
+                        return { valid: false, error: 'XML должен начинаться с декларации или элемента' };
+                    }
+                    
+                    // Проверка на закрывающие теги
+                    const tagRegex = /<([^>]+)>/g;
+                    const tags = [];
+                    let match;
+                    
+                    while ((match = tagRegex.exec(xmlString)) !== null) {
+                        const tag = match[1];
+                        if (!tag.startsWith('?') && !tag.startsWith('!')) {
+                            if (tag.endsWith('/')) {
+                                // Самозакрывающийся тег
+                                continue;
+                            } else if (tag.startsWith('/')) {
+                                // Закрывающий тег
+                                const openTag = tags.pop();
+                                if (!openTag || openTag !== tag.substring(1)) {
+                                    return { valid: false, error: `Несоответствие тегов: ${openTag} и ${tag}` };
+                                }
+                            } else {
+                                // Открывающий тег
+                                const tagName = tag.split(' ')[0].split('/')[0];
+                                tags.push(tagName);
+                            }
+                        }
+                    }
+                    
+                    if (tags.length > 0) {
+                        return { valid: false, error: `Не закрыты теги: ${tags.join(', ')}` };
+                    }
+                    
+                    return { valid: true, message: 'XML правильно сформирован (well-formed)' };
+                    
+                } catch (error) {
+                    return { valid: false, error: `Ошибка при разборе XML: ${error.message}` };
+                }
+            }
+            
+            // Обработчики кнопок
+            document.getElementById('validateBtn').addEventListener('click', function() {
+                const xmlInput = document.getElementById('xmlInput').value;
+                const result = validateXML(xmlInput);
+                const resultDiv = document.getElementById('validationResult');
+                
+                resultDiv.style.display = 'block';
+                if (result.valid) {
+                    resultDiv.innerHTML = `<div style="background-color: #d5f4e6; color: #2c8c3f; padding: 10px; border-radius: 4px; border-left: 4px solid #2ecc71;">
+                        <strong>✓ Валидный XML</strong><br>${result.message}
+                    </div>`;
+                } else {
+                    resultDiv.innerHTML = `<div style="background-color: #fadbd8; color: #e74c3c; padding: 10px; border-radius: 4px; border-left: 4px solid #e74c3c;">
+                        <strong>✗ Невалидный XML</strong><br>${result.error}
+                    </div>`;
+                }
+            });
+            
+            document.getElementById('exampleBtn').addEventListener('click', function() {
+                const exampleXML = `<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE catalog [
+  <!ELEMENT catalog (book+)>
+  <!ELEMENT book (title, author, year)>
+  <!ATTLIST book id ID #REQUIRED>
+  <!ELEMENT title (#PCDATA)>
+  <!ELEMENT author (#PCDATA)>
+  <!ELEMENT year (#PCDATA)>
+]>
+<catalog>
+  <book id="b1">
+    <title>XML Basics</title>
+    <author>John Doe</author>
+    <year>2023</year>
+  </book>
+  <book id="b2">
+    <title>Advanced XML</title>
+    <author>Jane Smith</author>
+    <year>2023</year>
+  </book>
+</catalog>`;
+                
+                document.getElementById('xmlInput').value = exampleXML;
+                document.getElementById('validationResult').style.display = 'none';
+            });
+            
+            // Добавляем подсветку при наведении на XML-примеры
+            const xmlExamples = document.querySelectorAll('.xml-demo');
+            xmlExamples.forEach(example => {
+                example.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                    this.style.transition = 'transform 0.3s ease';
+                    this.style.boxShadow = '0 8px 16px rgba(0,0,0,0.2)';
+                });
+                
+                example.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = 'none';
+                });
+            });
+            
+            // Показываем информацию о DTD при клике
+            const dtdExamples = document.querySelectorAll('.dtd-keyword');
+            dtdExamples.forEach(item => {
+                item.addEventListener('click', function() {
+                    alert('Это элемент DTD (Document Type Definition) - языка для описания структуры XML-документов.\n\nDTD определяет:\n• Какие элементы могут быть в документе\n• Какие атрибуты у элементов\n• Порядок элементов\n• Типы данных элементов и атрибутов');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

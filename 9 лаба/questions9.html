@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Модульные сетки и Grid-верстка</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #3498db;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+        }
+        
+        h2 {
+            color: #2980b9;
+            margin: 40px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+        
+        h3 {
+            color: #3498db;
+            margin: 25px 0 15px;
+        }
+        
+        .question {
+            background-color: #f8fafc;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-left: 5px solid #3498db;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        
+        .question:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            transform: translateY(-2px);
+        }
+        
+        .answer {
+            background-color: #e8f4fc;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            border: 1px solid #d6eaf8;
+        }
+        
+        .demo-section {
+            background-color: #f9f9f9;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .demo-title {
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+        
+        /* Skeleton Grid Demo */
+        .skeleton-demo {
+            margin: 20px 0;
+        }
+        
+        .skeleton-container {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+        
+        .skeleton-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        
+        .skeleton-column {
+            padding: 15px;
+            background-color: #3498db;
+            color: white;
+            margin-bottom: 20px;
+            text-align: center;
+            border-radius: 4px;
+        }
+        
+        .one { width: 8.33%; }
+        .two { width: 16.66%; }
+        .three { width: 25%; }
+        .four { width: 33.33%; }
+        .five { width: 41.66%; }
+        .six { width: 50%; }
+        .seven { width: 58.33%; }
+        .eight { width: 66.66%; }
+        .nine { width: 75%; }
+        .ten { width: 83.33%; }
+        .eleven { width: 91.66%; }
+        .twelve { width: 100%; }
+        
+        /* Grid верстка демо */
+        .grid-demo-container {
+            display: grid;
+            gap: 10px;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f0f0f0;
+            border-radius: 6px;
+        }
+        
+        .grid-item {
+            background-color: #3498db;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 60px;
+        }
+        
+        .grid-demo-1 {
+            grid-template-columns: 20px 20px 20px;
+            grid-template-rows: 40px 40px;
+        }
+        
+        .grid-demo-2 {
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 80px 120px 80px;
+        }
+        
+        .grid-demo-3 {
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 80px);
+            grid-template-areas: 
+                "header header header"
+                "sidebar content content"
+                "footer footer footer";
+        }
+        
+        .item-header { grid-area: header; background-color: #2c3e50; }
+        .item-sidebar { grid-area: sidebar; background-color: #e74c3c; }
+        .item-content { grid-area: content; background-color: #2ecc71; }
+        .item-footer { grid-area: footer; background-color: #f39c12; }
+        
+        /* Практическое задание - 3x3 grid */
+        .exercise-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 100px);
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .exercise-item {
+            padding: 15px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .row-2 {
+            grid-row: 2;
+            background-color: #e74c3c;
+            color: white;
+        }
+        
+        .blue-text {
+            grid-column: 1 / span 3;
+            grid-row: 1;
+            color: #2980b9;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        /* Выравнивание в Grid */
+        .alignment-demo {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 100px);
+            gap: 10px;
+            margin: 20px 0;
+            background-color: #f0f0f0;
+            padding: 15px;
+            border-radius: 6px;
+        }
+        
+        .align-item {
+            background-color: #3498db;
+            color: white;
+            padding: 15px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .align-start {
+            align-self: start;
+            background-color: #2ecc71;
+        }
+        
+        .align-end {
+            align-self: end;
+            background-color: #e74c3c;
+        }
+        
+        .align-center {
+            align-self: center;
+            background-color: #f39c12;
+        }
+        
+        .justify-start {
+            justify-self: start;
+            background-color: #9b59b6;
+        }
+        
+        .justify-end {
+            justify-self: end;
+            background-color: #1abc9c;
+        }
+        
+        .justify-center {
+            justify-self: center;
+            background-color: #d35400;
+        }
+        
+        /* Информационные блоки */
+        .info-box {
+            background-color: #e8f6f3;
+            border-left: 4px solid #1abc9c;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        code {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        pre {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #ecf0f1;
+            color: #7f8c8d;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .skeleton-column {
+                width: 100% !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Модульные сетки и Grid-верстка</h1>
+            <p class="subtitle">Ответы на вопросы по системам модульной верстки и CSS Grid</p>
+        </header>
+        
+        <section>
+            <h2>Модульные сетки</h2>
+            
+            <div class="question">
+                <h3>1. Что представляет из себя модульная сетка?</h3>
+            </div>
+            <div class="answer">
+                <p>Модульная сетка — это система организации контента на веб-странице, основанная на использовании колонок и рядов. Она представляет собой невидимую структуру, которая помогает дизайнерам и разработчикам:</p>
+                <ul>
+                    <li>Распределять контент на странице</li>
+                    <li>Создавать последовательный и гармоничный дизайн</li>
+                    <li>Обеспечивать отзывчивость (адаптивность) сайта</li>
+                    <li>Упрощать процесс верстки</li>
+                    <li>Соблюдать визуальную иерархию</li>
+                </ul>
+                <div class="info-box">
+                    <p><strong>Ключевые характеристики модульных сеток:</strong></p>
+                    <ul>
+                        <li>Деление на колонки (обычно 12, 16 или 24)</li>
+                        <li>Межколоночные промежутки (гаттеры)</li>
+                        <li>Горизонтальные ряды</li>
+                        <li>Возможность объединения колонок</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>2. Поясните суть системы модульной верстки Skeleton.</h3>
+            </div>
+            <div class="answer">
+                <p>Skeleton — это легковесный CSS-фреймворк для создания адаптивных сеток. Его суть заключается в предоставлении простой и понятной системы из 12 колонок для построения макетов веб-страниц.</p>
+                <p><strong>Основные особенности Skeleton:</strong></p>
+                <ul>
+                    <li>Использует 12-колоночную сетку</li>
+                    <li>Имеет фиксированную максимальную ширину 960px</li>
+                    <li>Автоматически адаптируется под мобильные устройства</li>
+                    <li>Минимальный размер (всего около 400 строк CSS)</li>
+                    <li>Не включает встроенные компоненты UI (только сетка)</li>
+                </ul>
+                <div class="demo-section">
+                    <p class="demo-title">Демонстрация 12-колоночной сетки Skeleton:</p>
+                    <div class="skeleton-demo">
+                        <div class="skeleton-container">
+                            <div class="skeleton-row">
+                                <div class="skeleton-column twelve">12 колонок (100%)</div>
+                            </div>
+                            <div class="skeleton-row">
+                                <div class="skeleton-column six">6 колонок (50%)</div>
+                                <div class="skeleton-column six">6 колонок (50%)</div>
+                            </div>
+                            <div class="skeleton-row">
+                                <div class="skeleton-column four">4 колонки (33%)</div>
+                                <div class="skeleton-column four">4 колонки (33%)</div>
+                                <div class="skeleton-column four">4 колонки (33%)</div>
+                            </div>
+                            <div class="skeleton-row">
+                                <div class="skeleton-column three">3 колонки (25%)</div>
+                                <div class="skeleton-column six">6 колонок (50%)</div>
+                                <div class="skeleton-column three">3 колонки (25%)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>3. Каким образом можно использовать систему Skeleton?</h3>
+            </div>
+            <div class="answer">
+                <p>Систему Skeleton можно использовать несколькими способами:</p>
+                <ol>
+                    <li><strong>Скачать и подключить файлы Skeleton:</strong>
+                        <pre><code>&lt;link rel="stylesheet" href="skeleton.css"&gt;</code></pre>
+                    </li>
+                    <li><strong>Использовать через CDN:</strong>
+                        <pre><code>&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css"&gt;</code></pre>
+                    </li>
+                    <li><strong>Встроить в проект и настроить под свои нужды</strong></li>
+                </ol>
+                <p><strong>Базовый шаблон использования Skeleton:</strong></p>
+                <pre><code>&lt;div class="container"&gt;
+  &lt;div class="row"&gt;
+    &lt;div class="one column"&gt;Одна колонка&lt;/div&gt;
+    &lt;div class="eleven columns"&gt;Одиннадцать колонок&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="row"&gt;
+    &lt;div class="two columns"&gt;Две колонки&lt;/div&gt;
+    &lt;div class="ten columns"&gt;Десять колонок&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+            
+            <div class="question">
+                <h3>4. Что означают стили в файле skeleton.css?</h3>
+            </div>
+            <div class="answer">
+                <p>Файл skeleton.css содержит несколько ключевых групп стилей:</p>
+                <ol>
+                    <li><strong>Сброс и базовая типографика</strong> - нормализация стилей, базовые стили для текста, кнопок, форм</li>
+                    <li><strong>Сеточная система</strong> - стили для контейнера, строк и колонок
+                        <pre><code>.container {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.column, .columns {
+  width: 100%;
+  padding: 0 15px;
+}
+
+/* Классы для разных размеров колонок */
+.one.column { width: 8.33%; }
+.two.columns { width: 16.66%; }
+/* и так далее до twelve.columns */</code></pre>
+                    </li>
+                    <li><strong>Медиа-запросы</strong> - адаптивные стили для мобильных устройств</li>
+                    <li><strong>Утилитарные классы</strong> - вспомогательные стили для выравнивания, отображения и т.д.</li>
+                </ol>
+            </div>
+            
+            <div class="question">
+                <h3>5. Назовите этапы реализации системы модульной верстки Skeleton.</h3>
+            </div>
+            <div class="answer">
+                <p>Реализация системы Skeleton включает следующие этапы:</p>
+                <ol>
+                    <li><strong>Подключение Skeleton</strong> - добавление CSS-файла в проект</li>
+                    <li><strong>Создание контейнера</strong> - обертка с классом <code>.container</code></li>
+                    <li><strong>Создание строк</strong> - добавление элементов с классом <code>.row</code></li>
+                    <li><strong>Определение колонок</strong> - добавление колонок с классами <code>.one</code>, <code>.two</code>, ..., <code>.twelve</code> и <code>.column</code> или <code>.columns</code></li>
+                    <li><strong>Распределение контента</strong> - размещение контента внутри колонок</li>
+                    <li><strong>Адаптация</strong> - проверка и корректировка отображения на разных устройствах</li>
+                </ol>
+                <div class="demo-section">
+                    <p class="demo-title">Пример реализации:</p>
+                    <pre><code>&lt;!-- 1. Подключение Skeleton --&gt;
+&lt;link rel="stylesheet" href="skeleton.css"&gt;
+
+&lt;!-- 2. Создание контейнера --&gt;
+&lt;div class="container"&gt;
+  
+  &lt;!-- 3. Создание строки --&gt;
+  &lt;div class="row"&gt;
+    
+    &lt;!-- 4. Определение колонок --&gt;
+    &lt;div class="four columns"&gt;
+      &lt;!-- 5. Распределение контента --&gt;
+      &lt;h3&gt;Заголовок&lt;/h3&gt;
+      &lt;p&gt;Текст в колонке&lt;/p&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="eight columns"&gt;
+      &lt;h3&gt;Другой заголовок&lt;/h3&gt;
+      &lt;p&gt;Больше текста в широкой колонке&lt;/p&gt;
+    &lt;/div&gt;
+    
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>CSS Grid верстка</h2>
+            
+            <div class="question">
+                <h3>6. Что такое grid-верстка?</h3>
+            </div>
+            <div class="answer">
+                <p>CSS Grid — это мощная система двумерной верстки, которая позволяет создавать сложные макеты с помощью строк и колонок. В отличие от Flexbox (одномерная система), Grid дает полный контроль над обоими измерениями одновременно.</p>
+                <p><strong>Ключевые особенности CSS Grid:</strong></p>
+                <ul>
+                    <li>Двумерное позиционирование (строки и колонки одновременно)</li>
+                    <li>Точное размещение элементов в любом месте сетки</li>
+                    <li>Простое создание сложных, асимметричных макетов</li>
+                    <li>Контроль над перекрытием элементов</li>
+                    <li>Встроенные возможности для адаптивного дизайна</li>
+                </ul>
+                <div class="demo-section">
+                    <p class="demo-title">Базовый пример Grid-верстки:</p>
+                    <div class="grid-demo-container grid-demo-2">
+                        <div class="grid-item">Элемент 1</div>
+                        <div class="grid-item">Элемент 2</div>
+                        <div class="grid-item">Элемент 3</div>
+                        <div class="grid-item">Элемент 4</div>
+                        <div class="grid-item">Элемент 5</div>
+                        <div class="grid-item">Элемент 6</div>
+                    </div>
+                    <pre><code>.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 80px 120px 80px;
+  gap: 10px;
+}</code></pre>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>7. Для чего необходимо свойство grid-template-areas?</h3>
+            </div>
+            <div class="answer">
+                <p>Свойство <code>grid-template-areas</code> позволяет задавать имена для областей сетки и определять их расположение с помощью визуального шаблона. Это делает код более читаемым и упрощает позиционирование элементов.</p>
+                <div class="demo-section">
+                    <p class="demo-title">Пример использования grid-template-areas:</p>
+                    <div class="grid-demo-container grid-demo-3">
+                        <div class="grid-item item-header">Header</div>
+                        <div class="grid-item item-sidebar">Sidebar</div>
+                        <div class="grid-item item-content">Main Content</div>
+                        <div class="grid-item item-footer">Footer</div>
+                    </div>
+                    <pre><code>.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 100px 300px 100px;
+  grid-template-areas: 
+    "header header"
+    "sidebar content"
+    "footer footer";
+}
+
+.header {
+  grid-area: header;
+}
+
+.sidebar {
+  grid-area: sidebar;
+}
+
+.content {
+  grid-area: content;
+}
+
+.footer {
+  grid-area: footer;
+}</code></pre>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>8. С какой целью используется свойство grid-template-columns?</h3>
+            </div>
+            <div class="answer">
+                <p>Свойство <code>grid-template-columns</code> определяет количество, размеры и структуру колонок в Grid-контейнере. Оно позволяет задавать:</p>
+                <ul>
+                    <li>Количество колонок</li>
+                    <li>Ширину каждой колонки</li>
+                    <li>Гибкие единицы измерения (fr, auto, minmax())</li>
+                    <li>Повторяющиеся паттерны</li>
+                </ul>
+                <div class="demo-section">
+                    <p class="demo-title">Примеры использования:</p>
+                    <pre><code>/* 3 колонки равной ширины */
+grid-template-columns: 1fr 1fr 1fr;
+
+/* 4 колонки с разной шириной */
+grid-template-columns: 100px 1fr 2fr auto;
+
+/* Повторяющийся паттерн */
+grid-template-columns: repeat(3, 1fr);
+
+/* Смешанные значения */
+grid-template-columns: 200px repeat(2, 1fr) 100px;</code></pre>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>9. Для чего применяется свойство grid-area?</h3>
+            </div>
+            <div class="answer">
+                <p>Свойство <code>grid-area</code> выполняет две основные функции:</p>
+                <ol>
+                    <li><strong>Присвоение имени области</strong> - для использования с <code>grid-template-areas</code>
+                        <pre><code>.element {
+  grid-area: header;
+}</code></pre>
+                    </li>
+                    <li><strong>Сокращенное задание позиции</strong> - объединяет <code>grid-row-start</code>, <code>grid-column-start</code>, <code>grid-row-end</code>, <code>grid-column-end</code>
+                        <pre><code>/* grid-area: row-start / column-start / row-end / column-end */
+.element {
+  grid-area: 1 / 1 / 3 / 4; /* Занимает строки 1-2 и колонки 1-3 */
+}</code></pre>
+                    </li>
+                </ol>
+            </div>
+            
+            <div class="question">
+                <h3>10. С какой целью используется свойство grid-row?</h3>
+            </div>
+            <div class="answer">
+                <p>Свойство <code>grid-row</code> определяет положение элемента по вертикали (в каких строках сетки он расположен). Это сокращенное свойство, которое объединяет <code>grid-row-start</code> и <code>grid-row-end</code>.</p>
+                <div class="demo-section">
+                    <p class="demo-title">Примеры использования grid-row:</p>
+                    <pre><code>/* Элемент занимает строки с 1 по 3 */
+.element {
+  grid-row: 1 / 3;
+}
+
+/* Элемент начинается со строки 2 и заканчивается автоматически */
+.element {
+  grid-row: 2 / auto;
+}
+
+/* Элемент занимает 2 строки, начиная с текущей позиции */
+.element {
+  grid-row: span 2;
+}</code></pre>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>11. Что означает grid-template-columns: 20px 20px 20px;?</h3>
+            </div>
+            <div class="answer">
+                <p>Запись <code>grid-template-columns: 20px 20px 20px;</code> означает создание Grid-контейнера с тремя колонками, каждая шириной 20 пикселей.</p>
+                <div class="demo-section">
+                    <p class="demo-title">Визуализация:</p>
+                    <div class="grid-demo-container grid-demo-1">
+                        <div class="grid-item">1</div>
+                        <div class="grid-item">2</div>
+                        <div class="grid-item">3</div>
+                        <div class="grid-item">4</div>
+                        <div class="grid-item">5</div>
+                        <div class="grid-item">6</div>
+                    </div>
+                    <pre><code>.grid-container {
+  display: grid;
+  grid-template-columns: 20px 20px 20px;
+  grid-template-rows: 40px 40px;
+  gap: 10px;
+}</code></pre>
+                    <p>Результат: создается сетка из 3 колонок по 20px каждая и 2 строк по 40px каждая, всего 6 ячеек.</p>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>12. Поясните запись grid-row-end: 4;</h3>
+            </div>
+            <div class="answer">
+                <p>Запись <code>grid-row-end: 4;</code> означает, что элемент заканчивается на линии сетки номер 4. В CSS Grid линии нумеруются начиная с 1 (или с -1, если считать с конца).</p>
+                <div class="info-box">
+                    <p><strong>Важно понимать:</strong> В Grid линии — это границы между ячейками, а не сами ячейки. Линия 1 находится перед первой строкой/колонкой, линия 2 — между первой и второй и т.д.</p>
+                </div>
+                <pre><code>/* Элемент занимает пространство от линии 2 до линии 4 */
+.element {
+  grid-row-start: 2;
+  grid-row-end: 4;
+  /* Или в сокращенной форме: grid-row: 2 / 4; */
+}</code></pre>
+                <p>Это означает, что элемент будет занимать строки 2 и 3 (потому что он начинается на линии 2 и заканчивается на линии 4).</p>
+            </div>
+            
+            <div class="question">
+                <h3>13. Для чего используется свойство grid-gap?</h3>
+            </div>
+            <div class="answer">
+                <p>Свойство <code>grid-gap</code> (или его современные аналоги <code>gap</code>, <code>row-gap</code>, <code>column-gap</code>) задает расстояние между строками и колонками в Grid-контейнере.</p>
+                <p><strong>Варианты использования:</strong></p>
+                <pre><code>/* Одинаковый отступ между строками и колонками */
+grid-gap: 20px;
+
+/* Разные отступы для строк и колонок */
+grid-gap: 10px 20px; /* row-gap column-gap */
+
+/* Современный синтаксис */
+gap: 20px;
+row-gap: 10px;
+column-gap: 20px;</code></pre>
+                <div class="info-box">
+                    <p><strong>Примечание:</strong> <code>grid-gap</code> — устаревшее свойство, рекомендуется использовать <code>gap</code>, которое также работает с Flexbox.</p>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>14. Создайте документ, содержащий три колонки и три строки, вторую строку сделайте красного цвета, в первую добавьте абзац синего цвета.</h3>
+            </div>
+            <div class="answer">
+                <div class="demo-section">
+                    <p class="demo-title">Решение задачи:</p>
+                    <div class="exercise-grid">
+                        <div class="exercise-item blue-text">
+                            <p>Это абзац синего цвета в первой строке</p>
+                        </div>
+                        <div class="exercise-item">Колонка 1, строка 2</div>
+                        <div class="exercise-item row-2">Колонка 2, строка 2 (красная)</div>
+                        <div class="exercise-item row-2">Колонка 3, строка 2 (красная)</div>
+                        <div class="exercise-item">Колонка 1, строка 3</div>
+                        <div class="exercise-item">Колонка 2, строка 3</div>
+                        <div class="exercise-item">Колонка 3, строка 3</div>
+                    </div>
+                    <pre><code>&lt;style&gt;
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 100px);
+    gap: 10px;
+  }
+  
+  .row-2 {
+    grid-row: 2;
+    background-color: #e74c3c;
+    color: white;
+  }
+  
+  .blue-text {
+    grid-column: 1 / span 3;
+    grid-row: 1;
+    color: #2980b9;
+    font-weight: bold;
+    text-align: center;
+  }
+&lt;/style&gt;
+
+&lt;div class="grid-container"&gt;
+  &lt;div class="blue-text"&gt;
+    &lt;p&gt;Это абзац синего цвета в первой строке&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class="row-2"&gt;Колонка 1, строка 2&lt;/div&gt;
+  &lt;div class="row-2"&gt;Колонка 2, строка 2&lt;/div&gt;
+  &lt;div class="row-2"&gt;Колонка 3, строка 2&lt;/div&gt;
+  &lt;div&gt;Колонка 1, строка 3&lt;/div&gt;
+  &lt;div&gt;Колонка 2, строка 3&lt;/div&gt;
+  &lt;div&gt;Колонка 3, строка 3&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>15. С какой целью применяется свойства align-self и justify-self?</h3>
+            </div>
+            <div class="answer">
+                <p>Свойства <code>align-self</code> и <code>justify-self</code> используются для выравнивания отдельного элемента внутри своей ячейки Grid:</p>
+                <ul>
+                    <li><strong>justify-self</strong> - выравнивание по горизонтали (вдоль строки)
+                        <ul>
+                            <li><code>start</code> - к началу ячейки</li>
+                            <li><code>end</code> - к концу ячейки</li>
+                            <li><code>center</code> - по центру</li>
+                            <li><code>stretch</code> - растянуть (по умолчанию)</li>
+                        </ul>
+                    </li>
+                    <li><strong>align-self</strong> - выравнивание по вертикали (вдоль колонки)
+                        <ul>
+                            <li>Принимает те же значения, что и <code>justify-self</code></li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="demo-section">
+                    <p class="demo-title">Демонстрация align-self и justify-self:</p>
+                    <div class="alignment-demo">
+                        <div class="align-item align-start">align-self: start</div>
+                        <div class="align-item align-center">align-self: center</div>
+                        <div class="align-item align-end">align-self: end</div>
+                        <div class="align-item justify-start">justify-self: start</div>
+                        <div class="align-item justify-center">justify-self: center</div>
+                        <div class="align-item justify-end">justify-self: end</div>
+                    </div>
+                    <pre><code>.item1 {
+  align-self: start;    /* Выравнивание по верху ячейки */
+}
+
+.item2 {
+  align-self: center;   /* Выравнивание по центру по вертикали */
+}
+
+.item3 {
+  align-self: end;      /* Выравнивание по низу ячейки */
+}
+
+.item4 {
+  justify-self: start;  /* Выравнивание по левому краю */
+}
+
+.item5 {
+  justify-self: center; /* Выравнивание по центру по горизонтали */
+}
+
+.item6 {
+  justify-self: end;    /* Выравнивание по правому краю */
+}</code></pre>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <p>Материалы подготовлены на основе лекций по компьютерным языкам разметки</p>
+            <p>Все примеры являются интерактивными и демонстрируют реальную работу модульных сеток и CSS Grid</p>
+        </footer>
+    </div>
+
+    <script>
+        // Добавляем интерактивность демонстрациям
+        document.addEventListener('DOMContentLoaded', function() {
+            // Добавляем обработчики для демонстрации hover-эффектов на grid-элементах
+            const gridItems = document.querySelectorAll('.grid-item, .skeleton-column, .exercise-item, .align-item');
+            
+            gridItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.03)';
+                    this.style.transition = 'transform 0.2s ease';
+                    this.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                    this.style.boxShadow = 'none';
+                });
+            });
+            
+            // Динамическое изменение grid-template-columns для демонстрации
+            const demo1 = document.querySelector('.grid-demo-1');
+            const originalColumns = '20px 20px 20px';
+            
+            demo1.addEventListener('click', function() {
+                if (this.style.gridTemplateColumns === '30px 30px 30px') {
+                    this.style.gridTemplateColumns = originalColumns;
+                } else {
+                    this.style.gridTemplateColumns = '30px 30px 30px';
+                }
+            });
+            
+            // Информация о текущих grid-настройках
+            demo1.title = 'Нажмите, чтобы изменить grid-template-columns с 20px на 30px';
+        });
+    </script>
+</body>
+</html>

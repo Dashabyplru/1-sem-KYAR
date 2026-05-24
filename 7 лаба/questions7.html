@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS-трансформации, переходы и анимация</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #eaeaea;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+        
+        h2 {
+            color: #3498db;
+            margin: 30px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eaeaea;
+        }
+        
+        h3 {
+            color: #2980b9;
+            margin: 20px 0 10px;
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        .question {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-left: 4px solid #3498db;
+            border-radius: 4px;
+        }
+        
+        .answer {
+            background-color: #e8f4fc;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        
+        .demo {
+            background-color: #f9f9f9;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .demo-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .demo-box {
+            width: 150px;
+            height: 150px;
+            background-color: #3498db;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .demo-box:hover {
+            transform: scale(1.05);
+        }
+        
+        .transform-demo {
+            transform: rotate(15deg);
+        }
+        
+        .transition-demo {
+            transition: all 0.5s ease;
+        }
+        
+        .transition-demo:hover {
+            background-color: #e74c3c;
+            transform: translateX(20px);
+        }
+        
+        .animation-demo {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                background-color: #3498db;
+            }
+            50% {
+                transform: scale(1.1);
+                background-color: #e74c3c;
+            }
+            100% {
+                transform: scale(1);
+                background-color: #3498db;
+            }
+        }
+        
+        .circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #3498db;
+            transition: background-color 0.5s ease;
+            margin: 20px auto;
+        }
+        
+        .circle:hover {
+            background-color: #e74c3c;
+        }
+        
+        code {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        pre {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eaeaea;
+            color: #7f8c8d;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>CSS-трансформации, переходы и анимация</h1>
+            <p>Ответы на вопросы по материалам лекций</p>
+        </header>
+        
+        <section>
+            <h2>Трансформации</h2>
+            
+            <div class="question">
+                <h3>1. С помощью какого свойства производится трансформация?</h3>
+            </div>
+            <div class="answer">
+                <p>Трансформация элементов производится с помощью свойства <code>transform</code>. Это свойство позволяет изменять форму, положение и ориентацию элемента на странице.</p>
+                <div class="demo">
+                    <p>Пример:</p>
+                    <pre><code>.element {
+    transform: rotate(15deg);
+}</code></pre>
+                    <div class="demo-container">
+                        <div class="demo-box transform-demo">Трансформированный элемент</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>2. Как осуществить наклон?</h3>
+            </div>
+            <div class="answer">
+                <p>Наклон элемента осуществляется с помощью функции <code>skew()</code> в свойстве <code>transform</code>.</p>
+                <ul>
+                    <li><code>skewX(угол)</code> - наклон по оси X</li>
+                    <li><code>skewY(угол)</code> - наклон по оси Y</li>
+                    <li><code>skew(уголX, уголY)</code> - наклон по обеим осям</li>
+                </ul>
+                <div class="demo">
+                    <p>Пример:</p>
+                    <pre><code>.element {
+    transform: skewX(20deg);
+}</code></pre>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>3. Каким образом выполнить смещение?</h3>
+            </div>
+            <div class="answer">
+                <p>Смещение элемента осуществляется с помощью функции <code>translate()</code> в свойстве <code>transform</code>.</p>
+                <ul>
+                    <li><code>translateX(значение)</code> - смещение по оси X</li>
+                    <li><code>translateY(значение)</code> - смещение по оси Y</li>
+                    <li><code>translate(значениеX, значениеY)</code> - смещение по обеим осям</li>
+                </ul>
+                <div class="demo">
+                    <p>Пример:</p>
+                    <pre><code>.element {
+    transform: translate(50px, 20px);
+}</code></pre>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>4. Поясните, как осуществляется вращение.</h3>
+            </div>
+            <div class="answer">
+                <p>Вращение элемента осуществляется с помощью функции <code>rotate()</code> в свойстве <code>transform</code>. Угол вращения задается в градусах (deg), градах (grad), радианах (rad) или оборотах (turn).</p>
+                <ul>
+                    <li><code>rotate(угол)</code> - вращение в 2D-пространстве</li>
+                    <li><code>rotateX(угол)</code> - вращение вокруг оси X</li>
+                    <li><code>rotateY(угол)</code> - вращение вокруг оси Y</li>
+                    <li><code>rotateZ(угол)</code> - вращение вокруг оси Z</li>
+                </ul>
+                <div class="demo">
+                    <p>Пример:</p>
+                    <pre><code>.element {
+    transform: rotate(45deg);
+}</code></pre>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>5. Каким образом масштабировать элементы?</h3>
+            </div>
+            <div class="answer">
+                <p>Масштабирование элемента осуществляется с помощью функции <code>scale()</code> в свойстве <code>transform</code>.</p>
+                <ul>
+                    <li><code>scale(коэффициент)</code> - равномерное масштабирование</li>
+                    <li><code>scaleX(коэффициент)</code> - масштабирование по оси X</li>
+                    <li><code>scaleY(коэффициент)</code> - масштабирование по оси Y</li>
+                    <li><code>scale(коэффициентX, коэффициентY)</code> - масштабирование по обеим осям</li>
+                </ul>
+                <div class="demo">
+                    <p>Пример:</p>
+                    <pre><code>.element {
+    transform: scale(1.5);
+}</code></pre>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>6. Что будет происходить, если использовать rotateY?</h3>
+            </div>
+            <div class="answer">
+                <p>При использовании <code>rotateY(угол)</code> элемент будет вращаться вокруг вертикальной оси Y. Это создает эффект поворота элемента в 3D-пространстве, как если бы он был повернут вокруг своей вертикальной оси.</p>
+                <div class="demo">
+                    <p>Пример:</p>
+                    <pre><code>.element {
+    transform: rotateY(45deg);
+}</code></pre>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>7. Какой будет результат от применения rotateX?</h3>
+            </div>
+            <div class="answer">
+                <p>При использовании <code>rotateX(угол)</code> элемент будет вращаться вокруг горизонтальной оси X. Это создает эффект наклона элемента вперед или назад в 3D-пространстве.</p>
+                <div class="demo">
+                    <p>Пример:</p>
+                    <pre><code>.element {
+    transform: rotateX(45deg);
+}</code></pre>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>8. Как создать перспективу изображения?</h3>
+            </div>
+            <div class="answer">
+                <p>Перспектива создается с помощью свойства <code>perspective</code>, которое задает расстояние от плоскости экрана до точки сходимости линий. Это свойство применяется к родительскому элементу, содержащему трансформируемые дочерние элементы.</p>
+                <div class="demo">
+                    <p>Пример:</p>
+                    <pre><code>.container {
+    perspective: 500px;
+}
+
+.element {
+    transform: rotateY(45deg);
+}</code></pre>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>Переходы</h2>
+            
+            <div class="question">
+                <h3>9. Для чего используется свойство transition?</h3>
+            </div>
+            <div class="answer">
+                <p>Свойство <code>transition</code> используется для создания плавных переходов между разными состояниями элемента. Оно позволяет анимировать изменения значений CSS-свойств с течением времени.</p>
+                <div class="demo">
+                    <p>Пример:</p>
+                    <pre><code>.element {
+    transition: all 0.3s ease;
+}</code></pre>
+                    <div class="demo-container">
+                        <div class="demo-box transition-demo">Наведи на меня</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>10. Что такое переходы?</h3>
+            </div>
+            <div class="answer">
+                <p>Переходы (transitions) в CSS - это механизм, позволяющий плавно изменять значения свойств элемента от начального до конечного состояния в течение определенного времени. Они активируются при изменении состояния элемента, например, при наведении курсора.</p>
+            </div>
+            
+            <div class="question">
+                <h3>11. Каким образом увеличить продолжительность перехода?</h3>
+            </div>
+            <div class="answer">
+                <p>Продолжительность перехода увеличивается с помощью свойства <code>transition-duration</code>, которое задает время выполнения перехода в секундах (s) или миллисекундах (ms).</p>
+                <div class="demo">
+                    <p>Пример:</p>
+                    <pre><code>.element {
+    transition-duration: 2s; /* Увеличение продолжительности до 2 секунд */
+}</code></pre>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>12. Для чего используется transition-timing-function?</h3>
+            </div>
+            <div class="answer">
+                <p>Свойство <code>transition-timing-function</code> определяет функцию времени перехода, то есть как будет изменяться скорость анимации в течение ее выполнения. Оно позволяет создавать различные эффекты ускорения и замедления.</p>
+                <p>Распространенные значения:</p>
+                <ul>
+                    <li><code>ease</code> - медленный start, затем быстро, медленный конец (по умолчанию)</li>
+                    <li><code>linear</code> - постоянная скорость</li>
+                    <li><code>ease-in</code> - медленный start</li>
+                    <li><code>ease-out</code> - медленный конец</li>
+                    <li><code>ease-in-out</code> - медленный start и конец</li>
+                    <li><code>cubic-bezier(n,n,n,n)</code> - пользовательская функция времени</li>
+                </ul>
+            </div>
+            
+            <div class="question">
+                <h3>13. Что входит в сокращенную запись свойства transition?</h3>
+            </div>
+            <div class="answer">
+                <p>Сокращенная запись свойства <code>transition</code> включает в себя:</p>
+                <ul>
+                    <li><code>transition-property</code> - свойство, к которому применяется переход</li>
+                    <li><code>transition-duration</code> - продолжительность перехода</li>
+                    <li><code>transition-timing-function</code> - функция времени</li>
+                    <li><code>transition-delay</code> - задержка перед началом перехода</li>
+                </ul>
+                <div class="demo">
+                    <p>Пример:</p>
+                    <pre><code>.element {
+    /* property | duration | timing-function | delay */
+    transition: all 0.5s ease-in-out 0.2s;
+}</code></pre>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>Анимация</h2>
+            
+            <div class="question">
+                <h3>14. Назовите этапы создания анимации</h3>
+            </div>
+            <div class="answer">
+                <p>Создание CSS-анимации включает следующие этапы:</p>
+                <ol>
+                    <li>Определение ключевых кадров с помощью правила <code>@keyframes</code></li>
+                    <li>Применение анимации к элементу с помощью свойства <code>animation</code> или его под-свойств</li>
+                    <li>Настройка параметров анимации (продолжительность, задержка, количество повторений и т.д.)</li>
+                </ol>
+                <div class="demo">
+                    <p>Пример:</p>
+                    <pre><code>/* 1. Определение ключевых кадров */
+@keyframes example {
+    0% { background-color: red; }
+    50% { background-color: yellow; }
+    100% { background-color: blue; }
+}
+
+/* 2. Применение анимации к элементу */
+.element {
+    animation: example 3s infinite;
+}</code></pre>
+                    <div class="demo-container">
+                        <div class="demo-box animation-demo">Анимированный элемент</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>15. Какие свойства включает сокращенная запись animation?</h3>
+            </div>
+            <div class="answer">
+                <p>Сокращенная запись свойства <code>animation</code> включает в себя:</p>
+                <ul>
+                    <li><code>animation-name</code> - имя анимации (определенное в @keyframes)</li>
+                    <li><code>animation-duration</code> - продолжительность анимации</li>
+                    <li><code>animation-timing-function</code> - функция времени</li>
+                    <li><code>animation-delay</code> - задержка перед началом анимации</li>
+                    <li><code>animation-iteration-count</code> - количество повторений</li>
+                    <li><code>animation-direction</code> - направление анимации</li>
+                    <li><code>animation-fill-mode</code> - стили до и после анимации</li>
+                    <li><code>animation-play-state</code> - состояние анимации (воспроизведение или пауза)</li>
+                </ul>
+                <div class="demo">
+                    <p>Пример:</p>
+                    <pre><code>.element {
+    /* name | duration | timing-function | delay | iteration-count | direction | fill-mode | play-state */
+    animation: example 3s ease-in-out 1s infinite alternate both running;
+}</code></pre>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>16. Каким образом сделать анимацию непрерывной?</h3>
+            </div>
+            <div class="answer">
+                <p>Чтобы сделать анимацию непрерывной (бесконечной), нужно установить свойство <code>animation-iteration-count</code> в значение <code>infinite</code>.</p>
+                <div class="demo">
+                    <p>Пример:</p>
+                    <pre><code>.element {
+    animation-iteration-count: infinite;
+}</code></pre>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>17. Как изменить прозрачность элемента?</h3>
+            </div>
+            <div class="answer">
+                <p>Прозрачность элемента изменяется с помощью свойства <code>opacity</code>, которое принимает значения от 0 (полностью прозрачный) до 1 (полностью непрозрачный).</p>
+                <div class="demo">
+                    <p>Пример:</p>
+                    <pre><code>.element {
+    opacity: 0.5; /* Полупрозрачный элемент */
+}</code></pre>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>18. Каким образом создать несколько кадров анимации? только 2 кадра?</h3>
+            </div>
+            <div class="answer">
+                <p>Для создания анимации с несколькими кадрами используется правило <code>@keyframes</code> с указанием процентных значений для каждого ключевого кадра. Для анимации с двумя кадрами достаточно указать <code>from</code> (или 0%) и <code>to</code> (или 100%).</p>
+                <div class="demo">
+                    <p>Пример с несколькими кадрами:</p>
+                    <pre><code>@keyframes multi-frame {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(100px); }
+    50% { transform: translateX(100px) translateY(100px); }
+    75% { transform: translateX(0) translateY(100px); }
+    100% { transform: translateX(0) translateY(0); }
+}</code></pre>
+                    <p>Пример с двумя кадрами:</p>
+                    <pre><code>@keyframes two-frames {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}</code></pre>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>19. Для чего необходимо свойство z-index?</h3>
+            </div>
+            <div class="answer">
+                <p>Свойство <code>z-index</code> определяет порядок наложения элементов друг на друга по оси Z (глубина). Элементы с большим значением z-index будут перекрывать элементы с меньшим значением. Это свойство работает только для позиционированных элементов (с position: absolute, relative, fixed или sticky).</p>
+                <div class="demo">
+                    <p>Пример:</p>
+                    <pre><code>.element1 {
+    position: absolute;
+    z-index: 1;
+}
+
+.element2 {
+    position: absolute;
+    z-index: 2; /* Этот элемент будет поверх element1 */
+}</code></pre>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>20. Чем отличаются переходы от анимации?</h3>
+            </div>
+            <div class="answer">
+                <p>Основные различия между переходами и анимациями:</p>
+                <ul>
+                    <li><strong>Переходы (transitions)</strong>:
+                        <ul>
+                            <li>Активируются при изменении состояния элемента (например, при наведении)</li>
+                            <li>Имеют только начальное и конечное состояние</li>
+                            <li>Проще в использовании для простых эффектов</li>
+                            <li>Не могут повторяться автоматически</li>
+                        </ul>
+                    </li>
+                    <li><strong>Анимации (animations)</strong>:
+                        <ul>
+                            <li>Могут запускаться автоматически при загрузке страницы</li>
+                            <li>Поддерживают множество промежуточных состояний (ключевых кадров)</li>
+                            <li>Могут повторяться бесконечно или заданное количество раз</li>
+                            <li>Могут изменять направление воспроизведения</li>
+                            <li>Более гибкие и мощные, но сложнее в настройке</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="question">
+                <h3>21. Как остановить анимацию?</h3>
+            </div>
+            <div class="answer">
+                <p>Анимацию можно остановить с помощью свойства <code>animation-play-state</code>, установив его значение в <code>paused</code>. Обычно это делается через JavaScript при наступлении определенного события.</p>
+                <div class="demo">
+                    <p>Пример:</p>
+                    <pre><code>.element {
+    animation-play-state: paused; /* Остановка анимации */
+}</code></pre>
+                    <p>Или через JavaScript:</p>
+                    <pre><code>document.querySelector('.element').style.animationPlayState = 'paused';</code></pre>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>22. Для чего можно применять свойство filter?</h3>
+            </div>
+            <div class="answer">
+                <p>Свойство <code>filter</code> применяется для добавления графических эффектов к элементам, таких как размытие, изменение цвета, тени и др. Оно принимает различные функции фильтров:</p>
+                <ul>
+                    <li><code>blur(радиус)</code> - размытие</li>
+                    <li><code>brightness(значение)</code> - яркость</li>
+                    <li><code>contrast(значение)</code> - контрастность</li>
+                    <li><code>grayscale(значение)</code> - оттенки серого</li>
+                    <li><code>hue-rotate(угол)</code> - изменение цветового тона</li>
+                    <li><code>invert(значение)</code> - инверсия цветов</li>
+                    <li><code>opacity(значение)</code> - прозрачность</li>
+                    <li><code>saturate(значение)</code> - насыщенность</li>
+                    <li><code>sepia(значение)</code> - сепия</li>
+                    <li><code>drop-shadow(смещение-x смещение-y радиус цвет)</code> - тень</li>
+                </ul>
+                <div class="demo">
+                    <p>Пример:</p>
+                    <pre><code>.element {
+    filter: blur(2px) grayscale(50%);
+}</code></pre>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>23. Создайте плавный переход изменения цвета круга с синего на красный при наведении.</h3>
+            </div>
+            <div class="answer">
+                <p>Для создания плавного перехода изменения цвета круга при наведении нужно:</p>
+                <ol>
+                    <li>Создать элемент с классом circle</li>
+                    <li>Задать ему начальный цвет фона (синий)</li>
+                    <li>Добавить свойство transition для плавного изменения background-color</li>
+                    <li>Добавить псевдокласс :hover с измененным цветом фона (красный)</li>
+                </ol>
+                <div class="demo">
+                    <p>Пример кода:</p>
+                    <pre><code>.circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #3498db; /* Синий цвет */
+    transition: background-color 0.5s ease;
+}
+
+.circle:hover {
+    background-color: #e74c3c; /* Красный цвет */
+}</code></pre>
+                    <p>Демонстрация:</p>
+                    <div class="circle"></div>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <p>Материалы подготовлены на основе лекций по компьютерным языкам разметки</p>
+        </footer>
+    </div>
+</body>
+</html>

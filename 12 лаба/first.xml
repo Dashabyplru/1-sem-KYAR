@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="style.css"?>
+<!DOCTYPE shop SYSTEM "product_anna_asti.dtd">
+<shop name="Anna Asti Official Store" category="Музыка и мерч">
+  <description>Официальный магазин музыки и мерчендайза певицы Anna Asti</description>
+  
+  <product id="001">
+    <name>Альбом "Царица" (CD)</name>
+    <category>Музыка</category>
+    <price currency="RUB">1499</price>
+    <quantity>50</quantity>
+    <description>Официальный CD альбом "Царица" с автографом</description>
+    <release_year>2023</release_year>
+    <rating>5.0</rating>
+    <image>album_tsaritsa.jpg</image>
+  </product>
+  
+  <product id="002">
+    <name>Футболка "FREEDOM"</name>
+    <category>Одежда</category>
+    <price currency="RUB">2499</price>
+    <quantity>120</quantity>
+    <description>Черная футболка с принтом FREEDOM из клипа</description>
+    <sizes>S, M, L, XL</sizes>
+    <material>Хлопок 100%</material>
+    <rating>4.8</rating>
+    <image>tshirt_freedom.jpg</image>
+  </product>
+  
+  <product id="003">
+    <name>Виниловая пластинка "Полевые цветы"</name>
+    <category>Музыка</category>
+    <price currency="RUB">3299</price>
+    <quantity>25</quantity>
+    <description>Ограниченный тираж виниловой пластинки</description>
+    <release_year>2022</release_year>
+    <rating>4.9</rating>
+    <image>vinyl_polevye_cvety.jpg</image>
+  </product>
+  
+  <product id="004">
+    <name>Толстовка с капюшоном "Асти"</name>
+    <category>Одежда</category>
+    <price currency="RUB">4299</price>
+    <quantity>80</quantity>
+    <description>Серая толстовка с логотипом певицы</description>
+    <sizes>M, L, XL</sizes>
+    <material>Хлопок 80%, Полиэстер 20%</material>
+    <rating>4.7</rating>
+    <image>hoodie_asti.jpg</image>
+  </product>
+  
+  <product id="005">
+    <name>Билет на концерт + meetgreet</name>
+    <category>Билеты</category>
+    <price currency="RUB">8999</price>
+    <quantity>15</quantity>
+    <description>VIP билет с возможностью личной встречи</description>
+    <concert_date>2024-06-15</concert_date>
+    <location>Москва, Крокус Сити Холл</location>
+    <rating>5.0</rating>
+    <image>vip_ticket.jpg</image>
+  </product>
+</shop>

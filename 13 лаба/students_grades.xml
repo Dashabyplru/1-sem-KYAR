@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="students_transform.xsl"?>
+<students>
+  <student>
+    <id>001</id>
+    <last_name>Иванов</last_name>
+    <first_name>Иван</first_name>
+    <group>ИТ-101</group>
+    <subjects>
+      <subject>
+        <name>Математика</name>
+        <grade>9</grade>
+      </subject>
+      <subject>
+        <name>Физика</name>
+        <grade>7</grade>
+      </subject>
+      <subject>
+        <name>Программирование</name>
+        <grade>10</grade>
+      </subject>
+      <subject>
+        <name>Базы данных</name>
+        <grade>8</grade>
+      </subject>
+      <subject>
+        <name>Английский язык</name>
+        <grade>6</grade>
+      </subject>
+    </subjects>
+    <average>8.0</average>
+  </student>
+  
+  <student>
+    <id>002</id>
+    <last_name>Петрова</last_name>
+    <first_name>Анна</first_name>
+    <group>ИТ-101</group>
+    <subjects>
+      <subject>
+        <name>Математика</name>
+        <grade>8</grade>
+      </subject>
+      <subject>
+        <name>Физика</name>
+        <grade>9</grade>
+      </subject>
+      <subject>
+        <name>Программирование</name>
+        <grade>9</grade>
+      </subject>
+      <subject>
+        <name>Базы данных</name>
+        <grade>7</grade>
+      </subject>
+      <subject>
+        <name>Английский язык</name>
+        <grade>8</grade>
+      </subject>
+    </subjects>
+    <average>8.2</average>
+  </student>
+  
+  <student>
+    <id>003</id>
+    <last_name>Сидоров</last_name>
+    <first_name>Алексей</first_name>
+    <group>ИТ-102</group>
+    <subjects>
+      <subject>
+        <name>Математика</name>
+        <grade>4</grade>
+      </subject>
+      <subject>
+        <name>Физика</name>
+        <grade>3</grade>
+      </subject>
+      <subject>
+        <name>Программирование</name>
+        <grade>5</grade>
+      </subject>
+      <subject>
+        <name>Базы данных</name>
+        <grade>4</grade>
+      </subject>
+      <subject>
+        <name>Английский язык</name>
+        <grade>6</grade>
+      </subject>
+    </subjects>
+    <average>4.4</average>
+  </student>
+  
+  <student>
+    <id>004</id>
+    <last_name>Козлова</last_name>
+    <first_name>Елена</first_name>
+    <group>ИТ-102</group>
+    <subjects>
+      <subject>
+        <name>Математика</name>
+        <grade>10</grade>
+      </subject>
+      <subject>
+        <name>Физика</name>
+        <grade>9</grade>
+      </subject>
+      <subject>
+        <name>Программирование</name>
+        <grade>10</grade>
+      </subject>
+      <subject>
+        <name>Базы данных</name>
+        <grade>9</grade>
+      </subject>
+      <subject>
+        <name>Английский язык</name>
+        <grade>8</grade>
+      </subject>
+    </subjects>
+    <average>9.2</average>
+  </student>
+  
+  <student>
+    <id>005</id>
+    <last_name>Васильев</last_name>
+    <first_name>Дмитрий</first_name>
+    <group>ИТ-101</group>
+    <subjects>
+      <subject>
+        <name>Математика</name>
+        <grade>7</grade>
+      </subject>
+      <subject>
+        <name>Физика</name>
+        <grade>6</grade>
+      </subject>
+      <subject>
+        <name>Программирование</name>
+        <grade>8</grade>
+      </subject>
+      <subject>
+        <name>Базы данных</name>
+        <grade>7</grade>
+      </subject>
+      <subject>
+        <name>Английский язык</name>
+        <grade>5</grade>
+      </subject>
+    </subjects>
+    <average>6.6</average>
+  </student>
+</students>

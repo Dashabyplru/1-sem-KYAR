@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Основы CSS3: Псевдоклассы, псевдоэлементы и работа с текстом</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        h2 {
+            color: #3498db;
+            margin: 25px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .question {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 4px solid #3498db;
+            border-radius: 4px;
+        }
+        
+        .question h3 {
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .answer {
+            margin: 10px 0;
+            padding-left: 15px;
+        }
+        
+        code {
+            background-color: #f1f1f1;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: Consolas, monospace;
+        }
+        
+        .example {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border-left: 3px solid #2ecc71;
+        }
+        
+        .example-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .demo-element {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #e8f4fc;
+            border-radius: 4px;
+        }
+        
+        .demo-element::before {
+            content: "Пример: ";
+            font-weight: bold;
+        }
+        
+        .demo-element::after {
+            content: " (демонстрация)";
+            font-style: italic;
+            color: #7f8c8d;
+        }
+        
+        .first-letter-demo::first-letter {
+            font-size: 2em;
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        .first-line-demo::first-line {
+            font-weight: bold;
+            color: #2980b9;
+        }
+        
+        .text-shadow-demo {
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-size: 1.2em;
+        }
+        
+        .custom-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .custom-list li::before {
+            content: "✓ ";
+            color: #27ae60;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        .font-demo {
+            font-family: 'Arial', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Основы CSS3: Псевдоклассы, псевдоэлементы и работа с текстом</h1>
+        
+        <div class="question">
+            <h3>1. Что такое псевдоэлементы? Назовите псевдоэлементы, которые вы знаете.</h3>
+            <div class="answer">
+                <p>Псевдоэлементы — это селекторы, которые позволяют задать стиль определенной части элемента, не относящейся к элементам документа.</p>
+                <p>Известные псевдоэлементы:</p>
+                <ul>
+                    <li><code>::first-letter</code> — применяет стиль к первой букве текста</li>
+                    <li><code>::first-line</code> — применяет стиль к первой строке текста</li>
+                    <li><code>::before</code> — создает псевдоэлемент и добавляет его перед содержимым выбранного элемента</li>
+                    <li><code>::after</code> — создает псевдоэлемент и добавляет его после содержимого выбранного элемента</li>
+                    <li><code>::selection</code> — позволяет применить стили к элементам, которые были выделены пользователем</li>
+                    <li><code>::marker</code> — позволяет применить стили к маркерам списка</li>
+                    <li><code>::placeholder</code> — позволяет применить стили к тексту атрибута placeholder в элементах input и textarea</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="question">
+            <h3>2. Раскройте суть понятия «псевдоклассы».</h3>
+            <div class="answer">
+                <p>Псевдоклассы — это селекторы, которые определяют динамическое состояние элементов, которое изменяется с помощью действий пользователя, а также в зависимости от положения в DOM.</p>
+                <p>Примеры псевдоклассов:</p>
+                <ul>
+                    <li><code>:hover</code> — применяется при наведении курсора на элемент</li>
+                    <li><code>:active</code> — применяется в момент активации элемента</li>
+                    <li><code>:focus</code> — применяется к элементу, получившему фокус</li>
+                    <li><code>:first-child</code> — выбирает первый дочерний элемент</li>
+                    <li><code>:nth-child()</code> — выбирает элементы по их порядковому номеру</li>
+                    <li><code>:checked</code> — применяется к отмеченным элементам формы</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="question">
+            <h3>3. Для чего используется псевдоэлемент ::before? Приведите пример.</h3>
+            <div class="answer">
+                <p>Псевдоэлемент <code>::before</code> используется для создания псевдоэлемента и добавления его перед содержимым выбранного элемента.</p>
+                <div class="example">
+                    <div class="example-title">Пример CSS:</div>
+                    <code>.element::before {<br>
+                    &nbsp;&nbsp;content: "→ ";<br>
+                    &nbsp;&nbsp;color: #3498db;<br>
+                    }</code>
+                </div>
+                <div class="demo-element">Текст элемента</div>
+            </div>
+        </div>
+        
+        <div class="question">
+            <h3>4. С какой целью применяется псевдоэлемент ::after? Приведите пример.</h3>
+            <div class="answer">
+                <p>Псевдоэлемент <code>::after</code> используется для создания псевдоэлемента и добавления его после содержимого выбранного элемента.</p>
+                <div class="example">
+                    <div class="example-title">Пример CSS:</div>
+                    <code>.element::after {<br>
+                    &nbsp;&nbsp;content: " *";<br>
+                    &nbsp;&nbsp;color: #e74c3c;<br>
+                    }</code>
+                </div>
+                <div class="demo-element">Текст элемента</div>
+            </div>
+        </div>
+        
+        <div class="question">
+            <h3>5. Каким образом изменить первую букву текста?</h3>
+            <div class="answer">
+                <p>Для изменения первой буквы текста используется псевдоэлемент <code>::first-letter</code>.</p>
+                <div class="example">
+                    <div class="example-title">Пример CSS:</div>
+                    <code>p::first-letter {<br>
+                    &nbsp;&nbsp;font-size: 2em;<br>
+                    &nbsp;&nbsp;color: #e74c3c;<br>
+                    &nbsp;&nbsp;font-weight: bold;<br>
+                    }</code>
+                </div>
+                <p class="first-letter-demo">Это пример текста с измененной первой буквой. Обратите внимание, как первая буква выделяется размером и цветом.</p>
+            </div>
+        </div>
+        
+        <div class="question">
+            <h3>6. Как создать отступ первой строки?</h3>
+            <div class="answer">
+                <p>Для создания отступа первой строки используется свойство <code>text-indent</code>.</p>
+                <div class="example">
+                    <div class="example-title">Пример CSS:</div>
+                    <code>p {<br>
+                    &nbsp;&nbsp;text-indent: 2em;<br>
+                    }</code>
+                </div>
+                <p style="text-indent: 2em;">Это пример текста с отступом первой строки. Обратите внимание, что первая строка начинается с отступа, а последующие строки выравниваются по левому краю.</p>
+            </div>
+        </div>
+        
+        <div class="question">
+            <h3>7. Расскажите, как убрать отступы между фрагментами текста?</h3>
+            <div class="answer">
+                <p>Для удаления отступов между фрагментами текста используется свойство <code>margin</code> с нулевым значением.</p>
+                <div class="example">
+                    <div class="example-title">Пример CSS:</div>
+                    <code>p {<br>
+                    &nbsp;&nbsp;margin: 0;<br>
+                    }</code>
+                </div>
+                <p style="margin: 0;">Первый фрагмент текста без отступа.</p>
+                <p style="margin: 0;">Второй фрагмент текста без отступа.</p>
+            </div>
+        </div>
+        
+        <div class="question">
+            <h3>8. Каким образом изменить регистр?</h3>
+            <div class="answer">
+                <p>Для изменения регистра текста используется свойство <code>text-transform</code>.</p>
+                <div class="example">
+                    <div class="example-title">Пример CSS:</div>
+                    <code>.uppercase {<br>
+                    &nbsp;&nbsp;text-transform: uppercase;<br>
+                    }<br>
+                    .lowercase {<br>
+                    &nbsp;&nbsp;text-transform: lowercase;<br>
+                    }<br>
+                    .capitalize {<br>
+                    &nbsp;&nbsp;text-transform: capitalize;<br>
+                    }</code>
+                </div>
+                <p style="text-transform: uppercase;">Это текст в верхнем регистре</p>
+                <p style="text-transform: lowercase;">ЭТО ТЕКСТ В НИЖНЕМ РЕГИСТРЕ</p>
+                <p style="text-transform: capitalize;">это текст с заглавными первыми буквами каждого слова</p>
+            </div>
+        </div>
+        
+        <div class="question">
+            <h3>9. Поясните, как сделать малые прописные буквы.</h3>
+            <div class="answer">
+                <p>Для создания малых прописных букв используется свойство <code>font-variant</code> со значением <code>small-caps</code>.</p>
+                <div class="example">
+                    <div class="example-title">Пример CSS:</div>
+                    <code>.small-caps {<br>
+                    &nbsp;&nbsp;font-variant: small-caps;<br>
+                    }</code>
+                </div>
+                <p style="font-variant: small-caps;">Это текст с малыми прописными буквами</p>
+            </div>
+        </div>
+        
+        <div class="question">
+            <h3>10. Как добавить тень к тексту?</h3>
+            <div class="answer">
+                <p>Для добавления тени к тексту используется свойство <code>text-shadow</code>.</p>
+                <div class="example">
+                    <div class="example-title">Пример CSS:</div>
+                    <code>.text-shadow {<br>
+                    &nbsp;&nbsp;text-shadow: 2px 2px 4px rgba(0,0,0,0.3);<br>
+                    }</code>
+                </div>
+                <p class="text-shadow-demo">Это текст с тенью</p>
+            </div>
+        </div>
+        
+        <div class="question">
+            <h3>11. Расскажите, как изменить только цвет маркера нумерованного списка.</h3>
+            <div class="answer">
+                <p>Для изменения цвета маркера нумерованного списка можно использовать псевдоэлемент <code>::marker</code>.</p>
+                <div class="example">
+                    <div class="example-title">Пример CSS:</div>
+                    <code>ol li::marker {<br>
+                    &nbsp;&nbsp;color: #e74c3c;<br>
+                    }</code>
+                </div>
+                <ol style="list-style: decimal; color: #e74c3c;">
+                    <li style="color: black;">Первый пункт</li>
+                    <li style="color: black;">Второй пункт</li>
+                    <li style="color: black;">Третий пункт</li>
+                </ol>
+            </div>
+        </div>
+        
+        <div class="question">
+            <h3>12. Какие действия надо выполнить, чтобы изменить выравнивание текста на странице?</h3>
+            <div class="answer">
+                <p>Для изменения выравнивания текста используется свойство <code>text-align</code>.</p>
+                <div class="example">
+                    <div class="example-title">Пример CSS:</div>
+                    <code>.left {<br>
+                    &nbsp;&nbsp;text-align: left;<br>
+                    }<br>
+                    .center {<br>
+                    &nbsp;&nbsp;text-align: center;<br>
+                    }<br>
+                    .right {<br>
+                    &nbsp;&nbsp;text-align: right;<br>
+                    }<br>
+                    .justify {<br>
+                    &nbsp;&nbsp;text-align: justify;<br>
+                    }</code>
+                </div>
+                <p style="text-align: left;">Текст, выровненный по левому краю</p>
+                <p style="text-align: center;">Текст, выровненный по центру</p>
+                <p style="text-align: right;">Текст, выровненный по правому краю</p>
+                <p style="text-align: justify;">Текст, выровненный по ширине. Обратите внимание, как слова распределяются по всей ширине блока, создавая ровные края с обеих сторон.</p>
+            </div>
+        </div>
+        
+        <div class="question">
+            <h3>13. Как добавить новый шрифт?</h3>
+            <div class="answer">
+                <p>Для добавления нового шрифта используется правило <code>@font-face</code>.</p>
+                <div class="example">
+                    <div class="example-title">Пример CSS:</div>
+                    <code>@font-face {<br>
+                    &nbsp;&nbsp;font-family: 'MyFont';<br>
+                    &nbsp;&nbsp;src: url('myfont.woff2') format('woff2'),<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;url('myfont.woff') format('woff');<br>
+                    }<br>
+                    body {<br>
+                    &nbsp;&nbsp;font-family: 'MyFont', sans-serif;<br>
+                    }</code>
+                </div>
+            </div>
+        </div>
+        
+        <div class="question">
+            <h3>14. В каких форматах добавляется новый шрифт и от чего это зависит?</h3>
+            <div class="answer">
+                <p>Шрифты добавляются в различных форматах, чтобы обеспечить совместимость с разными браузерами:</p>
+                <ul>
+                    <li><strong>WOFF/WOFF2</strong> — современные форматы, обеспечивающие хорошее сжатие и широкую поддержку браузерами</li>
+                    <li><strong>TTF/OTF</strong> — стандартные форматы шрифтов</li>
+                    <li><strong>EOT</strong> — формат для старых версий Internet Explorer</li>
+                    <li><strong>SVG</strong> — формат для мобильных устройств</li>
+                </ul>
+                <p>Выбор формата зависит от требований к совместимости с браузерами и размера файла.</p>
+            </div>
+        </div>
+        
+        <div class="question">
+            <h3>15. Как изменить маркер на изображение для маркированного списка?</h3>
+            <div class="answer">
+                <p>Для изменения маркера на изображение используется свойство <code>list-style-image</code>.</p>
+                <div class="example">
+                    <div class="example-title">Пример CSS:</div>
+                    <code>ul {<br>
+                    &nbsp;&nbsp;list-style-image: url('marker.png');<br>
+                    }</code>
+                </div>
+                <p>Альтернативный способ с использованием псевдоэлемента <code>::before</code>:</p>
+                <div class="example">
+                    <div class="example-title">Пример CSS:</div>
+                    <code>ul.custom {<br>
+                    &nbsp;&nbsp;list-style: none;<br>
+                    }<br>
+                    ul.custom li::before {<br>
+                    &nbsp;&nbsp;content: "";<br>
+                    &nbsp;&nbsp;display: inline-block;<br>
+                    &nbsp;&nbsp;width: 16px;<br>
+                    &nbsp;&nbsp;height: 16px;<br>
+                    &nbsp;&nbsp;background-image: url('marker.png');<br>
+                    &nbsp;&nbsp;background-size: contain;<br>
+                    &nbsp;&nbsp;margin-right: 8px;<br>
+                    }</code>
+                </div>
+                <ul class="custom-list">
+                    <li>Пункт списка с кастомным маркером</li>
+                    <li>Еще один пункт</li>
+                    <li>И еще один</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="question">
+            <h3>16. В каких единицах можно задавать параметры текста?</h3>
+            <div class="answer">
+                <p>Параметры текста можно задавать в следующих единицах измерения:</p>
+                <ul>
+                    <li><strong>Абсолютные единицы</strong>: px (пиксели), pt (пункты), cm (сантиметры), mm (миллиметры), in (дюймы)</li>
+                    <li><strong>Относительные единицы</strong>: 
+                        <ul>
+                            <li>em — относительно размера шрифта родительского элемента</li>
+                            <li>rem — относительно размера шрифта корневого элемента (html)</li>
+                            <li>% — процент от размера родительского элемента</li>
+                            <li>vw/vh — процент от ширины/высоты окна просмотра</li>
+                            <li>ch — ширина символа "0" текущего шрифта</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="question">
+            <h3>17. Как изменить междустрочный интервал?</h3>
+            <div class="answer">
+                <p>Для изменения междустрочного интервала используется свойство <code>line-height</code>.</p>
+                <div class="example">
+                    <div class="example-title">Пример CSS:</div>
+                    <code>p {<br>
+                    &nbsp;&nbsp;line-height: 1.5;<br>
+                    }</code>
+                </div>
+                <p style="line-height: 1.5;">Это пример текста с увеличенным междустрочным интервалом. Обратите внимание, как увеличилось расстояние между строками, что делает текст более читаемым.</p>
+                <p style="line-height: 2;">Это пример текста с еще большим междустрочным интервалом.</p>
+            </div>
+        </div>
+        
+        <div class="question">
+            <h3>18. Каким образом текст сделать полужирным или курсивом?</h3>
+            <div class="answer">
+                <p>Для изменения начертания текста используются свойства <code>font-weight</code> и <code>font-style</code>.</p>
+                <div class="example">
+                    <div class="example-title">Пример CSS:</div>
+                    <code>.bold {<br>
+                    &nbsp;&nbsp;font-weight: bold;<br>
+                    }<br>
+                    .italic {<br>
+                    &nbsp;&nbsp;font-style: italic;<br>
+                    }</code>
+                </div>
+                <p style="font-weight: bold;">Это полужирный текст</p>
+                <p style="font-style: italic;">Это курсивный текст</p>
+                <p style="font-weight: bold; font-style: italic;">Это полужирный курсивный текст</p>
+            </div>
+        </div>
+        
+        <div class="question">
+            <h3>19. Как изменить гарнитуру шрифта из набора существующих?</h3>
+            <div class="answer">
+                <p>Для изменения гарнитуры шрифта используется свойство <code>font-family</code>.</p>
+                <div class="example">
+                    <div class="example-title">Пример CSS:</div>
+                    <code>body {<br>
+                    &nbsp;&nbsp;font-family: Arial, Helvetica, sans-serif;<br>
+                    }</code>
+                </div>
+                <p class="font-demo">Это текст с измененной гарнитурой шрифта.</p>
+            </div>
+        </div>
+        
+        <div class="question">
+            <h3>20. Каким образом изменить размер текста?</h3>
+            <div class="answer">
+                <p>Для изменения размера текста используется свойство <code>font-size</code>.</p>
+                <div class="example">
+                    <div class="example-title">Пример CSS:</div>
+                    <code>.small {<br>
+                    &nbsp;&nbsp;font-size: 12px;<br>
+                    }<br>
+                    .medium {<br>
+                    &nbsp;&nbsp;font-size: 16px;<br>
+                    }<br>
+                    .large {<br>
+                    &nbsp;&nbsp;font-size: 24px;<br>
+                    }</code>
+                </div>
+                <p style="font-size: 12px;">Это текст маленького размера</p>
+                <p style="font-size: 16px;">Это текст среднего размера</p>
+                <p style="font-size: 24px;">Это текст большого размера</p>
+            </div>
+        </div>
+        
+        <div class="question">
+            <h3>21. Как изменить интервал между словами и символами?</h3>
+            <div class="answer">
+                <p>Для изменения интервалов между словами и символами используются свойства <code>word-spacing</code> и <code>letter-spacing</code>.</p>
+                <div class="example">
+                    <div class="example-title">Пример CSS:</div>
+                    <code>.word-spacing {<br>
+                    &nbsp;&nbsp;word-spacing: 10px;<br>
+                    }<br>
+                    .letter-spacing {<br>
+                    &nbsp;&nbsp;letter-spacing: 3px;<br>
+                    }</code>
+                </div>
+                <p style="word-spacing: 10px;">Это текст с увеличенным интервалом между словами</p>
+                <p style="letter-spacing: 3px;">Это текст с увеличенным интервалом между символами</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

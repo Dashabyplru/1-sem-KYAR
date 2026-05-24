@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Адаптивный дизайн, Flexbox и медиазапросы</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #3498db;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+        }
+        
+        h2 {
+            color: #2980b9;
+            margin: 40px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+        
+        h3 {
+            color: #3498db;
+            margin: 25px 0 15px;
+        }
+        
+        .question {
+            background-color: #f8fafc;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-left: 5px solid #3498db;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        
+        .question:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            transform: translateY(-2px);
+        }
+        
+        .answer {
+            background-color: #e8f4fc;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            border: 1px solid #d6eaf8;
+        }
+        
+        .demo-section {
+            background-color: #f9f9f9;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .demo-title {
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+        
+        /* Демонстрация типов верстки */
+        .layout-demo {
+            margin: 20px 0;
+        }
+        
+        .layout-example {
+            height: 150px;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            border-radius: 6px;
+        }
+        
+        .fixed-layout {
+            width: 960px;
+            background-color: #3498db;
+        }
+        
+        .fluid-layout {
+            width: 80%;
+            background-color: #2ecc71;
+        }
+        
+        .adaptive-layout {
+            width: 100%;
+            background-color: #e74c3c;
+        }
+        
+        /* Flexbox демо */
+        .flex-demo {
+            margin: 20px 0;
+        }
+        
+        .flex-container {
+            display: flex;
+            background-color: #f0f0f0;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            min-height: 150px;
+        }
+        
+        .flex-item {
+            background-color: #3498db;
+            color: white;
+            padding: 20px;
+            margin: 5px;
+            border-radius: 4px;
+            text-align: center;
+            min-width: 80px;
+        }
+        
+        .wrap-demo {
+            flex-wrap: wrap;
+        }
+        
+        .direction-demo {
+            flex-direction: column;
+        }
+        
+        .justify-demo {
+            justify-content: space-between;
+        }
+        
+        .align-demo {
+            align-items: center;
+            height: 200px;
+        }
+        
+        .flex-item-tall {
+            height: 120px;
+        }
+        
+        .flex-item-short {
+            height: 60px;
+        }
+        
+        .flex-self-demo {
+            align-items: flex-start;
+        }
+        
+        .align-self-start {
+            align-self: flex-start;
+            background-color: #2ecc71;
+        }
+        
+        .align-self-center {
+            align-self: center;
+            background-color: #e74c3c;
+        }
+        
+        .align-self-end {
+            align-self: flex-end;
+            background-color: #f39c12;
+        }
+        
+        /* Медиазапросы демо */
+        .media-query-demo {
+            padding: 20px;
+            background-color: #ecf0f1;
+            border-radius: 6px;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .responsive-paragraph {
+            padding: 15px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+            font-weight: bold;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        /* Адаптивное меню */
+        .responsive-menu-demo {
+            margin: 20px 0;
+        }
+        
+        .responsive-menu {
+            background-color: #2c3e50;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        
+        .responsive-menu ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: space-around;
+        }
+        
+        .responsive-menu li {
+            flex: 1;
+        }
+        
+        .responsive-menu a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 15px 20px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .responsive-menu a:hover {
+            background-color: #3498db;
+        }
+        
+        /* Мультимедиа демо */
+        .media-demo {
+            margin: 20px 0;
+        }
+        
+        .video-container, .audio-container {
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 15px 0;
+        }
+        
+        .placeholder-video, .placeholder-audio {
+            width: 100%;
+            height: 200px;
+            background-color: #3498db;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        /* Информационные блоки */
+        .info-box {
+            background-color: #e8f6f3;
+            border-left: 4px solid #1abc9c;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .warning-box {
+            background-color: #fef9e7;
+            border-left: 4px solid #f39c12;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        code {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        pre {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+        
+        /* Практическое задание - адаптивный абзац */
+        .exercise-paragraph {
+            padding: 20px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 6px;
+            margin: 20px 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #ecf0f1;
+            color: #7f8c8d;
+        }
+        
+        /* Медиазапросы для демонстрации */
+        @media (max-width: 768px) {
+            .exercise-paragraph {
+                background-color: #e74c3c;
+            }
+            
+            .responsive-menu ul {
+                flex-direction: column;
+            }
+            
+            .layout-demo .fixed-layout {
+                width: 100%;
+                background-color: #9b59b6;
+            }
+        }
+        
+        @media (min-width: 560px) {
+            .media-query-demo {
+                background-color: #d5f4e6;
+                border-left: 4px solid #2ecc71;
+            }
+        }
+        
+        @media (max-width: 960px) {
+            .media-query-demo {
+                background-color: #fadbd8;
+                border-left: 4px solid #e74c3c;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Адаптивный дизайн, Flexbox и медиазапросы</h1>
+            <p class="subtitle">Ответы на вопросы по адаптивной верстке, Flexbox и медиазапросам</p>
+        </header>
+        
+        <section>
+            <h2>Типы верстки веб-страниц</h2>
+            
+            <div class="question">
+                <h3>1. Раскройте суть фиксированной верстки веб-страницы?</h3>
+            </div>
+            <div class="answer">
+                <p>Фиксированная верстка (fixed layout) — это подход, при котором ширина страницы задается в пикселях и не изменяется в зависимости от размера окна браузера или устройства.</p>
+                <p><strong>Характеристики фиксированной верстки:</strong></p>
+                <ul>
+                    <li>Фиксированная ширина контейнера (обычно 960px, 1024px или 1200px)</li>
+                    <li>Элементы имеют абсолютные размеры в пикселях</li>
+                    <li>Макет выглядит одинаково на всех устройствах</li>
+                    <li>На маленьких экранах появляется горизонтальная прокрутка</li>
+                    <li>Проще в разработке и тестировании</li>
+                </ul>
+                <div class="demo-section">
+                    <p class="demo-title">Пример фиксированной верстки (ширина 960px):</p>
+                    <div class="layout-demo">
+                        <div class="layout-example fixed-layout">Фиксированный контейнер 960px</div>
+                    </div>
+                    <pre><code>.container {
+  width: 960px;
+  margin: 0 auto;
+}
+
+/* Все элементы внутри имеют фиксированные размеры */
+.sidebar {
+  width: 200px;
+  float: left;
+}
+
+.content {
+  width: 740px;
+  float: right;
+}</code></pre>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>2. Что такое резиновый макет веб-страницы?</h3>
+            </div>
+            <div class="answer">
+                <p>Резиновый макет (fluid layout) — это подход, при котором ширина элементов задается в процентах относительно родительского контейнера, что позволяет макету "растягиваться" и "сжиматься" в зависимости от размера окна браузера.</p>
+                <p><strong>Характеристики резиновой верстки:</strong></p>
+                <ul>
+                    <li>Ширина элементов задается в процентах (%)</li>
+                    <li>Макет адаптируется к ширине окна браузера</li>
+                    <li>Используются относительные единицы измерения</li>
+                    <li>На очень широких экранах может выглядеть растянуто</li>
+                    <li>На очень узких экранах может стать нечитаемым</li>
+                </ul>
+                <div class="demo-section">
+                    <p class="demo-title">Пример резиновой верстки (ширина 80%):</p>
+                    <div class="layout-demo">
+                        <div class="layout-example fluid-layout">Резиновый контейнер 80%</div>
+                    </div>
+                    <pre><code>.container {
+  width: 80%; /* Контейнер занимает 80% ширины окна */
+  margin: 0 auto;
+}
+
+.sidebar {
+  width: 25%; /* Сайдбар занимает 25% ширины контейнера */
+  float: left;
+}
+
+.content {
+  width: 75%; /* Контент занимает 75% ширины контейнера */
+  float: right;
+}</code></pre>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>3. Дайте определение понятия «адаптивный дизайн»</h3>
+            </div>
+            <div class="answer">
+                <p>Адаптивный дизайн (responsive design) — это подход к веб-дизайну, при котором веб-страница автоматически подстраивается под различные устройства и размеры экранов, обеспечивая оптимальное отображение и удобство использования.</p>
+                <p><strong>Ключевые принципы адаптивного дизайна:</strong></p>
+                <ol>
+                    <li><strong>Гибкая сетка</strong> - использование относительных единиц (%, fr, em, rem)</li>
+                    <li><strong>Гибкие изображения</strong> - масштабирование изображений относительно контейнера</li>
+                    <li><strong>Медиазапросы</strong> - применение разных стилей в зависимости от характеристик устройства</li>
+                </ol>
+                <div class="demo-section">
+                    <p class="demo-title">Пример адаптивного контейнера:</p>
+                    <div class="layout-demo">
+                        <div class="layout-example adaptive-layout">Адаптивный контейнер 100%</div>
+                    </div>
+                    <pre><code>/* Базовые стили для мобильных устройств */
+.container {
+  width: 100%;
+  padding: 15px;
+}
+
+/* Для планшетов */
+@media (min-width: 768px) {
+  .container {
+    width: 90%;
+    margin: 0 auto;
+  }
+}
+
+/* Для десктопов */
+@media (min-width: 1200px) {
+  .container {
+    width: 1140px;
+    margin: 0 auto;
+  }
+}</code></pre>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>Медиазапросы</h2>
+            
+            <div class="question">
+                <h3>4. Что такое медиазапросы? Как подключить медиазапросы?</h3>
+            </div>
+            <div class="answer">
+                <p>Медиазапросы (media queries) — это правила CSS, которые позволяют применять стили в зависимости от характеристик устройства или окна браузера (ширина, высота, ориентация, разрешение и т.д.).</p>
+                <p><strong>Способы подключения медиазапросов:</strong></p>
+                <ol>
+                    <li><strong>Внутри CSS-файла с помощью @media:</strong>
+                        <pre><code>@media (max-width: 768px) {
+  .element {
+    color: red;
+  }
+}</code></pre>
+                    </li>
+                    <li><strong>В HTML через атрибут media в теге link:</strong>
+                        <pre><code>&lt;link rel="stylesheet" media="(max-width: 768px)" href="mobile.css"&gt;</code></pre>
+                    </li>
+                    <li><strong>В HTML через тег style:</strong>
+                        <pre><code>&lt;style&gt;
+  @media (max-width: 768px) {
+    body { font-size: 14px; }
+  }
+&lt;/style&gt;</code></pre>
+                    </li>
+                </ol>
+                <div class="demo-section">
+                    <p class="demo-title">Демонстрация медиазапросов:</p>
+                    <div class="media-query-demo">
+                        <p>Этот блок меняет цвет фона в зависимости от ширины окна:</p>
+                        <ul>
+                            <li>По умолчанию: серый фон</li>
+                            <li>При ширине более 560px: зеленый фон</li>
+                            <li>При ширине менее 960px: красный фон</li>
+                        </ul>
+                        <p><strong>Попробуйте изменить размер окна браузера!</strong></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>5. Для чего используется правило @import?</h3>
+            </div>
+            <div class="answer">
+                <p>Правило <code>@import</code> используется для импорта внешних CSS-файлов в текущую таблицу стилей. Это позволяет разделять стили на несколько файлов и подключать их по мере необходимости.</p>
+                <div class="info-box">
+                    <p><strong>Важно:</strong> <code>@import</code> может замедлять загрузку страницы, так как файлы загружаются последовательно. Для повышения производительности рекомендуется использовать несколько тегов <code>&lt;link&gt;</code> или сборщики.</p>
+                </div>
+                <pre><code>/* Импорт базовых стилей */
+@import url("reset.css");
+
+/* Импорт стилей для печати */
+@import url("print.css") print;
+
+/* Импорт с медиазапросом */
+@import url("mobile.css") (max-width: 768px);
+
+/* Импорт шрифтов */
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');</code></pre>
+            </div>
+            
+            <div class="question">
+                <h3>6. С какой целью применяется правило @media?</h3>
+            </div>
+            <div class="answer">
+                <p>Правило <code>@media</code> применяется для создания медиазапросов — условных блоков CSS, которые применяются только при выполнении определенных условий (характеристик устройства).</p>
+                <p><strong>Основные цели использования:</strong></p>
+                <ul>
+                    <li>Создание адаптивного дизайна</li>
+                    <li>Оптимизация отображения для разных устройств</li>
+                    <li>Создание отдельных стилей для печати</li>
+                    <li>Учет ориентации устройства (альбомная/портретная)</li>
+                    <li>Учет разрешения экрана (ретина-дисплеи)</li>
+                </ul>
+                <div class="demo-section">
+                    <p class="demo-title">Примеры использования @media:</p>
+                    <pre><code>/* Для мобильных устройств */
+@media (max-width: 767px) {
+  .menu { display: none; }
+  .mobile-menu { display: block; }
+}
+
+/* Для планшетов */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .container { width: 90%; }
+}
+
+/* Для печати */
+@media print {
+  .sidebar, .ads { display: none; }
+  body { font-size: 12pt; }
+}
+
+/* Для ретина-дисплеев */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .logo { background-image: url('logo@2x.png'); }
+}</code></pre>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>8. Что означает @media (min-width: 560px)?</h3>
+            </div>
+            <div class="answer">
+                <p>Медиазапрос <code>@media (min-width: 560px)</code> означает, что CSS-правила внутри этого блока будут применяться только когда ширина окна браузера (viewport) составляет <strong>560 пикселей или больше</strong>.</p>
+                <div class="demo-section">
+                    <p class="demo-title">Наглядное объяснение:</p>
+                    <pre><code>@media (min-width: 560px) {
+  /* Эти стили применятся когда:
+     - Ширина окна = 560px ✓
+     - Ширина окна = 800px ✓
+     - Ширина окна = 1200px ✓
+     - Ширина окна = 400px ✗ (слишком мало)
+  */
+  .container {
+    width: 80%;
+    margin: 0 auto;
+  }
+}</code></pre>
+                    <p>Этот медиазапрос часто используется для создания "mobile-first" дизайна, где базовые стили для мобильных, а дополнительные — для более широких экранов.</p>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>9. Расшифруйте запись @media (max-width: 960px).</h3>
+            </div>
+            <div class="answer">
+                <p>Медиазапрос <code>@media (max-width: 960px)</code> означает, что CSS-правила внутри этого блока будут применяться только когда ширина окна браузера (viewport) составляет <strong>960 пикселей или меньше</strong>.</p>
+                <div class="demo-section">
+                    <p class="demo-title">Наглядное объяснение:</p>
+                    <pre><code>@media (max-width: 960px) {
+  /* Эти стили применятся когда:
+     - Ширина окна = 960px ✓
+     - Ширина окна = 768px ✓
+     - Ширина окна = 480px ✓
+     - Ширина окна = 1200px ✗ (слишком много)
+  */
+  .sidebar {
+    display: none; /* Скрываем сайдбар на маленьких экранах */
+  }
+  
+  .content {
+    width: 100%; /* Растягиваем контент на всю ширину */
+  }
+}</code></pre>
+                    <p>Этот медиазапрос часто используется для адаптации десктопного дизайна под планшеты и мобильные устройства.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>Flexbox</h2>
+            
+            <div class="question">
+                <h3>7. Для чего используется свойство flex?</h3>
+            </div>
+            <div class="answer">
+                <p>Свойство <code>flex</code> является сокращенным свойством для <code>flex-grow</code>, <code>flex-shrink</code> и <code>flex-basis</code>. Оно определяет, как flex-элемент будет изменять свои размеры для заполнения доступного пространства.</p>
+                <p><strong>Синтаксис:</strong> <code>flex: flex-grow flex-shrink flex-basis;</code></p>
+                <div class="demo-section">
+                    <p class="demo-title">Примеры использования свойства flex:</p>
+                    <div class="flex-demo">
+                        <div class="flex-container">
+                            <div class="flex-item" style="flex: 1;">flex: 1;</div>
+                            <div class="flex-item" style="flex: 2;">flex: 2;</div>
+                            <div class="flex-item" style="flex: 1;">flex: 1;</div>
+                        </div>
+                    </div>
+                    <pre><code>.item1 { flex: 1; }   /* grow=1, shrink=1, basis=0% */
+.item2 { flex: 2; }   /* grow=2, shrink=1, basis=0% - в 2 раза шире */
+.item3 { flex: 1; }   /* grow=1, shrink=1, basis=0% */
+
+/* Эквивалентная запись без сокращения */
+.item1 {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0%;
+}</code></pre>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>10. Что означает flex: 1 2 200px;?</h3>
+            </div>
+            <div class="answer">
+                <p>Запись <code>flex: 1 2 200px;</code> расшифровывается как:</p>
+                <ul>
+                    <li><code>flex-grow: 1</code> - элемент может увеличиваться пропорционально другим элементам</li>
+                    <li><code>flex-shrink: 2</code> - элемент будет сжиматься в 2 раза быстрее других элементов при нехватке места</li>
+                    <li><code>flex-basis: 200px</code> - начальный размер элемента составляет 200 пикселей</li>
+                </ul>
+                <div class="demo-section">
+                    <p class="demo-title">Визуализация:</p>
+                    <div class="flex-demo">
+                        <div class="flex-container">
+                            <div class="flex-item" style="flex: 1 2 200px; background-color: #2ecc71;">flex: 1 2 200px;</div>
+                            <div class="flex-item" style="flex: 1 1 200px; background-color: #e74c3c;">flex: 1 1 200px;</div>
+                        </div>
+                    </div>
+                    <pre><code>.element {
+  flex: 1 2 200px;
+  /* Эквивалентно: */
+  flex-grow: 1;
+  flex-shrink: 2;
+  flex-basis: 200px;
+}</code></pre>
+                    <p>При уменьшении контейнера первый элемент будет сжиматься быстрее (в 2 раза), так как у него <code>flex-shrink: 2</code>.</p>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>11. Для чего предназначено значение wrap?</h3>
+            </div>
+            <div class="answer">
+                <p>Значение <code>wrap</code> для свойства <code>flex-wrap</code> позволяет flex-элементам переноситься на следующую строку, если они не помещаются в одну строку внутри flex-контейнера.</p>
+                <div class="demo-section">
+                    <p class="demo-title">Демонстрация flex-wrap:</p>
+                    <div class="flex-demo">
+                        <div class="flex-container wrap-demo">
+                            <div class="flex-item">Элемент 1</div>
+                            <div class="flex-item">Элемент 2</div>
+                            <div class="flex-item">Элемент 3</div>
+                            <div class="flex-item">Элемент 4</div>
+                            <div class="flex-item">Элемент 5</div>
+                            <div class="flex-item">Элемент 6</div>
+                        </div>
+                    </div>
+                    <pre><code>.flex-container {
+  display: flex;
+  flex-wrap: wrap; /* Элементы будут переноситься на новую строку */
+}
+
+/* Другие значения flex-wrap */
+.flex-container {
+  flex-wrap: nowrap; /* Без переноса (по умолчанию) */
+  flex-wrap: wrap; /* С переносом */
+  flex-wrap: wrap-reverse; /* С переносом в обратном порядке */
+}</code></pre>
+                    <p><strong>Попробуйте уменьшить ширину окна браузера, чтобы увидеть перенос элементов!</strong></p>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>12. С какой целью используется свойство flex-flow?</h3>
+            </div>
+            <div class="answer">
+                <p>Свойство <code>flex-flow</code> является сокращением для <code>flex-direction</code> и <code>flex-wrap</code>. Оно позволяет задать направление и перенос элементов в одной записи.</p>
+                <div class="demo-section">
+                    <p class="demo-title">Примеры использования flex-flow:</p>
+                    <pre><code>/* Направление - строка, с переносом */
+.flex-container {
+  flex-flow: row wrap;
+}
+
+/* Направление - колонка, без переноса */
+.flex-container {
+  flex-flow: column nowrap;
+}
+
+/* Направление - строка в обратном порядке, с переносом */
+.flex-container {
+  flex-flow: row-reverse wrap;
+}
+
+/* Эквивалентная запись без сокращения */
+.flex-container {
+  flex-direction: row;
+  flex-wrap: wrap;
+}</code></pre>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>13. Для чего применяется свойство flex-direction?</h3>
+            </div>
+            <div class="answer">
+                <p>Свойство <code>flex-direction</code> определяет направление, в котором flex-элементы располагаются внутри flex-контейнера.</p>
+                <div class="demo-section">
+                    <p class="demo-title">Демонстрация flex-direction:</p>
+                    <div class="flex-demo">
+                        <div class="flex-container direction-demo">
+                            <div class="flex-item">Элемент 1</div>
+                            <div class="flex-item">Элемент 2</div>
+                            <div class="flex-item">Элемент 3</div>
+                        </div>
+                    </div>
+                    <pre><code>/* Основные значения flex-direction */
+.flex-container {
+  flex-direction: row; /* Слева направо (по умолчанию) */
+  flex-direction: row-reverse; /* Справа налево */
+  flex-direction: column; /* Сверху вниз */
+  flex-direction: column-reverse; /* Снизу вверх */
+}</code></pre>
+                    <p>В демонстрации выше используется <code>flex-direction: column</code>, поэтому элементы расположены вертикально.</p>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>14. С какой целью используются свойства align-items и свойство align-content?</h3>
+            </div>
+            <div class="answer">
+                <p><strong>align-items</strong> и <strong>align-content</strong> — это свойства для выравнивания flex-элементов, но они работают в разных ситуациях:</p>
+                
+                <div class="info-box">
+                    <p><strong>align-items</strong> - выравнивает элементы <em>внутри каждой строки</em> по поперечной оси (cross axis). Работает всегда.</p>
+                </div>
+                
+                <div class="info-box">
+                    <p><strong>align-content</strong> - выравнивает <em>сами строки</em> внутри контейнера по поперечной оси. Работает только когда есть несколько строк (при <code>flex-wrap: wrap</code>).</p>
+                </div>
+                
+                <div class="demo-section">
+                    <p class="demo-title">Демонстрация align-items:</p>
+                    <div class="flex-demo">
+                        <div class="flex-container align-demo">
+                            <div class="flex-item flex-item-tall">Высокий</div>
+                            <div class="flex-item flex-item-short">Низкий</div>
+                            <div class="flex-item flex-item-tall">Высокий</div>
+                        </div>
+                    </div>
+                    <pre><code>/* Выравнивание элементов внутри строки */
+.flex-container {
+  align-items: stretch; /* Растянуть (по умолчанию) */
+  align-items: flex-start; /* К началу */
+  align-items: flex-end; /* К концу */
+  align-items: center; /* По центру */
+  align-items: baseline; /* По базовой линии текста */
+}</code></pre>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>15. Какие значения имеет свойство align-self?</h3>
+            </div>
+            <div class="answer">
+                <p>Свойство <code>align-self</code> позволяет переопределить выравнивание отдельного flex-элемента, установленное свойством <code>align-items</code> для всего контейнера.</p>
+                <p><strong>Допустимые значения:</strong></p>
+                <ul>
+                    <li><code>auto</code> - наследует значение от <code>align-items</code> контейнера (по умолчанию)</li>
+                    <li><code>flex-start</code> - выравнивание к началу поперечной оси</li>
+                    <li><code>flex-end</code> - выравнивание к концу поперечной оси</li>
+                    <li><code>center</code> - выравнивание по центру поперечной оси</li>
+                    <li><code>baseline</code> - выравнивание по базовой линии текста</li>
+                    <li><code>stretch</code> - растягивание элемента</li>
+                </ul>
+                <div class="demo-section">
+                    <p class="demo-title">Демонстрация align-self:</p>
+                    <div class="flex-demo">
+                        <div class="flex-container flex-self-demo">
+                            <div class="flex-item align-self-start">align-self: flex-start</div>
+                            <div class="flex-item align-self-center">align-self: center</div>
+                            <div class="flex-item align-self-end">align-self: flex-end</div>
+                        </div>
+                    </div>
+                    <pre><code>.flex-container {
+  align-items: flex-start; /* Все элементы выравниваются к началу */
+}
+
+.item1 {
+  align-self: flex-start; /* Остается у начала */
+}
+
+.item2 {
+  align-self: center; /* Переопределяется на центр */
+}
+
+.item3 {
+  align-self: flex-end; /* Переопределяется на конец */
+}</code></pre>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>16. Назовите свойства, которые имеет flex-контейнер.</h3>
+            </div>
+            <div class="answer">
+                <p>Flex-контейнер (элемент с <code>display: flex</code>) имеет следующие свойства:</p>
+                <ol>
+                    <li><code>flex-direction</code> - направление элементов</li>
+                    <li><code>flex-wrap</code> - перенос элементов</li>
+                    <li><code>flex-flow</code> - сокращение для direction и wrap</li>
+                    <li><code>justify-content</code> - выравнивание по главной оси</li>
+                    <li><code>align-items</code> - выравнивание по поперечной оси</li>
+                    <li><code>align-content</code> - выравнивание строк (при наличии нескольких строк)</li>
+                </ol>
+            </div>
+            
+            <div class="question">
+                <h3>17. Какими свойствами обладают flex-элементы?</h3>
+            </div>
+            <div class="answer">
+                <p>Flex-элементы (дочерние элементы flex-контейнера) имеют следующие свойства:</p>
+                <ol>
+                    <li><code>order</code> - порядок отображения</li>
+                    <li><code>flex-grow</code> - коэффициент увеличения</li>
+                    <li><code>flex-shrink</code> - коэффициент сжатия</li>
+                    <li><code>flex-basis</code> - начальный размер</li>
+                    <li><code>flex</code> - сокращение для grow, shrink и basis</li>
+                    <li><code>align-self</code> - индивидуальное выравнивание</li>
+                </ol>
+            </div>
+            
+            <div class="question">
+                <h3>18. Для чего предназначено свойство justify-content?</h3>
+            </div>
+            <div class="answer">
+                <p>Свойство <code>justify-content</code> определяет выравнивание flex-элементов по главной оси (main axis) внутри контейнера.</p>
+                <div class="demo-section">
+                    <p class="demo-title">Демонстрация justify-content:</p>
+                    <div class="flex-demo">
+                        <div class="flex-container justify-demo">
+                            <div class="flex-item">Элемент 1</div>
+                            <div class="flex-item">Элемент 2</div>
+                            <div class="flex-item">Элемент 3</div>
+                        </div>
+                    </div>
+                    <pre><code>/* Выравнивание по главной оси */
+.flex-container {
+  justify-content: flex-start; /* К началу (по умолчанию) */
+  justify-content: flex-end; /* К концу */
+  justify-content: center; /* По центру */
+  justify-content: space-between; /* Равномерно, первый и последний у краев */
+  justify-content: space-around; /* Равномерно, с отступами по краям */
+  justify-content: space-evenly; /* Равномерно, с равными отступами */
+}</code></pre>
+                    <p>В демонстрации выше используется <code>justify-content: space-between</code>.</p>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>20. Чем отличается свойство align-items от свойства align-self?</h3>
+            </div>
+            <div class="answer">
+                <div class="info-box">
+                    <p><strong>align-items</strong> - устанавливается для flex-контейнера и применяется ко всем flex-элементам внутри него. Определяет выравнивание элементов по поперечной оси.</p>
+                </div>
+                
+                <div class="info-box">
+                    <p><strong>align-self</strong> - устанавливается для отдельного flex-элемента и переопределяет значение <code>align-items</code>, установленное для контейнера. Позволяет задать индивидуальное выравнивание для конкретного элемента.</p>
+                </div>
+                
+                <div class="demo-section">
+                    <p class="demo-title">Наглядное сравнение:</p>
+                    <pre><code>/* Контейнер с общим выравниванием */
+.flex-container {
+  display: flex;
+  align-items: center; /* Все элементы по центру */
+}
+
+/* Переопределение для конкретного элемента */
+.special-item {
+  align-self: flex-start; /* Этот элемент будет у начала, не смотря на align-items: center */
+}</code></pre>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>Практические примеры</h2>
+            
+            <div class="question">
+                <h3>19. Как вставить видео? Каким образом вставить аудио?</h3>
+            </div>
+            <div class="answer">
+                <p>В HTML5 для вставки видео и аудио используются теги <code>&lt;video&gt;</code> и <code>&lt;audio&gt;</code> соответственно.</p>
+                
+                <div class="demo-section">
+                    <p class="demo-title">Вставка видео:</p>
+                    <div class="media-demo">
+                        <div class="video-container">
+                            <div class="placeholder-video">
+                                <p>Здесь будет видео (тег &lt;video&gt;)</p>
+                            </div>
+                        </div>
+                        <pre><code>&lt;video width="640" height="360" controls poster="preview.jpg"&gt;
+  &lt;source src="video.mp4" type="video/mp4"&gt;
+  &lt;source src="video.webm" type="video/webm"&gt;
+  Ваш браузер не поддерживает видео тег.
+&lt;/video&gt;</code></pre>
+                    </div>
+                    
+                    <p class="demo-title">Вставка аудио:</p>
+                    <div class="media-demo">
+                        <div class="audio-container">
+                            <div class="placeholder-audio">
+                                <p>Здесь будет аудио (тег &lt;audio&gt;)</p>
+                            </div>
+                        </div>
+                        <pre><code>&lt;audio controls&gt;
+  &lt;source src="audio.mp3" type="audio/mpeg"&gt;
+  &lt;source src="audio.ogg" type="audio/ogg"&gt;
+  Ваш браузер не поддерживает аудио тег.
+&lt;/audio&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>21. Как создать адаптивное меню?</h3>
+            </div>
+            <div class="answer">
+                <p>Адаптивное меню меняет свой вид в зависимости от размера экрана. Чаще всего на десктопе это горизонтальное меню, а на мобильных устройствах — "гамбургер-меню".</p>
+                
+                <div class="demo-section">
+                    <p class="demo-title">Пример адаптивного меню:</p>
+                    <div class="responsive-menu-demo">
+                        <nav class="responsive-menu">
+                            <ul>
+                                <li><a href="#">Главная</a></li>
+                                <li><a href="#">О нас</a></li>
+                                <li><a href="#">Услуги</a></li>
+                                <li><a href="#">Портфолио</a></li>
+                                <li><a href="#">Контакты</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    
+                    <pre><code>&lt;style&gt;
+  /* Базовые стили - для мобильных */
+  .responsive-menu ul {
+    flex-direction: column;
+    display: none; /* Скрываем на мобильных */
+  }
+  
+  /* Кнопка гамбургер-меню для мобильных */
+  .menu-toggle {
+    display: block;
+  }
+  
+  /* Для планшетов и десктопов */
+  @media (min-width: 768px) {
+    .responsive-menu ul {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+    }
+    
+    .menu-toggle {
+      display: none; /* Скрываем кнопку на больших экранах */
+    }
+  }
+&lt;/style&gt;
+
+&lt;nav class="responsive-menu"&gt;
+  &lt;button class="menu-toggle"&gt;☰ Меню&lt;/button&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href="#"&gt;Главная&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;О нас&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;Услуги&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;Портфолио&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;Контакты&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;</code></pre>
+                    
+                    <p><strong>Попробуйте изменить размер окна браузера! На мобильных (меньше 768px) меню станет вертикальным.</strong></p>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>22. Создайте документ, в котором цвет абзаца изменяется на красный при изменении ширины до 768 px.</h3>
+            </div>
+            <div class="answer">
+                <div class="demo-section">
+                    <p class="demo-title">Решение задачи:</p>
+                    <div class="exercise-paragraph">
+                        <p>Этот абзац меняет цвет при ширине окна меньше 768px</p>
+                        <p>Текущая ширина окна: <span id="window-width">0</span>px</p>
+                    </div>
+                    
+                    <pre><code>&lt;style&gt;
+  /* Базовый цвет абзаца */
+  .adaptive-paragraph {
+    padding: 20px;
+    background-color: #3498db; /* Синий цвет по умолчанию */
+    color: white;
+    border-radius: 6px;
+    font-size: 1.2rem;
+    text-align: center;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Меняем цвет на красный при ширине меньше 768px */
+  @media (max-width: 768px) {
+    .adaptive-paragraph {
+      background-color: #e74c3c; /* Красный цвет */
+    }
+  }
+&lt;/style&gt;
+
+&lt;div class="adaptive-paragraph"&gt;
+  &lt;p&gt;Этот абзац меняет цвет при ширине окна меньше 768px&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+                    
+                    <p><strong>Попробуйте уменьшить ширину окна браузера до 768px или меньше! Абзац изменит цвет с синего на красный.</strong></p>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <p>Материалы подготовлены на основе лекций по компьютерным языкам разметки</p>
+            <p>Все примеры являются интерактивными - изменяйте размер окна браузера для демонстрации адаптивности</p>
+        </footer>
+    </div>
+
+    <script>
+        // Динамическое отображение ширины окна
+        function updateWindowWidth() {
+            const widthElement = document.getElementById('window-width');
+            if (widthElement) {
+                widthElement.textContent = window.innerWidth;
+            }
+        }
+        
+        // Обновляем при загрузке и изменении размера
+        window.addEventListener('load', updateWindowWidth);
+        window.addEventListener('resize', updateWindowWidth);
+        
+        // Инициализируем ширину
+        updateWindowWidth();
+        
+        // Добавляем интерактивность демонстрациям
+        document.addEventListener('DOMContentLoaded', function() {
+            // Добавляем обработчики для демонстрации hover-эффектов
+            const flexItems = document.querySelectorAll('.flex-item, .layout-example, .responsive-menu a');
+            
+            flexItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-3px)';
+                    this.style.transition = 'transform 0.2s ease';
+                    this.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = 'none';
+                });
+            });
+            
+            // Демонстрация изменения flex-direction при клике
+            const directionDemo = document.querySelector('.direction-demo');
+            const originalDirection = 'column';
+            
+            directionDemo.addEventListener('click', function() {
+                if (this.style.flexDirection === 'row') {
+                    this.style.flexDirection = originalDirection;
+                } else {
+                    this.style.flexDirection = 'row';
+                }
+            });
+            
+            directionDemo.title = 'Нажмите, чтобы изменить flex-direction с column на row';
+            
+            // Демонстрация изменения justify-content при клике
+            const justifyDemo = document.querySelector('.justify-demo');
+            const justifyValues = ['flex-start', 'flex-end', 'center', 'space-between', 'space-around'];
+            let justifyIndex = 3; // Начинаем с space-between
+            
+            justifyDemo.addEventListener('click', function() {
+                justifyIndex = (justifyIndex + 1) % justifyValues.length;
+                this.style.justifyContent = justifyValues[justifyIndex];
+                
+                // Обновляем подсказку
+                this.title = `justify-content: ${justifyValues[justifyIndex]}. Нажмите для смены`;
+                
+                // Визуальная обратная связь
+                this.style.backgroundColor = '#e8f4fc';
+                setTimeout(() => {
+                    this.style.backgroundColor = '';
+                }, 300);
+            });
+            
+            justifyDemo.title = `justify-content: ${justifyValues[justifyIndex]}. Нажмите для смены`;
+        });
+    </script>
+</body>
+</html>

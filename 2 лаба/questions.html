@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS - Вопросы и ответы</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        .css-letters {
+            font-size: 4rem;
+            font-weight: bold;
+            margin: 30px 0;
+            text-align: center;
+            letter-spacing: 15px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+        }
+        
+        .first-letter {
+            color: #ff4d4d;
+        }
+        
+        .second-letter {
+            color: #4dff4d;
+        }
+        
+        .third-letter {
+            color: #4d4dff;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .qa-section {
+            margin-bottom: 40px;
+        }
+        
+        h2 {
+            color: #2c3e50;
+            border-bottom: 3px solid #4b6cb7;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+        }
+        
+        .question {
+            background: linear-gradient(to right, #f5f7fa, #e4e8f0);
+            border-left: 5px solid #4b6cb7;
+            padding: 18px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .question:hover {
+            background: linear-gradient(to right, #e4e8f0, #d5dbe6);
+            transform: translateX(5px);
+        }
+        
+        .answer {
+            background: #f8f9fa;
+            padding: 20px;
+            border-left: 4px solid #2ecc71;
+            margin: 15px 0 25px 20px;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+        
+        .code {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .properties-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 12px;
+            margin: 20px 0;
+        }
+        
+        .property {
+            background: #e8f4fc;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+        
+        .property:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .color-examples {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .color-box {
+            width: 120px;
+            height: 80px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: #2c3e50;
+            color: white;
+            font-size: 1.1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .properties-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .color-examples {
+                justify-content: center;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .css-letters {
+                font-size: 3rem;
+                letter-spacing: 10px;
+            }
+            
+            .question {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Каскадные таблицы стилей</h1>
+            <p class="subtitle">Ответы на все вопросы о CSS</p>
+            <div class="css-letters">
+                <span class="first-letter">C</span>
+                <span class="second-letter">S</span>
+                <span class="third-letter">S</span>
+            </div>
+        </header>
+        
+        <div class="content">
+            <div class="qa-section">
+                <h2>Основы CSS</h2>
+                
+                <div class="question">1. Что такое CSS? Как расшифровывается CSS?</div>
+                <div class="answer">
+                    <p><strong>CSS</strong> (Cascading Style Sheets) - это каскадные таблицы стилей. Это язык стилей, который определяет внешний вид HTML-документов, включая макет, цвета, шрифты и другие визуальные аспекты.</p>
+                </div>
+                
+                <div class="question">2. Что представляет из себя синтаксис CSS?</div>
+                <div class="answer">
+                    <p>Синтаксис CSS состоит из селектора и блока объявлений:</p>
+                    <div class="code">
+                        селектор {<br>
+                        &nbsp;&nbsp;свойство: значение;<br>
+                        &nbsp;&nbsp;свойство: значение;<br>
+                        }
+                    </div>
+                    <p>Например:</p>
+                    <div class="code">
+                        p {<br>
+                        &nbsp;&nbsp;color: blue;<br>
+                        &nbsp;&nbsp;font-size: 16px;<br>
+                        }
+                    </div>
+                </div>
+                
+                <div class="question">3. Как подключаются внутренние таблицы стилей?</div>
+                <div class="answer">
+                    <p>Внутренние таблицы стилей подключаются с помощью тега &lt;style&gt; в разделе &lt;head&gt; HTML-документа:</p>
+                    <div class="code">
+                        &lt;head&gt;<br>
+                        &nbsp;&nbsp;&lt;style&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;body {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;background-color: #f0f0f0;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&lt;/style&gt;<br>
+                        &lt;/head&gt;
+                    </div>
+                </div>
+                
+                <div class="question">4. Каким образом создаются внешние таблицы стилей?</div>
+                <div class="answer">
+                    <p>Внешние таблицы стилей создаются в отдельном файле с расширением .css и подключаются с помощью тега &lt;link&gt;:</p>
+                    <div class="code">
+                        &lt;head&gt;<br>
+                        &nbsp;&nbsp;&lt;link rel="stylesheet" href="styles.css"&gt;<br>
+                        &lt;/head&gt;
+                    </div>
+                    <p>Содержимое файла styles.css:</p>
+                    <div class="code">
+                        body {<br>
+                        &nbsp;&nbsp;font-family: Arial, sans-serif;<br>
+                        &nbsp;&nbsp;margin: 0;<br>
+                        &nbsp;&nbsp;padding: 20px;<br>
+                        }
+                    </div>
+                </div>
+                
+                <div class="question">5. Что такое строковое подключение стилей?</div>
+                <div class="answer">
+                    <p>Строковое подключение стилей - это применение CSS-правил непосредственно к HTML-элементу с помощью атрибута style:</p>
+                    <div class="code">
+                        &lt;p style="color: red; font-size: 18px;"&gt;Этот текст красного цвета и размером 18px.&lt;/p&gt;
+                    </div>
+                </div>
+            </div>
+            
+            <div class="qa-section">
+                <h2>Селекторы и специфичность</h2>
+                
+                <div class="question">6. Как создаются классы?</div>
+                <div class="answer">
+                    <p>Классы создаются в CSS с помощью точки (.) и применяются к HTML-элементам с помощью атрибута class:</p>
+                    <div class="code">
+                        /* В CSS */<br>
+                        .highlight {<br>
+                        &nbsp;&nbsp;background-color: yellow;<br>
+                        &nbsp;&nbsp;padding: 5px;<br>
+                        }<br><br>
+                        
+                        /* В HTML */<br>
+                        &lt;p class="highlight"&gt;Этот текст будет выделен.&lt;/p&gt;
+                    </div>
+                </div>
+                
+                <div class="question">7. Каким образом создаются идентификаторы?</div>
+                <div class="answer">
+                    <p>Идентификаторы создаются в CSS с помощью решетки (#) и применяются к HTML-элементам с помощью атрибута id:</p>
+                    <div class="code">
+                        /* В CSS */<br>
+                        #header {<br>
+                        &nbsp;&nbsp;background-color: #333;<br>
+                        &nbsp;&nbsp;color: white;<br>
+                        &nbsp;&nbsp;padding: 20px;<br>
+                        }<br><br>
+                        
+                        /* В HTML */<br>
+                        &lt;div id="header"&gt;Заголовок сайта&lt;/div&gt;
+                    </div>
+                </div>
+                
+                <div class="question">8. Как подключается универсальный стиль?</div>
+                <div class="answer">
+                    <p>Универсальный стиль применяется ко всем элементам на странице с помощью селектора *:</p>
+                    <div class="code">
+                        * {<br>
+                        &nbsp;&nbsp;margin: 0;<br>
+                        &nbsp;&nbsp;padding: 0;<br>
+                        &nbsp;&nbsp;box-sizing: border-box;<br>
+                        }
+                    </div>
+                </div>
+                
+                <div class="question">14. Что означает групповой селектор и как он создается?</div>
+                <div class="answer">
+                    <p>Групповой селектор позволяет применять одинаковые стили к нескольким элементам одновременно. Создается путем перечисления селекторов через запятую:</p>
+                    <div class="code">
+                        h1, h2, h3 {<br>
+                        &nbsp;&nbsp;font-family: 'Arial', sans-serif;<br>
+                        &nbsp;&nbsp;color: #333;<br>
+                        &nbsp;&nbsp;margin-bottom: 15px;<br>
+                        }
+                    </div>
+                </div>
+                
+                <div class="question">17. Что такое специфичность селектора?</div>
+                <div class="answer">
+                    <p>Специфичность - это вес селектора, который определяет, какое CSS-правило будет применено к элементу при наличии конфликтующих правил. Специфичность рассчитывается на основе комбинации селекторов:</p>
+                    <ul>
+                        <li>Идентификаторы: 100 очков за каждый</li>
+                        <li>Классы, псевдоклассы и атрибуты: 10 очков за каждый</li>
+                        <li>Элементы и псевдоэлементы: 1 очко за каждый</li>
+                    </ul>
+                    <p>Например, селектор #content .article p имеет специфичность 100 + 10 + 1 = 111.</p>
+                </div>
+            </div>
+            
+            <div class="qa-section">
+                <h2>Взаимодействие элементов</h2>
+                
+                <div class="question">9. Что такое дочерний элемент?</div>
+                <div class="answer">
+                    <p>Дочерний элемент - это прямой потомок родительского элемента (первый уровень вложенности). В CSS выбирается с помощью селектора >:</p>
+                    <div class="code">
+                        /* Выберет только прямые дочерние элементы div в section */<br>
+                        section > div {<br>
+                        &nbsp;&nbsp;border: 1px solid #ccc;<br>
+                        }
+                    </div>
+                </div>
+                
+                <div class="question">10. Раскройте суть понятия «родительский элемент».</div>
+                <div class="answer">
+                    <p>Родительский элемент - это элемент, который непосредственно содержит другие элементы (дочерние элементы). Например, в структуре &lt;div&gt;&lt;p&gt;Текст&lt;/p&gt;&lt;/div&gt; элемент div является родительским для элемента p.</p>
+                </div>
+                
+                <div class="question">11. Что такое родственные элементы?</div>
+                <div class="answer">
+                    <p>Родственные элементы (сиблинги) - это элементы, имеющие общего родителя и находящиеся на одном уровне вложенности. В CSS выбираются с помощью селекторов + и ~:</p>
+                    <div class="code">
+                        /* Выберет первый параграф, следующий сразу за h2 */<br>
+                        h2 + p {<br>
+                        &nbsp;&nbsp;font-weight: bold;<br>
+                        }<br><br>
+                        
+                        /* Выберет все параграфы, следующие после h2 */<br>
+                        h2 ~ p {<br>
+                        &nbsp;&nbsp;color: #666;<br>
+                        }
+                    </div>
+                </div>
+            </div>
+            
+            <div class="qa-section">
+                <h2>Каскадность и наследование</h2>
+                
+                <div class="question">12. В чем заключается каскадность стилей?</div>
+                <div class="answer">
+                    <p>Каскадность - это принцип, по которому браузер определяет, какие CSS-правила применять к элементу, когда есть конфликтующие правила. Браузер учитывает:</p>
+                    <ol>
+                        <li>Важность правила (!important)</li>
+                        <li>Специфичность селектора</li>
+                        <li>Порядок следования правил (последнее правило имеет приоритет)</li>
+                    </ol>
+                </div>
+                
+                <div class="question">13. Каков смысл наследования стилей?</div>
+                <div class="answer">
+                    <p>Наследование позволяет дочерним элементам получать некоторые стили от своих родительских элементов. Это уменьшает количество повторяющегося кода. Например, если установить цвет текста для body, все текстовые элементы внутри унаследуют этот цвет, если для них не указано другое значение.</p>
+                </div>
+                
+                <div class="question">15. Какие свойства не наследуемые?</div>
+                <div class="answer">
+                    <p>Некоторые CSS-свойства не наследуются дочерними элементами. Вот некоторые из них:</p>
+                    <div class="properties-list">
+                        <div class="property">margin</div>
+                        <div class="property">padding</div>
+                        <div class="property">border</div>
+                        <div class="property">background</div>
+                        <div class="property">width</div>
+                        <div class="property">height</div>
+                        <div class="property">position</div>
+                        <div class="property">display</div>
+                        <div class="property">float</div>
+                        <div class="property">overflow</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="qa-section">
+                <h2>Цвета в CSS</h2>
+                
+                <div class="question">16. Перечислите способы, которыми можно задать цвет в CSS.</div>
+                <div class="answer">
+                    <p>В CSS цвет можно задать несколькими способами:</p>
+                    <div class="color-examples">
+                        <div class="color-box" style="background-color: red;">По имени: red</div>
+                        <div class="color-box" style="background-color: #FF0000;">HEX: #FF0000</div>
+                        <div class="color-box" style="background-color: rgb(255, 0, 0);">RGB: rgb(255, 0, 0)</div>
+                        <div class="color-box" style="background-color: rgba(255, 0, 0, 0.7);">RGBA: rgba(255, 0, 0, 0.7)</div>
+                        <div class="color-box" style="background-color: hsl(120, 100%, 50%);">HSL: hsl(120, 100%, 50%)</div>
+                        <div class="color-box" style="background-color: hsla(120, 100%, 50%, 0.7);">HSLA: hsla(120, 100%, 50%, 0.7)</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="qa-section">
+                <h2>Демонстрация цветных букв CSS</h2>
+                
+                <div class="question">18. Создайте на веб-странице текст «CSS» и первую букву выделите красным цветом; вторую букву – зеленым, третью – синим цветом.</div>
+                <div class="answer">
+                    <p>На этой странице уже реализовано это требование. В заголовке вы видите слово "CSS", где:</p>
+                    <ul>
+                        <li>Первая буква "C" выделена <span style="color: #ff4d4d; font-weight: bold;">красным цветом</span></li>
+                        <li>Вторая буква "S" выделена <span style="color: #4dff4d; font-weight: bold;">зеленым цветом</span></li>
+                        <li>Третья буква "S" выделена <span style="color: #4d4dff; font-weight: bold;">синим цветом</span></li>
+                    </ul>
+                    <p>Это реализовано с помощью следующих стилей:</p>
+                    <div class="code">
+                        .first-letter {<br>
+                        &nbsp;&nbsp;color: #ff4d4d;<br>
+                        }<br>
+                        <br>
+                        .second-letter {<br>
+                        &nbsp;&nbsp;color: #4dff4d;<br>
+                        }<br>
+                        <br>
+                        .third-letter {<br>
+                        &nbsp;&nbsp;color: #4d4dff;<br>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Веб-сайт о CSS &copy; 2023 | Все вопросы рассмотрены</p>
+        </footer>
+    </div>
+</body>
+</html>

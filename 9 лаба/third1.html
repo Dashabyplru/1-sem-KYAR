@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Языки программирования</title>
+    <style>
+        .grid {
+            display: grid;
+            grid-template-areas:
+            "x y w"
+            "x2 y2 w2"
+            "x3 y3 w3";
+            grid-template-columns: 50px 450px 225px;
+            grid-template-rows: 150px 300px 90px;
+            grid-gap: 1%;
+            justify-content: center;
+        }
+        div>div {
+            padding: 10px;
+        }
+        nav {
+            writing-mode: vertical-lr; 
+            text-orientation: upright;
+            padding-left: 5px;
+        }
+        a {
+            text-decoration: none;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+        a:hover {
+            color: #0056b3;
+        }
+        h2 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="grid">
+        <nav style="grid-area: x; grid-row: 1/3;">
+            <a href="https://www.python.org/">Python</a>
+            <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript">JavaScript</a>
+            <a href="https://docs.oracle.com/javase/8/docs/">Java</a>
+        </nav>
+        <div style="grid-area: y; grid-column: 2/4;">
+            <h2>Многообразие языков программирования</h2>
+            Сегодня существует сотни языков программирования, каждый из которых имеет свою специализацию и область применения. От низкоуровневых языков, таких как C и C++, до высокоуровневых Python и JavaScript — выбор языка зависит от конкретной задачи, производительности и экосистемы.
+        </div>
+        <div style="grid-area: y2; grid-row: 2/3;">
+            Python — один из самых популярных языков благодаря своей простоте и читаемости. Он широко используется в data science, машинном обучении, веб-разработке и автоматизации. JavaScript доминирует в веб-разработке, позволяя создавать интерактивные пользовательские интерфейсы. Java остается основным языком для корпоративных приложений и Android-разработки.
+        </div>
+        <div style="grid-area: w2; grid-row: 2/3;">
+            Современные тенденции включают рост популярности языков с статической типизацией (TypeScript, Go, Rust), развитие функционального программирования и конвергенцию парадигм. Важно не только знать синтаксис языка, но и понимать его философию, экосистему и инструменты разработки.
+        </div>
+        <div style="grid-area: x3; grid-column: 1/4;">
+            Выбор языка программирования — это стратегическое решение, которое влияет на скорость разработки, производительность приложения, масштабируемость и поддержку проекта в долгосрочной перспективе.
+        </div>
+    </div>
+</body>
+</html>

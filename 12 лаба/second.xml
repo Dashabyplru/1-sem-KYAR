@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="style.css"?>
+<!DOCTYPE shop [
+  <!ENTITY storename "Anna Asti Official Store">
+  <!ENTITY storecat "Музыка и мерч">
+  <!ENTITY curr "RUB">
+  <!ENTITY cright "© 2024 Anna Asti Store">
+  
+  <!ELEMENT shop (description, product+)>
+  <!ATTLIST shop
+    name CDATA #REQUIRED
+    category CDATA #REQUIRED>
+  
+  <!ELEMENT description (#PCDATA)>
+  
+  <!ELEMENT product (name, category, price, quantity, description, 
+    (release_year | sizes | concert_date)?, 
+    material?, location?, rating, image)>
+  <!ATTLIST product
+    id ID #REQUIRED>
+  
+  <!ELEMENT name (#PCDATA)>
+  <!ELEMENT category (#PCDATA)>
+  <!ELEMENT price (#PCDATA)>
+  <!ATTLIST price
+    currency CDATA #REQUIRED>
+  
+  <!ELEMENT quantity (#PCDATA)>
+  <!ELEMENT description (#PCDATA)>
+  <!ELEMENT release_year (#PCDATA)>
+  <!ELEMENT sizes (#PCDATA)>
+  <!ELEMENT material (#PCDATA)>
+  <!ELEMENT concert_date (#PCDATA)>
+  <!ELEMENT location (#PCDATA)>
+  <!ELEMENT rating (#PCDATA)>
+  <!ELEMENT image (#PCDATA)>
+]>
+<shop name="&storename;" category="&storecat;">
+  <description>Официальный магазин музыки и мерчендайза певицы Anna Asti</description>
+  
+  <product id="001">
+    <name>Альбом "Царица" (CD)</name>
+    <category>Музыка</category>
+    <price currency="&curr;">1499</price>
+    <quantity>50</quantity>
+    <description>Официальный CD альбом "Царица" с автографом</description>
+    <release_year>2023</release_year>
+    <rating>5.0</rating>
+    <image>album_tsaritsa.jpg</image>
+  </product>
+  
+  <product id="002">
+    <name>Футболка "FREEDOM"</name>
+    <category>Одежда</category>
+    <price currency="&curr;">2499</price>
+    <quantity>120</quantity>
+    <description>Черная футболка с принтом FREEDOM из клипа</description>
+    <sizes>S, M, L, XL</sizes>
+    <material>Хлопок 100%</material>
+    <rating>4.8</rating>
+    <image>tshirt_freedom.jpg</image>
+  </product>
+  
+  <product id="003">
+    <name>Виниловая пластинка "Полевые цветы"</name>
+    <category>Музыка</category>
+    <price currency="&curr;">3299</price>
+    <quantity>25</quantity>
+    <description>Ограниченный тираж виниловой пластинки</description>
+    <release_year>2022</release_year>
+    <rating>4.9</rating>
+    <image>vinyl_polevye_cvety.jpg</image>
+  </product>
+  
+  <product id="004">
+    <name>Толстовка с капюшоном "Асти"</name>
+    <category>Одежда</category>
+    <price currency="&curr;">4299</price>
+    <quantity>80</quantity>
+    <description>Серая толстовка с логотипом певицы</description>
+    <sizes>M, L, XL</sizes>
+    <material>Хлопок 80%, Полиэстер 20%</material>
+    <rating>4.7</rating>
+    <image>hoodie_asti.jpg</image>
+  </product>
+  
+  <product id="005">
+    <name>Билет на концерт + meetgreet</name>
+    <category>Билеты</category>
+    <price currency="&curr;">8999</price>
+    <quantity>15</quantity>
+    <description>VIP билет с возможностью личной встречи</description>
+    <concert_date>2024-06-15</concert_date>
+    <location>Москва, Крокус Сити Холл</location>
+    <rating>5.0</rating>
+    <image>vip_ticket.jpg</image>
+  </product>
+  
+  <footer>&cright;</footer>
+</shop>

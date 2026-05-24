@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Псевдоклассы, навигация и позиционирование в CSS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #3498db;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+        }
+        
+        h2 {
+            color: #2980b9;
+            margin: 40px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+        
+        h3 {
+            color: #3498db;
+            margin: 25px 0 15px;
+        }
+        
+        .question {
+            background-color: #f8fafc;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-left: 5px solid #3498db;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        
+        .question:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            transform: translateY(-2px);
+        }
+        
+        .answer {
+            background-color: #e8f4fc;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            border: 1px solid #d6eaf8;
+        }
+        
+        .demo-section {
+            background-color: #f9f9f9;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .demo-title {
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        /* Демонстрация псевдоклассов ссылок */
+        .link-demo a {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .link-demo a:link {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .link-demo a:visited {
+            background-color: #9b59b6;
+            color: white;
+        }
+        
+        .link-demo a:hover {
+            background-color: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .link-demo a:active {
+            background-color: #e74c3c;
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        /* Вертикальная навигация */
+        .vertical-nav {
+            width: 200px;
+            background-color: #2c3e50;
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        .vertical-nav a {
+            display: block;
+            color: white;
+            padding: 15px 20px;
+            text-decoration: none;
+            border-bottom: 1px solid #34495e;
+            transition: all 0.3s ease;
+        }
+        
+        .vertical-nav a:hover {
+            background-color: #3498db;
+            padding-left: 30px;
+        }
+        
+        /* Горизонтальная навигация */
+        .horizontal-nav {
+            background-color: #2c3e50;
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        .horizontal-nav ul {
+            list-style-type: none;
+            display: flex;
+        }
+        
+        .horizontal-nav li {
+            flex: 1;
+        }
+        
+        .horizontal-nav a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 15px 20px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .horizontal-nav a:hover {
+            background-color: #3498db;
+        }
+        
+        /* Выпадающее меню */
+        .dropdown-container {
+            margin: 30px 0;
+        }
+        
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .dropbtn {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .dropbtn:hover {
+            background-color: #2980b9;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border-radius: 4px;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .dropdown-content a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            border-bottom: 1px solid #f1f1f1;
+            transition: background-color 0.3s ease;
+        }
+        
+        .dropdown-content a:hover {
+            background-color: #f8f9fa;
+            color: #3498db;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        /* Позиционирование демо */
+        .position-demo {
+            position: relative;
+            height: 300px;
+            background-color: #ecf0f1;
+            border: 2px dashed #bdc3c7;
+            border-radius: 8px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .position-box {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            border-radius: 4px;
+        }
+        
+        .static-box {
+            background-color: #3498db;
+            position: static;
+            margin: 20px;
+        }
+        
+        .relative-box {
+            background-color: #2ecc71;
+            position: relative;
+            top: 20px;
+            left: 40px;
+        }
+        
+        .absolute-box {
+            background-color: #e74c3c;
+            position: absolute;
+            top: 20px;
+            right: 40px;
+        }
+        
+        .fixed-box {
+            background-color: #9b59b6;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .sticky-box {
+            background-color: #f39c12;
+            position: sticky;
+            top: 20px;
+            margin-top: 150px;
+        }
+        
+        /* Практическое задание - вертикальное меню с выпадающим */
+        .vertical-dropdown-container {
+            width: 250px;
+            margin: 30px 0;
+        }
+        
+        .vertical-menu {
+            background-color: #2c3e50;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        
+        .vertical-menu-item {
+            position: relative;
+        }
+        
+        .vertical-menu-item > a {
+            display: block;
+            color: white;
+            padding: 15px 20px;
+            text-decoration: none;
+            border-bottom: 1px solid #34495e;
+            transition: all 0.3s ease;
+        }
+        
+        .vertical-menu-item > a:hover {
+            background-color: #3498db;
+        }
+        
+        .vertical-submenu {
+            display: none;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            width: 200px;
+            background-color: white;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border-radius: 0 6px 6px 0;
+            z-index: 10;
+        }
+        
+        .vertical-submenu a {
+            display: block;
+            color: #333;
+            padding: 12px 20px;
+            text-decoration: none;
+            border-bottom: 1px solid #f1f1f1;
+            transition: all 0.3s ease;
+        }
+        
+        .vertical-submenu a:hover {
+            background-color: #f8f9fa;
+            color: #3498db;
+        }
+        
+        .vertical-menu-item:hover .vertical-submenu {
+            display: block;
+        }
+        
+        /* Практическое задание - горизонтальное меню с выпадающим */
+        .horizontal-dropdown-container {
+            margin: 30px 0;
+        }
+        
+        .horizontal-menu {
+            background-color: #2c3e50;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        
+        .horizontal-menu ul {
+            list-style-type: none;
+            display: flex;
+            position: relative;
+        }
+        
+        .horizontal-menu li {
+            flex: 1;
+            position: relative;
+        }
+        
+        .horizontal-menu li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 15px 20px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .horizontal-menu li a:hover {
+            background-color: #3498db;
+        }
+        
+        .horizontal-submenu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 200px;
+            background-color: white;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border-radius: 0 0 6px 6px;
+            z-index: 10;
+        }
+        
+        .horizontal-submenu li {
+            width: 100%;
+        }
+        
+        .horizontal-submenu a {
+            color: #333;
+            text-align: left;
+            padding: 12px 20px;
+            border-bottom: 1px solid #f1f1f1;
+        }
+        
+        .horizontal-submenu a:hover {
+            background-color: #f8f9fa;
+            color: #3498db;
+        }
+        
+        .horizontal-menu li:hover .horizontal-submenu {
+            display: block;
+        }
+        
+        /* CSS спрайт */
+        .sprite-demo {
+            margin: 20px 0;
+        }
+        
+        .sprite {
+            width: 100px;
+            height: 100px;
+            background-image: url('https://via.placeholder.com/300x100/3498db/ffffff?text=Sprite+Image');
+            background-repeat: no-repeat;
+            display: inline-block;
+            margin: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .sprite-home {
+            background-position: 0 0;
+        }
+        
+        .sprite-about {
+            background-position: -100px 0;
+        }
+        
+        .sprite-contact {
+            background-position: -200px 0;
+        }
+        
+        /* Ролловер изображение */
+        .rollover-demo {
+            margin: 20px 0;
+        }
+        
+        .rollover {
+            width: 200px;
+            height: 100px;
+            background-image: url('https://via.placeholder.com/200x100/3498db/ffffff?text=Normal');
+            background-repeat: no-repeat;
+            transition: background-image 0.3s ease;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        
+        .rollover:hover {
+            background-image: url('https://via.placeholder.com/200x100/e74c3c/ffffff?text=Hover');
+        }
+        
+        code {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        pre {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #ecf0f1;
+            color: #7f8c8d;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .horizontal-nav ul {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Псевдоклассы, навигация и позиционирование в CSS</h1>
+            <p class="subtitle">Ответы на вопросы по материалам лекций</p>
+        </header>
+        
+        <section>
+            <h2>Псевдоклассы для гиперссылок</h2>
+            
+            <div class="question">
+                <h3>1. С помощью каких псевдоклассов можно изменить состояние гиперссылки?</h3>
+            </div>
+            <div class="answer">
+                <p>Для изменения состояния гиперссылки используются следующие псевдоклассы:</p>
+                <ul>
+                    <li><code>:link</code> - применяется к еще не посещенным ссылкам</li>
+                    <li><code>:visited</code> - применяется к уже посещенным ссылкам</li>
+                    <li><code>:hover</code> - применяется при наведении курсора на ссылку</li>
+                    <li><code>:active</code> - применяется в момент клика по ссылке</li>
+                    <li><code>:focus</code> - применяется когда ссылка получает фокус (например, при навигации с клавиатуры)</li>
+                </ul>
+                <div class="demo-section">
+                    <p class="demo-title">Демонстрация псевдоклассов ссылок:</p>
+                    <div class="link-demo">
+                        <a href="#link1">Непосещенная ссылка</a>
+                        <a href="#link2">Посещенная ссылка</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>2. Для чего используется псевдокласс :hover?</h3>
+            </div>
+            <div class="answer">
+                <p>Псевдокласс <code>:hover</code> используется для изменения стиля элемента при наведении на него курсора мыши. Это позволяет создавать интерактивные элементы, которые визуально реагируют на взаимодействие с пользователем.</p>
+                <div class="demo-section">
+                    <p class="demo-title">Пример использования:</p>
+                    <pre><code>a:hover {
+    color: red;
+    text-decoration: underline;
+    background-color: #f0f0f0;
+}</code></pre>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>3. Каково назначение псевдокласса :active?</h3>
+            </div>
+            <div class="answer">
+                <p>Псевдокласс <code>:active</code> применяется к элементу в момент его активации пользователем (когда пользователь нажимает на элемент, но еще не отпускает кнопку мыши). Это позволяет дать визуальную обратную связь о том, что элемент был нажат.</p>
+                <div class="demo-section">
+                    <p class="demo-title">Пример использования:</p>
+                    <pre><code>button:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}</code></pre>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>4. Для чего используется псевдокласс :link?</h3>
+            </div>
+            <div class="answer">
+                <p>Псевдокласс <code>:link</code> применяется ко всем еще не посещенным ссылкам. Он позволяет задать стили для ссылок, по которым пользователь еще не переходил.</p>
+                <div class="demo-section">
+                    <p class="demo-title">Пример использования:</p>
+                    <pre><code>a:link {
+    color: blue;
+    text-decoration: none;
+}</code></pre>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>5. Каково назначение псевдокласса :visited?</h3>
+            </div>
+            <div class="answer">
+                <p>Псевдокласс <code>:visited</code> применяется к ссылкам, которые уже были посещены пользователем. Он позволяет визуально отличать посещенные ссылки от непосещенных.</p>
+                <div class="demo-section">
+                    <p class="demo-title">Пример использования:</p>
+                    <pre><code>a:visited {
+    color: purple;
+    text-decoration: none;
+}</code></pre>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>Навигационные панели</h2>
+            
+            <div class="question">
+                <h3>6. Как создать вертикальную панель навигации?</h3>
+            </div>
+            <div class="answer">
+                <p>Для создания вертикальной панели навигации нужно:</p>
+                <ol>
+                    <li>Создать контейнер для навигации (обычно <code>&lt;nav&gt;</code> или <code>&lt;div&gt;</code>)</li>
+                    <li>Добавить список ссылок (<code>&lt;ul&gt;</code> и <code>&lt;li&gt;</code>)</li>
+                    <li>Убрать стандартные стили списка (<code>list-style-type: none</code>)</li>
+                    <li>Задать ссылкам блочное отображение (<code>display: block</code>)</li>
+                    <li>Добавить отступы и оформление</li>
+                </ol>
+                <div class="demo-section">
+                    <p class="demo-title">Пример вертикальной панели навигации:</p>
+                    <div class="vertical-nav">
+                        <a href="#home">Главная</a>
+                        <a href="#news">Новости</a>
+                        <a href="#contact">Контакты</a>
+                        <a href="#about">О нас</a>
+                    </div>
+                    <pre><code>.vertical-nav {
+    width: 200px;
+    background-color: #2c3e50;
+    border-radius: 6px;
+}
+
+.vertical-nav a {
+    display: block;
+    color: white;
+    padding: 15px 20px;
+    text-decoration: none;
+    border-bottom: 1px solid #34495e;
+}
+
+.vertical-nav a:hover {
+    background-color: #3498db;
+}</code></pre>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>7. Перечислите основные этапы создания горизонтальной панели навигации.</h3>
+            </div>
+            <div class="answer">
+                <p>Основные этапы создания горизонтальной панели навигации:</p>
+                <ol>
+                    <li>Создать контейнер для навигации</li>
+                    <li>Добавить неупорядоченный список <code>&lt;ul&gt;</code> с пунктами <code>&lt;li&gt;</code></li>
+                    <li>Установить для списка <code>list-style-type: none</code> чтобы убрать маркеры</li>
+                    <li>Изменить отображение пунктов списка на <code>display: inline-block</code> или использовать Flexbox (<code>display: flex</code>)</li>
+                    <li>Задать стили для ссылок внутри пунктов меню</li>
+                    <li>Добавить эффекты при наведении с помощью <code>:hover</code></li>
+                </ol>
+                <div class="demo-section">
+                    <p class="demo-title">Пример горизонтальной панели навигации:</p>
+                    <div class="horizontal-nav">
+                        <ul>
+                            <li><a href="#home">Главная</a></li>
+                            <li><a href="#news">Новости</a></li>
+                            <li><a href="#contact">Контакты</a></li>
+                            <li><a href="#about">О нас</a></li>
+                        </ul>
+                    </div>
+                    <pre><code>.horizontal-nav ul {
+    list-style-type: none;
+    display: flex;
+    background-color: #2c3e50;
+}
+
+.horizontal-nav li {
+    flex: 1;
+}
+
+.horizontal-nav a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 15px 20px;
+    text-decoration: none;
+}
+
+.horizontal-nav a:hover {
+    background-color: #3498db;
+}</code></pre>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>8. Как создать панель навигации с выпадающими элементами?</h3>
+            </div>
+            <div class="answer">
+                <p>Для создания панели навигации с выпадающими элементами нужно:</p>
+                <ol>
+                    <li>Создать основное меню</li>
+                    <li>Для пунктов меню, которые должны содержать выпадающие элементы, создать дополнительную структуру (вложенный список)</li>
+                    <li>Скрыть выпадающие элементы с помощью <code>display: none</code></li>
+                    <li>Использовать позиционирование (<code>position: absolute</code>) для выпадающего меню</li>
+                    <li>Показать выпадающее меню при наведении на родительский элемент с помощью <code>:hover</code></li>
+                </ol>
+                <div class="demo-section">
+                    <p class="demo-title">Пример выпадающего меню:</p>
+                    <div class="dropdown-container">
+                        <div class="dropdown">
+                            <button class="dropbtn">Выпадающее меню</button>
+                            <div class="dropdown-content">
+                                <a href="#">Пункт 1</a>
+                                <a href="#">Пункт 2</a>
+                                <a href="#">Пункт 3</a>
+                            </div>
+                        </div>
+                    </div>
+                    <pre><code>.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 200px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}</code></pre>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>9. Для чего используется метод CSS-спрайт?</h3>
+            </div>
+            <div class="answer">
+                <p>Метод CSS-спрайтов используется для объединения нескольких изображений в одно большое изображение, что позволяет:</p>
+                <ul>
+                    <li>Уменьшить количество HTTP-запросов к серверу</li>
+                    <li>Ускорить загрузку страницы</li>
+                    <li>Предотвратить мерцание изображений при наведении (для ролловеров)</li>
+                    <li>Упростить управление множеством мелких изображений</li>
+                </ul>
+                <p>Для отображения нужной части спрайта используется свойство <code>background-position</code>.</p>
+                <div class="demo-section">
+                    <p class="demo-title">Пример CSS-спрайта:</p>
+                    <div class="sprite-demo">
+                        <div class="sprite sprite-home"></div>
+                        <div class="sprite sprite-about"></div>
+                        <div class="sprite sprite-contact"></div>
+                    </div>
+                    <pre><code>.sprite {
+    width: 100px;
+    height: 100px;
+    background-image: url('sprite.png');
+    background-repeat: no-repeat;
+}
+
+.sprite-home {
+    background-position: 0 0;
+}
+
+.sprite-about {
+    background-position: -100px 0;
+}
+
+.sprite-contact {
+    background-position: -200px 0;
+}</code></pre>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>10. Что представляет из себя изображение-ролловер?</h3>
+            </div>
+            <div class="answer">
+                <p>Изображение-ролловер (rollover image) - это техника, при которой изображение меняется при наведении на него курсора мыши. Это создает интерактивный эффект и визуальную обратную связь для пользователя.</p>
+                <p>Есть два основных способа реализации ролловеров:</p>
+                <ol>
+                    <li>Использование двух отдельных изображений и их смена через JavaScript или CSS</li>
+                    <li>Использование CSS-спрайта с изменением позиции фона при наведении</li>
+                </ol>
+                <div class="demo-section">
+                    <p class="demo-title">Пример изображения-ролловера:</p>
+                    <div class="rollover-demo">
+                        <div class="rollover"></div>
+                    </div>
+                    <pre><code>.rollover {
+    width: 200px;
+    height: 100px;
+    background-image: url('normal-state.png');
+    transition: background-image 0.3s ease;
+}
+
+.rollover:hover {
+    background-image: url('hover-state.png');
+}</code></pre>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>11. Каким образом скрыть выпадающие элементы?</h3>
+            </div>
+            <div class="answer">
+                <p>Выпадающие элементы скрываются с помощью свойства <code>display: none</code>. При наведении на родительский элемент свойство меняется на <code>display: block</code> или <code>display: flex</code> в зависимости от структуры меню.</p>
+                <div class="demo-section">
+                    <p class="demo-title">Пример скрытия и показа выпадающих элементов:</p>
+                    <pre><code>/* Скрытие выпадающего меню */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    /* остальные стили */
+}
+
+/* Показ выпадающего меню при наведении */
+.dropdown:hover .dropdown-content {
+    display: block;
+}</code></pre>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>Позиционирование элементов</h2>
+            
+            <div class="question">
+                <h3>12. Для чего используется свойство position?</h3>
+            </div>
+            <div class="answer">
+                <p>Свойство <code>position</code> используется для определения метода позиционирования элемента на странице. Оно позволяет контролировать расположение элемента относительно его нормального положения в потоке документа или относительно других элементов.</p>
+                <p>Свойство <code>position</code> может принимать следующие значения:</p>
+                <ul>
+                    <li><code>static</code> - стандартное позиционирование (по умолчанию)</li>
+                    <li><code>relative</code> - относительное позиционирование</li>
+                    <li><code>absolute</code> - абсолютное позиционирование</li>
+                    <li><code>fixed</code> - фиксированное позиционирование</li>
+                    <li><code>sticky</code> - "липкое" позиционирование</li>
+                </ul>
+            </div>
+            
+            <div class="question">
+                <h3>13. Какое значение позиционирования должно быть у выпадающего меню и основного меню?</h3>
+            </div>
+            <div class="answer">
+                <p>Для создания выпадающего меню обычно используется следующая комбинация позиционирования:</p>
+                <ul>
+                    <li>Основной пункт меню: <code>position: relative</code> (чтобы создать контекст позиционирования для выпадающего меню)</li>
+                    <li>Выпадающее меню: <code>position: absolute</code> (чтобы позиционировать его относительно основного пункта меню)</li>
+                </ul>
+                <div class="demo-section">
+                    <p class="demo-title">Пример правильного позиционирования:</p>
+                    <pre><code>/* Основной пункт меню */
+.menu-item {
+    position: relative;
+    display: inline-block;
+}
+
+/* Выпадающее меню */
+.submenu {
+    position: absolute;
+    top: 100%; /* Позиционирование прямо под основным пунктом */
+    left: 0;
+    display: none;
+}
+
+/* Показать выпадающее меню при наведении */
+.menu-item:hover .submenu {
+    display: block;
+}</code></pre>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>14. Создайте вертикальное меню из двух элементов, для одного из которых должно справа появляться выпадающее вертикальное меню из трех элементов.</h3>
+            </div>
+            <div class="answer">
+                <div class="demo-section">
+                    <p class="demo-title">Вертикальное меню с выпадающим подменю справа:</p>
+                    <div class="vertical-dropdown-container">
+                        <div class="vertical-menu">
+                            <div class="vertical-menu-item">
+                                <a href="#home">Главная</a>
+                            </div>
+                            <div class="vertical-menu-item">
+                                <a href="#services">Услуги</a>
+                                <div class="vertical-submenu">
+                                    <a href="#web-dev">Веб-разработка</a>
+                                    <a href="#design">Дизайн</a>
+                                    <a href="#seo">SEO-оптимизация</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <pre><code>&lt;div class="vertical-menu"&gt;
+  &lt;div class="vertical-menu-item"&gt;
+    &lt;a href="#home"&gt;Главная&lt;/a&gt;
+  &lt;/div&gt;
+  &lt;div class="vertical-menu-item"&gt;
+    &lt;a href="#services"&gt;Услуги&lt;/a&gt;
+    &lt;div class="vertical-submenu"&gt;
+      &lt;a href="#web-dev"&gt;Веб-разработка&lt;/a&gt;
+      &lt;a href="#design"&gt;Дизайн&lt;/a&gt;
+      &lt;a href="#seo"&gt;SEO-оптимизация&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                    <pre><code>.vertical-menu-item {
+    position: relative;
+}
+
+.vertical-submenu {
+    display: none;
+    position: absolute;
+    left: 100%; /* Расположение справа от родителя */
+    top: 0;
+    width: 200px;
+    background-color: white;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+.vertical-menu-item:hover .vertical-submenu {
+    display: block;
+}</code></pre>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>15. Какие типы позиционирования вы знаете?</h3>
+            </div>
+            <div class="answer">
+                <p>В CSS существует 5 основных типов позиционирования:</p>
+                <ol>
+                    <li><strong>Static</strong> - статическое позиционирование (значение по умолчанию)</li>
+                    <li><strong>Relative</strong> - относительное позиционирование</li>
+                    <li><strong>Absolute</strong> - абсолютное позиционирование</li>
+                    <li><strong>Fixed</strong> - фиксированное позиционирование</li>
+                    <li><strong>Sticky</strong> - "липкое" позиционирование (гибрид relative и fixed)</li>
+                </ol>
+            </div>
+            
+            <div class="question">
+                <h3>16. Что такое относительное позиционирование?</h3>
+            </div>
+            <div class="answer">
+                <p>Относительное позиционирование (<code>position: relative</code>) позволяет смещать элемент относительно его исходного положения в потоке документа. Элемент сохраняет свое место в потоке, и другие элементы располагаются так, как если бы он оставался на своем исходном месте.</p>
+                <p>Для смещения используются свойства <code>top</code>, <code>right</code>, <code>bottom</code>, <code>left</code>.</p>
+                <div class="demo-section">
+                    <p class="demo-title">Демонстрация разных типов позиционирования:</p>
+                    <div class="position-demo">
+                        <div class="position-box static-box">Static</div>
+                        <div class="position-box relative-box">Relative</div>
+                        <div class="position-box absolute-box">Absolute</div>
+                        <div class="position-box fixed-box">Fixed</div>
+                        <div class="position-box sticky-box">Sticky</div>
+                    </div>
+                    <pre><code>.relative-box {
+    position: relative;
+    top: 20px;  /* Смещение на 20px вниз от исходной позиции */
+    left: 40px; /* Смещение на 40px вправо от исходной позиции */
+}</code></pre>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>17. Раскройте суть абсолютного позиционирования.</h3>
+            </div>
+            <div class="answer">
+                <p>Абсолютное позиционирование (<code>position: absolute</code>) полностью вынимает элемент из нормального потока документа. Элемент позиционируется относительно ближайшего позиционированного предка (элемента с <code>position</code> отличным от <code>static</code>) или относительно окна браузера, если такого предка нет.</p>
+                <p>Абсолютно позиционированные элементы не влияют на расположение других элементов и могут перекрывать их.</p>
+                <div class="demo-section">
+                    <p class="demo-title">Пример абсолютного позиционирования:</p>
+                    <pre><code>.container {
+    position: relative; /* Создает контекст позиционирования */
+}
+
+.absolute-box {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+}</code></pre>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>18. Что такое статическое позиционирование?</h3>
+            </div>
+            <div class="answer">
+                <p>Статическое позиционирование (<code>position: static</code>) является значением по умолчанию для всех элементов. Элементы располагаются в нормальном потоке документа в том порядке, в котором они указаны в HTML. Свойства <code>top</code>, <code>right</code>, <code>bottom</code>, <code>left</code> и <code>z-index</code> не применяются к статически позиционированным элементам.</p>
+            </div>
+            
+            <div class="question">
+                <h3>19. Раскройте суть фиксированного позиционирования</h3>
+            </div>
+            <div class="answer">
+                <p>Фиксированное позиционирование (<code>position: fixed</code>) также вынимает элемент из нормального потока документа, но позиционирует его относительно окна браузера (viewport). Фиксированный элемент остается на одном и том же месте даже при прокрутке страницы.</p>
+                <p>Фиксированное позиционирование часто используется для создания панелей навигации, кнопок "наверх" или рекламных баннеров, которые должны быть всегда видны пользователю.</p>
+                <div class="demo-section">
+                    <p class="demo-title">Пример фиксированного позиционирования:</p>
+                    <pre><code>.fixed-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 1000;
+}</code></pre>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>20. Создайте горизонтальное меню из основных элементов, для одного из которых должен быть выпадающий список при наведении на него, состоящий из трех элементов.</h3>
+            </div>
+            <div class="answer">
+                <div class="demo-section">
+                    <p class="demo-title">Горизонтальное меню с выпадающим подменю:</p>
+                    <div class="horizontal-dropdown-container">
+                        <nav class="horizontal-menu">
+                            <ul>
+                                <li><a href="#home">Главная</a></li>
+                                <li><a href="#news">Новости</a></li>
+                                <li>
+                                    <a href="#services">Услуги</a>
+                                    <ul class="horizontal-submenu">
+                                        <li><a href="#web-dev">Веб-разработка</a></li>
+                                        <li><a href="#design">Дизайн</a></li>
+                                        <li><a href="#seo">SEO</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#contact">Контакты</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <pre><code>&lt;nav class="horizontal-menu"&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href="#home"&gt;Главная&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#news"&gt;Новости&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;
+      &lt;a href="#services"&gt;Услуги&lt;/a&gt;
+      &lt;ul class="horizontal-submenu"&gt;
+        &lt;li&gt;&lt;a href="#web-dev"&gt;Веб-разработка&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#design"&gt;Дизайн&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#seo"&gt;SEO&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href="#contact"&gt;Контакты&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;</code></pre>
+                    <pre><code>.horizontal-menu li {
+    position: relative;
+}
+
+.horizontal-submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 200px;
+    background-color: white;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+.horizontal-menu li:hover .horizontal-submenu {
+    display: block;
+}</code></pre>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>21. Что такое «липкое» позиционирование?</h3>
+            </div>
+            <div class="answer">
+                <p>"Липкое" позиционирование (<code>position: sticky</code>) является гибридом относительного и фиксированного позиционирования. Элемент ведет себя как относительно позиционированный до тех пор, пока не достигает заданного порога прокрутки, после чего он "прилипает" к указанной позиции и ведет себя как фиксированный.</p>
+                <p>"Липкие" элементы часто используются для заголовков таблиц, которые должны оставаться видимыми при прокрутке, или для навигационных панелей, которые должны "прилипать" к верхней части экрана при прокрутке страницы.</p>
+                <div class="demo-section">
+                    <p class="demo-title">Пример липкого позиционирования:</p>
+                    <pre><code>.sticky-header {
+    position: sticky;
+    top: 0; /* Начинает "прилипать" при достижении верха viewport */
+    background-color: white;
+    z-index: 100;
+}</code></pre>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <p>Материалы подготовлены на основе лекций по компьютерным языкам разметки</p>
+            <p>Все примеры являются интерактивными - попробуйте навести курсор на элементы меню и ссылки</p>
+        </footer>
+    </div>
+
+    <script>
+        // Добавляем фиксированную кнопку "Наверх"
+        const scrollToTopBtn = document.createElement('div');
+        scrollToTopBtn.className = 'position-box fixed-box';
+        scrollToTopBtn.textContent = 'Наверх';
+        scrollToTopBtn.style.cursor = 'pointer';
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        });
+        document.body.appendChild(scrollToTopBtn);
+        
+        // Симуляция посещенной ссылки для демонстрации
+        document.addEventListener('DOMContentLoaded', function() {
+            const visitedLink = document.querySelector('.link-demo a[href="#link2"]');
+            // Добавляем класс для симуляции посещенной ссылки
+            visitedLink.style.backgroundColor = '#9b59b6';
+            
+            // Добавляем обработчики для демонстрации active состояния
+            const links = document.querySelectorAll('.link-demo a');
+            links.forEach(link => {
+                link.addEventListener('mousedown', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
+                });
+                
+                link.addEventListener('mouseup', function() {
+                    this.style.transform = 'translateY(-3px)';
+                    this.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
+                });
+                
+                link.addEventListener('mouseleave', function() {
+                    this.style.transform = '';
+                    this.style.boxShadow = '';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

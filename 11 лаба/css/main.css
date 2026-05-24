@@ -1,0 +1,54 @@
+.logotype img {
+  height: 100%;
+  border: none;
+}
+
+.header {
+  height: 15%;
+  padding: 10px;
+  display: grid;
+  grid-gap: 3em;
+  grid-template-columns: 25% 75%;
+  grid-template-rows: 15vh;
+  background-color: #FFDC33;
+}
+
+.header {
+  border: 1px solid grey;
+  border-radius: 20px;
+}
+
+.logotype {
+  border: 1px solid grey;
+  border-radius: 20px;
+}
+
+.link {
+  border: 1px solid grey;
+  border-radius: 20px;
+}
+
+.nav, .logotype {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5%;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+p {
+  font-size: 1rem;
+}
+
+.link {
+  margin: 5%;
+  padding: 1%;
+}
+
+body {
+  font-size: 16px;
+  color: blue;
+}/*# sourceMappingURL=main.css.map */

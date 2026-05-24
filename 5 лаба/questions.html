@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Селекторы атрибутов, псевдоклассы и работа с таблицами</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: #3498db;
+            margin: 30px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .question {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border-left: 5px solid #3498db;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .question:hover {
+            transform: translateY(-5px);
+        }
+        
+        .question h3 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+            font-size: 1.3em;
+        }
+        
+        .answer {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+        
+        code {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            display: inline-block;
+            margin: 5px 0;
+        }
+        
+        .example {
+            background-color: #e8f4f8;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 4px solid #2ecc71;
+        }
+        
+        .example-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #27ae60;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .demo-table {
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+        
+        .demo-table table {
+            min-width: 500px;
+        }
+        
+        .table-6x5 tr:nth-child(3n) {
+            background-color: #bdc3c7;
+        }
+        
+        .table-4x9 col:nth-child(2n+3) {
+            background-color: #bdc3c7;
+        }
+        
+        .interactive-demo {
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .demo-element {
+            padding: 15px;
+            margin: 10px 0;
+            background: #34495e;
+            border-radius: 5px;
+        }
+        
+        input:focus {
+            outline: 2px solid #e74c3c;
+            box-shadow: 0 0 10px rgba(231, 76, 60, 0.5);
+        }
+        
+        .shadow-demo {
+            padding: 20px;
+            margin: 15px 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .border-radius-demo {
+            padding: 20px;
+            margin: 15px 0;
+            background: #3498db;
+            color: white;
+            border-radius: 25px;
+        }
+        
+        .attribute-selector-demo a[href^="https"] {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .attribute-selector-demo a[href$=".pdf"]::after {
+            content: " 📄";
+        }
+        
+        .attribute-selector-demo img[alt*="photo"] {
+            border: 3px solid #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Селекторы атрибутов, псевдоклассы и работа с таблицами</h1>
+        
+        <div class="question">
+            <h3>1. Что представляет из себя селектор атрибутов?</h3>
+            <div class="answer">
+                <p>Селектор атрибутов позволяет применять стили к элементам с конкретными атрибутами и их значениями.</p>
+                <p>Это мощный инструмент для выбора элементов на основе их атрибутов, что особенно полезно для форм, ссылок и изображений.</p>
+            </div>
+        </div>
+        
+        <div class="question">
+            <h3>2. Какие типы селекторов атрибутов вы знаете?</h3>
+            <div class="answer">
+                <p>Основные типы селекторов атрибутов:</p>
+                <ul>
+                    <li><code>[attr]</code> — выбирает элементы с указанным атрибутом</li>
+                    <li><code>[attr="value"]</code> — выбирает элементы с точным значением атрибута</li>
+                    <li><code>[attr^="value"]</code> — выбирает элементы, у которых значение атрибута начинается с указанной строки</li>
+                    <li><code>[attr$="value"]</code> — выбирает элементы, у которых значение атрибута заканчивается указанной строкой</li>
+                    <li><code>[attr*="value"]</code> — выбирает элементы, у которых значение атрибута содержит указанную подстроку</li>
+                    <li><code>[attr~="value"]</code> — выбирает элементы, у которых значение атрибута содержит указанное слово</li>
+                    <li><code>[attr|="value"]</code> — выбирает элементы, у которых значение атрибута равно указанной строке или начинается с нее</li>
+                </ul>
+                
+                <div class="example attribute-selector-demo">
+                    <div class="example-title">Демонстрация селекторов атрибутов:</div>
+                    <p><a href="https://example.com">Безопасная ссылка (https)</a></p>
+                    <p><a href="document.pdf">PDF документ</a></p>
+                    <p><img src="#" alt="photo123" style="width: 100px; height: 50px; background: #ddd;"> - Изображение с 'photo' в alt</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="question">
+            <h3>3. Расскажите, как убрать отступы между ячейками таблицы.</h3>
+            <div class="answer">
+                <p>Для удаления отступов между ячейками таблицы используется свойство <code>border-collapse</code> со значением <code>collapse</code>.</p>
+                <div class="example">
+                    <div class="example-title">Пример CSS:</div>
+                    <code>table {<br>
+                    &nbsp;&nbsp;border-collapse: collapse;<br>
+                    }</code>
+                </div>
+            </div>
+        </div>
+        
+        <div class="question">
+            <h3>4. Как убрать пустые ячейки таблицы?</h3>
+            <div class="answer">
+                <p>Пустые ячейки можно скрыть с помощью свойства <code>empty-cells</code> со значением <code>hide</code>.</p>
+                <div class="example">
+                    <div class="example-title">Пример CSS:</div>
+                    <code>table {<br>
+                    &nbsp;&nbsp;empty-cells: hide;<br>
+                    }</code>
+                </div>
+                <p>Это свойство работает только когда <code>border-collapse: separate</code>.</p>
+            </div>
+        </div>
+        
+        <div class="question">
+            <h3>5. Что означают значения в сокращенной записи свойства padding?</h3>
+            <div class="answer">
+                <p>Сокращенная запись свойства <code>padding</code> может принимать от 1 до 4 значений:</p>
+                <ul>
+                    <li><code>padding: 10px;</code> — все стороны</li>
+                    <li><code>padding: 10px 20px;</code> — верх/низ и право/лево</li>
+                    <li><code>padding: 10px 20px 15px;</code> — верх, право/лево, низ</li>
+                    <li><code>padding: 10px 20px 15px 5px;</code> — верх, право, низ, лево (по часовой стрелке)</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="question">
+            <h3>6. Для чего используется псевдокласс :focus?</h3>
+            <div class="answer">
+                <p>Псевдокласс <code>:focus</code> применяется к элементам, которые получили фокус (например, при клике мышью или переходе по Tab).</p>
+                <div class="interactive-demo">
+                    <div class="example-title">Демонстрация :focus:</div>
+                    <input type="text" placeholder="Кликните сюда для фокуса">
+                    <button>Кнопка</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="question">
+            <h3>7. С какой целью применяется псевдокласс :nth-child(odd)?</h3>
+            <div class="answer">
+                <p>Псевдокласс <code>:nth-child(odd)</code> выбирает все нечетные дочерние элементы.</p>
+                <div class="example">
+                    <div class="example-title">Пример CSS:</div>
+                    <code>tr:nth-child(odd) {<br>
+                    &nbsp;&nbsp;background-color: #f2f2f2;<br>
+                    }</code>
+                </div>
+            </div>
+        </div>
+        
+        <div class="question">
+            <h3>8. Для чего предназначен псевдокласс :nth-child(even)?</h3>
+            <div class="answer">
+                <p>Псевдокласс <code>:nth-child(even)</code> выбирает все четные дочерние элементы.</p>
+                <div class="example">
+                    <div class="example-title">Пример CSS:</div>
+                    <code>tr:nth-child(even) {<br>
+                    &nbsp;&nbsp;background-color: #f9f9f9;<br>
+                    }</code>
+                </div>
+            </div>
+        </div>
+        
+        <div class="question">
+            <h3>9. Каким образом сделать тень к элементам формы?</h3>
+            <div class="answer">
+                <p>Для добавления тени к элементам формы используется свойство <code>box-shadow</code>.</p>
+                <div class="example">
+                    <div class="example-title">Пример CSS:</div>
+                    <code>input, button {<br>
+                    &nbsp;&nbsp;box-shadow: 2px 2px 5px rgba(0,0,0,0.2);<br>
+                    }</code>
+                </div>
+                <div class="shadow-demo">
+                    Элемент с тенью
+                </div>
+            </div>
+        </div>
+        
+        <div class="question">
+            <h3>10. Как изменить промежуток между ячейками?</h3>
+            <div class="answer">
+                <p>Для изменения промежутка между ячейками используется свойство <code>border-spacing</code>.</p>
+                <div class="example">
+                    <div class="example-title">Пример CSS:</div>
+                    <code>table {<br>
+                    &nbsp;&nbsp;border-collapse: separate;<br>
+                    &nbsp;&nbsp;border-spacing: 10px;<br>
+                    }</code>
+                </div>
+            </div>
+        </div>
+        
+        <div class="question">
+            <h3>11. Для чего используется свойство border-radius?</h3>
+            <div class="answer">
+                <p>Свойство <code>border-radius</code> используется для скругления углов элементов.</p>
+                <div class="example">
+                    <div class="example-title">Пример CSS:</div>
+                    <code>.rounded {<br>
+                    &nbsp;&nbsp;border-radius: 15px;<br>
+                    }</code>
+                </div>
+                <div class="border-radius-demo">
+                    Элемент со скругленными углами
+                </div>
+            </div>
+        </div>
+        
+        <div class="question">
+            <h3>12. Какое свойство используется для выравнивания текста в таблице по вертикали в ячейках?</h3>
+            <div class="answer">
+                <p>Для вертикального выравнивания текста в ячейках таблицы используется свойство <code>vertical-align</code>.</p>
+            </div>
+        </div>
+        
+        <div class="question">
+            <h3>13. Назовите свойство, которое предназначено для выравнивания текста в таблице по горизонтали в ячейках.</h3>
+            <div class="answer">
+                <p>Для горизонтального выравнивания текста в ячейках таблицы используется свойство <code>text-align</code>.</p>
+            </div>
+        </div>
+        
+        <div class="question">
+            <h3>14. Какие значения может принимать свойство vertical-align?</h3>
+            <div class="answer">
+                <p>Свойство <code>vertical-align</code> может принимать значения:</p>
+                <ul>
+                    <li><code>baseline</code> — выравнивание по базовой линии</li>
+                    <li><code>top</code> — выравнивание по верхнему краю</li>
+                    <li><code>middle</code> — выравнивание по середине</li>
+                    <li><code>bottom</code> — выравнивание по нижнему краю</li>
+                    <li><code>sub</code> — нижний индекс</li>
+                    <li><code>super</code> — верхний индекс</li>
+                    <li>Процентные значения и единицы длины</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="question">
+            <h3>15. Для чего используется псевдокласс :first-child?</h3>
+            <div class="answer">
+                <p>Псевдокласс <code>:first-child</code> выбирает первый дочерний элемент родителя.</p>
+                <div class="example">
+                    <div class="example-title">Пример CSS:</div>
+                    <code>tr:first-child {<br>
+                    &nbsp;&nbsp;font-weight: bold;<br>
+                    }</code>
+                </div>
+            </div>
+        </div>
+        
+        <div class="question">
+            <h3>16. С какой целью применяется псевдокласс :last-child?</h3>
+            <div class="answer">
+                <p>Псевдокласс <code>:last-child</code> выбирает последний дочерний элемент родителя.</p>
+                <div class="example">
+                    <div class="example-title">Пример CSS:</div>
+                    <code>tr:last-child {<br>
+                    &nbsp;&nbsp;border-bottom: 2px solid #000;<br>
+                    }</code>
+                </div>
+            </div>
+        </div>
+        
+        <div class="question">
+            <h3>17. Для чего предназначены теги &lt;thead&gt;, &lt;tfoot&gt; и &lt;tbody&gt;?</h3>
+            <div class="answer">
+                <p>Эти теги семантически разделяют таблицу на логические части:</p>
+                <ul>
+                    <li><code>&lt;thead&gt;</code> — заголовок таблицы (шапка)</li>
+                    <li><code>&lt;tfoot&gt;</code> — подвал таблицы</li>
+                    <li><code>&lt;tbody&gt;</code> — основное тело таблицы</li>
+                </ul>
+                <p>Это улучшает доступность и позволяет отдельно стилизовать разные части таблицы.</p>
+            </div>
+        </div>
+        
+        <div class="question">
+            <h3>18. Какому свойству относится значение separate и для чего оно используется?</h3>
+            <div class="answer">
+                <p>Значение <code>separate</code> относится к свойству <code>border-collapse</code>.</p>
+                <p>Оно используется для отображения ячеек таблицы с раздельными границами и позволяет управлять расстоянием между ячейками через <code>border-spacing</code>.</p>
+            </div>
+        </div>
+        
+        <div class="question">
+            <h3>19. Какому свойству относится значение collapse и для чего оно используется?</h3>
+            <div class="answer">
+                <p>Значение <code>collapse</code> также относится к свойству <code>border-collapse</code>.</p>
+                <p>Оно объединяет границы соседних ячеек в одну общую границу, убирая промежутки между ячейками.</p>
+            </div>
+        </div>
+        
+        <div class="question">
+            <h3>20. Для чего предназначены теги &lt;colgroup&gt; и &lt;col&gt;?</h3>
+            <div class="answer">
+                <p>Теги <code>&lt;colgroup&gt;</code> и <code>&lt;col&gt;</code> используются для стилизации столбцов таблицы:</p>
+                <ul>
+                    <li><code>&lt;colgroup&gt;</code> — контейнер для группы столбцов</li>
+                    <li><code>&lt;col&gt;</code> — определяет стиль отдельного столбца или группы столбцов</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="question">
+            <h3>21. Что означает значение baseline?</h3>
+            <div class="answer">
+                <p>Значение <code>baseline</code> для свойства <code>vertical-align</code> выравнивает базовую линию элемента с базовой линией родителя.</p>
+                <p>Это особенно полезно для выравнивания текста и inline-элементов.</p>
+            </div>
+        </div>
+        
+        <div class="question">
+            <h3>22. Создайте таблицу из 6 строк и 5 столбцов и выделите серым цветом каждую третью строку.</h3>
+            <div class="answer">
+                <div class="demo-table">
+                    <table class="table-6x5">
+                        <tr><th>Заголовок 1</th><th>Заголовок 2</th><th>Заголовок 3</th><th>Заголовок 4</th><th>Заголовок 5</th></tr>
+                        <tr><td>Ячейка 1</td><td>Ячейка 2</td><td>Ячейка 3</td><td>Ячейка 4</td><td>Ячейка 5</td></tr>
+                        <tr><td>Ячейка 1</td><td>Ячейка 2</td><td>Ячейка 3</td><td>Ячейка 4</td><td>Ячейка 5</td></tr>
+                        <tr><td>Ячейка 1</td><td>Ячейка 2</td><td>Ячейка 3</td><td>Ячейка 4</td><td>Ячейка 5</td></tr>
+                        <tr><td>Ячейка 1</td><td>Ячейка 2</td><td>Ячейка 3</td><td>Ячейка 4</td><td>Ячейка 5</td></tr>
+                        <tr><td>Ячейка 1</td><td>Ячейка 2</td><td>Ячейка 3</td><td>Ячейка 4</td><td>Ячейка 5</td></tr>
+                    </table>
+                </div>
+                <div class="example">
+                    <div class="example-title">CSS для выделения каждой третьей строки:</div>
+                    <code>tr:nth-child(3n) {<br>
+                    &nbsp;&nbsp;background-color: #bdc3c7;<br>
+                    }</code>
+                </div>
+            </div>
+        </div>
+        
+        <div class="question">
+            <h3>23. Создайте таблицу из 4 строк и 9 столбцов и выделите серым цветом каждый второй столбец начиная с третьего.</h3>
+            <div class="answer">
+                <div class="demo-table">
+                    <table class="table-4x9">
+                        <colgroup>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                        </colgroup>
+                        <tr><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th></tr>
+                        <tr><td>Ячейка</td><td>Ячейка</td><td>Ячейка</td><td>Ячейка</td><td>Ячейка</td><td>Ячейка</td><td>Ячейка</td><td>Ячейка</td><td>Ячейка</td></tr>
+                        <tr><td>Ячейка</td><td>Ячейка</td><td>Ячейка</td><td>Ячейка</td><td>Ячейка</td><td>Ячейка</td><td>Ячейка</td><td>Ячейка</td><td>Ячейка</td></tr>
+                        <tr><td>Ячейка</td><td>Ячейка</td><td>Ячейка</td><td>Ячейка</td><td>Ячейка</td><td>Ячейка</td><td>Ячейка</td><td>Ячейка</td><td>Ячейка</td></tr>
+                    </table>
+                </div>
+                <div class="example">
+                    <div class="example-title">CSS для выделения столбцов:</div>
+                    <code>col:nth-child(2n+3) {<br>
+                    &nbsp;&nbsp;background-color: #bdc3c7;<br>
+                    }</code>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

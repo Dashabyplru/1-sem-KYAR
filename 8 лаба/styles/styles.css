@@ -1,0 +1,376 @@
+/* Общие стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    padding: 20px;
+}
+.container {
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin: 0;
+    /*animation: opa 5s infinite;
+    animation-direction: alternate;*/
+}
+
+@keyframes opa{
+    0% {
+    opacity: 0;
+    }
+    100% {
+        opacity: 80%;
+    }
+}
+
+/* Контейнер для изображений */
+.image-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 30px;
+    height: 35vh;
+}
+
+.image-box {
+    text-align: center;
+    width: 200px;
+}
+
+.image-box p {
+    font-weight: bold;
+    color: #555;
+}
+
+/* Стили для изображений */
+.image-box img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    transition: all 0.3s ease;
+}
+
+/* Анимации при наведении */
+
+/* Первое изображение - уменьшение в 2 раза */
+.image-box:nth-child(1) img:hover {
+    transform: scale(0.5);
+}
+
+/* Второе изображение - поворот на 45 градусов */
+.image-box:nth-child(2) img:hover {
+    transform: rotate(45deg);
+}
+
+/* Третье изображение - смещение вправо на 50px */
+.image-box:nth-child(3) img:hover {
+    transform: translateX(50px);
+}
+
+/* Четвертое изображение - наклон на -20 градусов */
+.image-box:nth-child(4) img:hover {
+    transform: skew(-20deg);
+}
+.button-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 30px;
+}
+.button-box {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.button-box button {
+    width: 200px;
+    height: 50px;
+    object-fit: cover;
+    transition: all 1s ease;
+}
+.button-box:nth-child(1) button:hover{
+    background-color: black;
+    color:white;
+}
+.button-box:nth-child(2) button:hover{
+    background-color: white;
+    border: solid 6px red; 
+    outline: solid 6px yellow;
+}
+.button-box:nth-child(3) button:hover{
+    background-color: white;
+    border-top: solid 6px green; 
+    border-bottom: solid 6px green;
+    border-right: none; 
+    border-left: none;
+}
+.button-box:nth-child(4) button:hover{
+    background-color: white;
+    border-right: solid 6px blue; 
+    border-left: solid 6px blue;
+    border-top: none; 
+    border-bottom: none; 
+}
+.button-box:nth-child(5) button:hover{
+    background-image: radial-gradient(
+    circle at center,
+    red,
+    blue
+  );
+}
+.perspective-box {
+    text-align: center;
+    width: 200px;
+    margin-bottom: 20px;
+}
+.perspective-box img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+.perspective-box:nth-child(1) img{
+    transform: perspective(100px) rotateX(30deg);
+}
+.perspective-box:nth-child(2) img{
+    transform: perspective(100px) rotateY(30deg);
+}
+.perspective-box:nth-child(3) img{
+    transform: perspective(100px) rotateX(30deg);
+}
+.perspective-box:nth-child(4) img{
+    transform: perspective(100px) rotateY(-30deg);
+}
+.pictures-container{
+    position: relative;
+    display: flex;
+    width: 800px;
+    height: 300px;
+    
+}
+.pictures-box{
+    animation-duration: 15s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+.pictures-box img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+.element1{
+    animation: element1 10s infinite;
+}
+.element2{
+    animation: element2 10s infinite;
+    left: -100px;
+}
+.element3{
+    animation: element3 10s infinite;
+    left: -200px;
+}
+.element4{
+    animation: element4 10s infinite;
+    left: -300px;
+}
+@keyframes element1{
+    0%{
+        transform: perspective(300px) rotateY(30deg);
+        position: relative;}
+
+        50%{
+        transform:perspective(300px);
+        position: relative;
+    }
+    100%{
+        transform:perspective(300px);
+        position: relative;
+      
+    }
+  }
+@keyframes element2{
+    0%{
+        transform: perspective(300px) rotateY(30deg);
+        position: relative;
+        filter: blur(0px);
+  
+    }
+    50%{
+        transform:perspective(300px);
+        position: relative;
+        filter: blur(0px);
+    }
+ 
+    100%{
+    transform: translate(60px,0px);
+    filter: blur(10px);
+    }
+    
+}
+@keyframes element3{
+    0%{
+        transform: perspective(300px) rotateY(30deg);
+        position: relative;
+        filter: grayscale(0);
+
+    }
+    50%{
+        transform:perspective(300px);
+        position: relative;
+        filter: grayscale(0);
+       
+    }
+    100%{
+        transform: translate(60px,0px);
+        filter: grayscale(1);
+    }
+    
+}
+@keyframes element4{
+    0%{
+        transform: perspective(300px) rotateY(30deg);
+        position: relative;
+        filter: invert(0);
+   
+    }
+    50%{
+        transform:perspective(300px);
+        position: relative;
+        filter: invert(0);
+    }
+    100%{
+        transform: translate(60px,0px);
+        filter: invert(1);
+    }
+}
+#smena{
+    justify-content: center;
+    display: flex;
+    width: 300px;
+    height: 300px;
+    border: 2px solid blue;
+    animation: smena 5s linear infinite;
+}
+@keyframes smena{
+    0%{
+        background-image: url("../pic/bereg.jpeg");
+    }
+    20%{
+        background-image: url("../pic/rastenia.jpg");
+    }
+    40%{
+        background-image: url("../pic/sumrise.jpg");
+    }
+    60%{
+        background-image: url("../pic/sunset.jpg");
+    }
+    80%{
+        background-image: url("../pic/tuman.jpg");
+    }
+    100%{
+        background-image: url("../pic/bereg.jpeg");
+    }
+} 
+.tuman{
+    width: 300px;
+    height: 300px;
+}
+#first{
+    animation: first 5s infinite;
+}
+@keyframes first{
+    0% {
+    transform: translateX(0px);
+    }
+    50% {
+        transform: translateX(200px);
+    }
+    100% {
+        transform: translateX(0px);
+    }
+}
+#second{
+    border: 3px solid gold;
+    animation: second 5s infinite;
+}
+@keyframes second{
+    0% {
+    transform: translateX(0px);
+    border-radius: 0%;
+    }
+    50% {
+        transform: translateX(800px);
+        border-radius: 50%;
+    }
+    100% {
+        transform: translateX(0px);
+        border-radius: 0%;
+    }
+}
+#third{
+    animation: third 5s infinite;
+}
+@keyframes third{
+    0% {
+    transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100vw);
+    }
+}
+#fourth{
+    animation:fourth 5s infinite;
+}
+@keyframes fourth{
+    0% {
+    transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(50px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+#fifth{
+    animation: fifth 5s infinite;
+    margin-bottom: 250px;
+}
+@keyframes fifth{
+    0% {
+    transform: translate(0px, 0px);
+    }
+    25% {
+        transform: translate(200px, 0px);
+    }
+    50% {
+        transform: translate(200px, 200px);
+    }
+    75% {
+        transform: translate(0px, 200px);
+    }
+    100% {
+        transform: translate(0px, 0px);
+    }
+}
+.text-block {
+    width: 300px;
+    height: 300px; /* Светлый фон блока */
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    font-size: 13px;
+    color: blue; /* Исходный цвет текста */
+    border: 1px solid #ddd;
+    transition: color 5s linear; /* Плавный линейный переход цвета за 5 сек */
+}
+
+.text-block:hover {
+    color: red; /* Цвет текста при наведении */
+}

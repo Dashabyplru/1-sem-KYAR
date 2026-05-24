@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>фотогалерея</title>
+	<style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        .container{
+            display: grid;
+            grid-gap: 1em;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr 1fr;
+            height: 98vh;
+            width: 100vw;
+        }
+        div > div{
+            border: 2px black solid;
+            text-align: center;
+            font-weight: bold;
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+        
+        }
+        #cell9{
+            grid-column: 4/6;           
+            grid-row: 2/4;           
+        }
+        div > img{
+        	height: 15vh;
+            overflow: hidden;
+        }
+        img{
+            overflow: hidden;
+            margin: 0;
+        }
+        #cell10 {
+		    grid-column: 1/3;
+		    grid-row: 3/5;
+		    position: relative; 
+		    display: block; 
+		    text-align: left; /* Выравнивание текста по левому краю */
+		}
+
+		#tongue {
+		    float: left; /* Обтекание слева */
+		    width: 30%; 
+		    height: 50%;
+		    margin: 0 15px 10px 0; 
+		    position: relative; 
+		    top: 0; 
+		    right: 0; 
+		}
+
+		#cell10 p {
+		    text-align: justify; /* Выравнивание текста по ширине */
+		    margin: 0; 
+		    font-size: 18.4px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div>
+			<img src="pic/lips.jpg">
+			<p>Lips</p>
+		</div>
+		<div>
+			<img src="pic/badplan.jpg">
+			<p>Bad Plan</p>
+		</div>
+		<div>
+			<img src="pic/blackglasses.jpg">
+			<p>Black Glasses</p>
+		</div>
+		<div>
+			<img src="pic/excited.jpg">
+			<p>Excited</p>
+		</div>
+		<div>
+			<img src="pic/eyesheart.jpg">
+			<p>Eyes Heart</p>
+		</div>
+		<div>
+			<img src="pic/happybirthday.jpg">
+			<p>Happy Birthday</p>
+		</div>
+		<div>
+			<img src="pic/heart.jpg">
+			<p>Heart</p>
+		</div>
+		<div>
+			<img src="pic/okay.jpg">
+			<p>Okay</p>
+		</div>
+		<div id="cell9">
+			<img style="width: 90%; height: 90%;" src="pic/flex.gif">
+		</div>
+		<div id="cell10">
+			<img id="tongue" src="pic/tongue.jpg">
+			<p>Изображение представляет собой крупный мультяшный смайлик. Смайлик розового цвета, круглой формы, с очень большими глазами. Глаза имеют черный зрачок, окруженный яркой голубой радужкой. Вокруг глаз нарисованы длинные черные ресницы. На щеках смайлика расположены два заметных розовых шарика. Рот изображен в виде маленькой изогнутой линии, формирующей четкую улыбку. Под смайликом находится небольшая тень. Фон абсолютно белый.Изображение представляет собой крупный мультяшный смайлик, который занимает центральное место. Смайлик однородного розового цвета, имеет идеальную круглую форму, с чрезвычайно большими, выразительными глазами. Глаза выделяются глубоким черным зрачком, который окружен контрастной, ярко-голубой радужной оболочкой. Вокруг каждого глаза нарисованы густые, длинные, изогнутые черные ресницы, придающие взгляду игривость. На выпуклых щеках смайлика симметрично расположены два округлых, розовых шарика, румянец.</p>
+		</div>
+		<div>
+			<img src="pic/rose.jpg">
+			<p>Rose</p>
+		</div>
+		<div>
+			<img src="pic/smile.jpg">
+			<p>Smile</p>
+		</div>
+		<div>
+			<img src="pic/shocked.jpg">
+			<p>Shocked</p>
+		</div>
+		<div>
+			<img src="pic/sad.jpg">
+			<p>Sad</p>
+		</div>
+	</div>
+</body>
+</html>

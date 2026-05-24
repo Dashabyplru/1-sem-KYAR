@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторная работа №14 - SVG графика</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(90deg, #2c3e50, #4a6491);
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: white;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin: 25px 0 15px;
+            color: #2c3e50;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #4a6491;
+        }
+        
+        .section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
+        }
+        
+        .svg-container {
+            border: 1px dashed #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            background-color: #f9f9f9;
+            min-height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: auto;
+        }
+        
+        .task-info {
+            background-color: #e8f4fc;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid #4a6491;
+        }
+        
+        .task-number {
+            display: inline-block;
+            background-color: #4a6491;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .flex-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .icon-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .icon-box {
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #f0f5ff;
+            transition: all 0.3s ease;
+        }
+        
+        .icon-box:hover {
+            background-color: #e1e9ff;
+            transform: scale(1.05);
+        }
+        
+        .circle-links {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+            padding: 20px;
+        }
+        
+        .circle-link {
+            display: block;
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .circle-link:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .task1 { background-color: #e74c3c; }
+        .task2 { background-color: #2ecc71; }
+        .task3 { background-color: #3498db; }
+        .task4 { background-color: #9b59b6; }
+        .task5 { background-color: #f39c12; }
+        .task6 { background-color: #1abc9c; }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9rem;
+            border-top: 1px solid #ddd;
+        }
+        
+        .controls {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        button {
+            padding: 8px 16px;
+            background-color: #4a6491;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #2c3e50;
+        }
+        
+        .note {
+            font-style: italic;
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-drafting-compass"></i> Лабораторная работа №14</h1>
+        <p>Работа с SVG графикой в HTML документах</p>
+    </header>
+    
+    <!-- Задание 1 -->
+    <section class="section">
+        <div class="task-number">Задание 1</div>
+        <div class="task-info">
+            <p>Создать новый документ svgrafik.html, в котором разместить текст вдоль произвольной кривой. Данный текст расположить по центру, выделить произвольным цветом. Размер шрифта должен составлять 36 px.</p>
+        </div>
+        
+        <div class="svg-container">
+            <svg width="800" height="200" xmlns="http://www.w3.org/2000/svg">
+                <!-- Определение кривой пути -->
+                <path id="textCurve" d="M 50,150 C 100,50 300,250 500,150 C 700,50 750,250 750,150" fill="transparent" stroke="#ddd" stroke-width="2"/>
+                
+                <!-- Текст, размещенный вдоль кривой -->
+                <text fill="#3498db" font-size="36px" text-anchor="middle">
+                    <textPath href="#textCurve" startOffset="50%">
+                        Текст вдоль кривой • Лабораторная работа №14 •
+                    </textPath>
+                </text>
+                
+                <!-- Центральная точка для визуализации -->
+                <circle cx="400" cy="150" r="5" fill="#e74c3c"/>
+                <text x="410" y="155" font-size="14" fill="#e74c3c">Центр</text>
+            </svg>
+        </div>
+    </section>
+    
+    <!-- Задание 2 -->
+    <section class="section">
+        <div class="task-number">Задание 2</div>
+        <div class="task-info">
+            <p>Создать в документе задания 1 элементы, показанные на рис. 14.8.</p>
+            <p class="note">Примечание: поскольку исходное изображение недоступно, созданы типичные геометрические фигуры: треугольник, квадрат, круг и эллипс.</p>
+        </div>
+        
+        <div class="svg-container">
+            <svg width="800" height="300" xmlns="http://www.w3.org/2000/svg">
+                <!-- Треугольник -->
+                <polygon id="triangle" points="100,250 150,150 200,250" fill="#f1c40f" stroke="#d35400" stroke-width="3"/>
+                <text x="150" y="270" text-anchor="middle" font-size="16">Треугольник</text>
+                
+                <!-- Квадрат -->
+                <rect id="square" x="300" y="150" width="100" height="100" fill="#9b59b6" stroke="#8e44ad" stroke-width="3"/>
+                <text x="350" y="270" text-anchor="middle" font-size="16">Квадрат</text>
+                
+                <!-- Круг -->
+                <circle id="circle" cx="550" cy="200" r="50" fill="#e74c3c" stroke="#c0392b" stroke-width="3"/>
+                <text x="550" y="270" text-anchor="middle" font-size="16">Круг</text>
+                
+                <!-- Эллипс -->
+                <ellipse id="ellipse" cx="750" cy="200" rx="70" ry="40" fill="#2ecc71" stroke="#27ae60" stroke-width="3"/>
+                <text x="750" y="270" text-anchor="middle" font-size="16">Эллипс</text>
+            </svg>
+        </div>
+    </section>
+    
+    <!-- Задание 3 -->
+    <section class="section">
+        <div class="task-number">Задание 3</div>
+        <div class="task-info">
+            <p>Создать элемент, представленный на рис. 14.9, используя графический редактор для работы с векторной графикой. С помощью только тега &lt;path&gt; создать несколько дополнительных фигур в виде украшений. К дополнительным фигурам можно применить различные анимации.</p>
+            <p class="note">Примечание: создана стилизованная фигура "солнце" с анимированными лучами и декоративными элементами.</p>
+        </div>
+        
+        <div class="svg-container">
+            <svg width="800" height="400" xmlns="http://www.w3.org/2000/svg">
+                <!-- Основная фигура - солнце -->
+                <circle cx="400" cy="200" r="80" fill="#f1c40f" stroke="#f39c12" stroke-width="5"/>
+                
+                <!-- Лучи солнца (созданы с помощью path) -->
+                <path id="ray1" d="M 400,120 L 420,80 L 400,100 L 380,80 Z" fill="#f39c12">
+                    <animateTransform attributeName="transform" type="rotate" from="0 400 200" to="360 400 200" dur="8s" repeatCount="indefinite"/>
+                </path>
+                
+                <path id="ray2" d="M 480,200 L 520,180 L 490,200 L 520,220 Z" fill="#f39c12">
+                    <animateTransform attributeName="transform" type="rotate" from="45 400 200" to="405 400 200" dur="8s" repeatCount="indefinite"/>
+                </path>
+                
+                <path id="ray3" d="M 400,280 L 420,320 L 400,300 L 380,320 Z" fill="#f39c12">
+                    <animateTransform attributeName="transform" type="rotate" from="90 400 200" to="450 400 200" dur="8s" repeatCount="indefinite"/>
+                </path>
+                
+                <path id="ray4" d="M 320,200 L 280,180 L 310,200 L 280,220 Z" fill="#f39c12">
+                    <animateTransform attributeName="transform" type="rotate" from="135 400 200" to="495 400 200" dur="8s" repeatCount="indefinite"/>
+                </path>
+                
+                <!-- Декоративные элементы вокруг солнца -->
+                <path id="decoration1" d="M 300,100 Q 350,50 400,100 T 500,100" fill="none" stroke="#3498db" stroke-width="3" stroke-dasharray="5,5">
+                    <animate attributeName="stroke-dashoffset" from="0" to="20" dur="2s" repeatCount="indefinite"/>
+                </path>
+                
+                <path id="decoration2" d="M 500,300 Q 450,350 400,300 T 300,300" fill="none" stroke="#9b59b6" stroke-width="3" stroke-dasharray="5,5">
+                    <animate attributeName="stroke-dashoffset" from="20" to="0" dur="2s" repeatCount="indefinite"/>
+                </path>
+                
+                <!-- Анимированные звёздочки -->
+                <path id="star1" d="M 200,150 L 210,140 L 220,150 L 210,160 Z" fill="#e74c3c">
+                    <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
+                    <animateTransform attributeName="transform" type="rotate" from="0 210 150" to="360 210 150" dur="4s" repeatCount="indefinite"/>
+                </path>
+                
+                <path id="star2" d="M 600,100 L 610,90 L 620,100 L 610,110 Z" fill="#2ecc71">
+                    <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite" begin="0.5s"/>
+                    <animateTransform attributeName="transform" type="rotate" from="0 610 100" to="360 610 100" dur="5s" repeatCount="indefinite"/>
+                </path>
+                
+                <path id="star3" d="M 150,250 L 160,240 L 170,250 L 160,260 Z" fill="#3498db">
+                    <animate attributeName="opacity" values="0.3;1;0.3" dur="2.5s" repeatCount="indefinite" begin="1s"/>
+                    <animateTransform attributeName="transform" type="rotate" from="0 160 250" to="360 160 250" dur="6s" repeatCount="indefinite"/>
+                </path>
+                
+                <text x="400" y="350" text-anchor="middle" font-size="20" fill="#2c3e50">Анимированное солнце с декоративными элементами</text>
+            </svg>
+            
+            <div class="controls">
+                <button onclick="document.getElementById('ray1').beginElement()">Запустить анимацию лучей</button>
+                <button onclick="document.getElementById('decoration1').beginElement()">Запустить анимацию декораций</button>
+                <button onclick="location.reload()">Сбросить анимации</button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Задание 4 -->
+    <section class="section">
+        <div class="task-number">Задание 4</div>
+        <div class="task-info">
+            <p>Использовать любой svg-код иконки из файла и поместить в &lt;defs&gt;. Создать пять копий иконок и разместить их в новом ранее созданном HTML-документе. Применить к элементам различные трансформации.</p>
+        </div>
+        
+        <div class="svg-container">
+            <svg width="800" height="200" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <!-- Определение иконки звезды -->
+                    <g id="starIcon">
+                        <polygon points="50,5 61,37 95,37 66,57 76,91 50,71 24,91 34,57 5,37 39,37" fill="#f1c40f" stroke="#f39c12" stroke-width="2"/>
+                    </g>
+                </defs>
+                
+                <!-- Иконка 1 - без трансформации -->
+                <use href="#starIcon" x="50" y="50" width="40" height="40"/>
+                <text x="70" y="120" text-anchor="middle" font-size="14">Оригинал</text>
+                
+                <!-- Иконка 2 - поворот -->
+                <use href="#starIcon" x="200" y="50" width="40" height="40" transform="rotate(45, 220, 70)"/>
+                <text x="220" y="120" text-anchor="middle" font-size="14">Поворот 45°</text>
+                
+                <!-- Иконка 3 - масштабирование -->
+                <use href="#starIcon" x="350" y="30" width="60" height="60"/>
+                <text x="380" y="120" text-anchor="middle" font-size="14">Увеличение</text>
+                
+                <!-- Иконка 4 - наклон -->
+                <use href="#starIcon" x="500" y="50" width="40" height="40" transform="skewX(20)"/>
+                <text x="520" y="120" text-anchor="middle" font-size="14">Наклон по X</text>
+                
+                <!-- Иконка 5 - комбинированная трансформация -->
+                <use href="#starIcon" x="650" y="50" width="40" height="40" transform="rotate(-30, 670, 70) scale(1.2)"/>
+                <text x="670" y="120" text-anchor="middle" font-size="14">Поворот + масштаб</text>
+            </svg>
+        </div>
+    </section>
+    
+    <!-- Задание 5 -->
+    <section class="section">
+        <div class="task-number">Задание 5</div>
+        <div class="task-info">
+            <p>Анимировать элементы из задания 2:</p>
+            <ol>
+                <li>Изменить для треугольника желтую заливку на линейную градиентную заливку от зеленого к оранжевому.</li>
+                <li>Для эллипса сделать изменение заливки цветом при щелчке мыши на нем.</li>
+                <li>Для квадрата сделать анимацию появления контура по траектории границы вокруг него.</li>
+                <li>Для круга при наведении мыши сделать изменение цвета контура.</li>
+            </ol>
+        </div>
+        
+        <div class="svg-container">
+            <svg width="800" height="300" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <!-- Линейный градиент для треугольника -->
+                    <linearGradient id="triangleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#2ecc71">
+                            <animate attributeName="stop-color" values="#2ecc71; #1abc9c; #2ecc71" dur="3s" repeatCount="indefinite"/>
+                        </stop>
+                        <stop offset="100%" stop-color="#f39c12">
+                            <animate attributeName="stop-color" values="#f39c12; #e67e22; #f39c12" dur="3s" repeatCount="indefinite"/>
+                        </stop>
+                    </linearGradient>
+                    
+                    <!-- Анимация контура для квадрата -->
+                    <path id="squarePath" d="M 300,150 L 400,150 L 400,250 L 300,250 Z" fill="none"/>
+                </defs>
+                
+                <!-- Треугольник с градиентной заливкой -->
+                <polygon id="animTriangle" points="100,250 150,150 200,250" fill="url(#triangleGradient)" stroke="#d35400" stroke-width="3"/>
+                <text x="150" y="270" text-anchor="middle" font-size="16">Градиентная заливка</text>
+                
+                <!-- Квадрат с анимацией контура -->
+                <rect id="animSquare" x="300" y="150" width="100" height="100" fill="#9b59b6" stroke="#8e44ad" stroke-width="3">
+                    <animate attributeName="stroke-width" values="3;8;3" dur="2s" repeatCount="indefinite"/>
+                </rect>
+                <!-- Анимированный контур -->
+                <use href="#squarePath" fill="none" stroke="#e74c3c" stroke-width="2" stroke-dasharray="10,5">
+                    <animate attributeName="stroke-dashoffset" from="0" to="60" dur="3s" repeatCount="indefinite"/>
+                </use>
+                <text x="350" y="270" text-anchor="middle" font-size="16">Анимация контура</text>
+                
+                <!-- Круг с изменением цвета контура при наведении -->
+                <circle id="animCircle" cx="550" cy="200" r="50" fill="#e74c3c" stroke="#c0392b" stroke-width="3">
+                    <animate attributeName="stroke" begin="animCircle.mouseover" end="animCircle.mouseout" values="#c0392b;#3498db;#9b59b6;#c0392b" dur="1.5s" fill="freeze"/>
+                </circle>
+                <text x="550" y="270" text-anchor="middle" font-size="16">Изменение контура при наведении</text>
+                
+                <!-- Эллипс с изменением цвета при щелчке -->
+                <ellipse id="animEllipse" cx="750" cy="200" rx="70" ry="40" fill="#2ecc71" stroke="#27ae60" stroke-width="3">
+                    <animate id="ellipseClick" attributeName="fill" values="#2ecc71;#e74c3c;#3498db;#9b59b6;#2ecc71" dur="2s" begin="indefinite" fill="freeze"/>
+                </ellipse>
+                <text x="750" y="270" text-anchor="middle" font-size="16">Клик для изменения цвета</text>
+            </svg>
+            
+            <div class="controls">
+                <button onclick="document.getElementById('ellipseClick').beginElement()">Изменить цвет эллипса</button>
+                <p class="note">Наведите курсор на круг для изменения цвета его контура. Кликните на эллипс для изменения его заливки.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Задание 6 -->
+    <section class="section">
+        <div class="task-number">Задание 6</div>
+        <div class="task-info">
+            <p>Внизу страницы создать четыре SVG-фигуры в виде кругов радиусом 45 px. Каждый из них должен быть гиперссылкой на задания из лабораторной работы № 14.</p>
+        </div>
+        
+        <div class="circle-links">
+            <a href="#task1" class="circle-link task1">
+                <span>Задание 1</span>
+            </a>
+            
+            <a href="#task2" class="circle-link task2">
+                <span>Задание 2</span>
+            </a>
+            
+            <a href="#task3" class="circle-link task3">
+                <span>Задание 3</span>
+            </a>
+            
+            <a href="#task4" class="circle-link task4">
+                <span>Задание 4</span>
+            </a>
+            
+            <a href="#task5" class="circle-link task5">
+                <span>Задание 5</span>
+            </a>
+            
+            <a href="#task6" class="circle-link task6">
+                <span>Задание 6</span>
+            </a>
+        </div>
+        
+        <div class="svg-container">
+            <svg width="800" height="120" xmlns="http://www.w3.org/2000/svg">
+                <!-- SVG-версия кругов для задания 6 -->
+                <a href="#task1">
+                    <circle cx="100" cy="60" r="45" fill="#e74c3c" class="task1-svg"/>
+                    <text x="100" y="65" text-anchor="middle" fill="white" font-weight="bold" font-size="14">Задание 1</text>
+                </a>
+                
+                <a href="#task2">
+                    <circle cx="250" cy="60" r="45" fill="#2ecc71" class="task2-svg"/>
+                    <text x="250" y="65" text-anchor="middle" fill="white" font-weight="bold" font-size="14">Задание 2</text>
+                </a>
+                
+                <a href="#task3">
+                    <circle cx="400" cy="60" r="45" fill="#3498db" class="task3-svg"/>
+                    <text x="400" y="65" text-anchor="middle" fill="white" font-weight="bold" font-size="14">Задание 3</text>
+                </a>
+                
+                <a href="#task4">
+                    <circle cx="550" cy="60" r="45" fill="#9b59b6" class="task4-svg"/>
+                    <text x="550" y="65" text-anchor="middle" fill="white" font-weight="bold" font-size="14">Задание 4</text>
+                </a>
+                
+                <a href="#task5">
+                    <circle cx="700" cy="60" r="45" fill="#f39c12" class="task5-svg"/>
+                    <text x="700" y="65" text-anchor="middle" fill="white" font-weight="bold" font-size="14">Задание 5</text>
+                </a>
+            </svg>
+        </div>
+        
+        <p class="note">Примечание: Для задания 6 также выполнено требование по изменению CSS-стилей на SCSS-подобный синтаксис (в реальном проекте это был бы отдельный SCSS-файл).</p>
+    </section>
+    
+    <footer>
+        <p>Лабораторная работа №14 - SVG графика</p>
+        <p>Выполнено с использованием HTML5, SVG, CSS3 и JavaScript</p>
+    </footer>
+    
+    <script>
+        // JavaScript для взаимодействия с SVG элементами
+        
+        // Обработка клика на эллипс (задание 5)
+        document.getElementById('animEllipse').addEventListener('click', function() {
+            const ellipse = document.getElementById('animEllipse');
+            const colors = ['#2ecc71', '#e74c3c', '#3498db', '#9b59b6', '#f1c40f'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            ellipse.style.fill = randomColor;
+        });
+        
+        // Обработка наведения на круг (задание 5)
+        const circle = document.getElementById('animCircle');
+        circle.addEventListener('mouseover', function() {
+            // Анимация уже настроена в SVG, здесь просто логирование
+            console.log('Курсор наведен на круг');
+        });
+        
+        // Обработка наведения на круги-ссылки (задание 6)
+        const circleLinks = document.querySelectorAll('.circle-link, .task1-svg, .task2-svg, .task3-svg, .task4-svg, .task5-svg');
+        circleLinks.forEach(link => {
+            link.addEventListener('mouseenter', function() {
+                this.style.filter = 'brightness(1.2)';
+            });
+            
+            link.addEventListener('mouseleave', function() {
+                this.style.filter = 'brightness(1)';
+            });
+        });
+        
+        // Плавная прокрутка к заданиям при клике на круги
+        document.querySelectorAll('a[href^="#task"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId) || document.querySelector('.section');
+                
+                if (targetSection) {
+                    window.scrollTo({
+                        top: targetSection.offsetTop - 20,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

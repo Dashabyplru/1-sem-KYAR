@@ -1,0 +1,33 @@
+/* Внешнее подключение - групповой селектор для заголовков */
+h1, h2, h3 {
+    color: purple;
+    font-family: 'Monotype Corsiva', cursive;
+}
+
+/* Стили для подпунктов списка */
+.ul-spinning li {
+    color: red;
+    font-family: 'Times New Roman', serif;
+    font-size: 18pt;
+}
+
+.ul-feeder li {
+    color: yellow;
+    font-family: 'Times New Roman', serif;
+    font-size: 20pt;
+}
+
+.ul-peaceful li {
+    color: green;
+    font-family: 'Times New Roman', serif;
+    font-size: 22pt;
+}
+table td {
+    color: darkblue;
+    font-weight: bold;
+}
+
+table th {
+    color: darkred;
+    background-color: #f0f0f0;
+}

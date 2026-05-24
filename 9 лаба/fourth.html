@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Факультет</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+    <style>
+        .header {
+            margin-bottom: 20px;
+        }
+        .header img {
+            max-width: 100vw;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Первая строка: логотип и навигационное меню -->
+    <div class="row header">
+        <div class="four columns">
+            <img src="pic/belstu.jpg" alt="Логотип факультета">
+        </div>
+        <div class="eight columns">
+            <nav>
+                <ul class="inline-list">
+                    <li><a href="index1.html">Задание 1.1</a></li>
+                    <li><a href="index2.html">Задание 1.2</a></li>
+                    <li><a href="second.html">Задание 2</a></li>
+                    <li><a href="third1.html">Задание 3.1</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- 2. Вторая строка: четыре столбца с заголовками -->
+    <div class="row">
+        <div class="three columns">
+            <h5>grid-template-columns</h5>
+        </div>
+        <div class="three columns">
+            <h5>grid-template-rows</h5>
+        </div>
+        <div class="three columns">
+            <h5>grid-gap</h5>
+        </div>
+        <div class="three columns">
+            <h5>grid-area</h5>
+        </div>
+    </div>
+    
+    <!-- 3. Третья строка: четыре столбца с информацией о свойствах Grid -->
+    <div class="row">
+        <div class="three columns">
+            <div class="property-description">
+                <p><strong>grid-template-columns</strong> определяет количество и размеры колонок в grid-контейнере.</p>
+                <p>Можно использовать различные единицы измерения: пиксели (px), проценты (%), дробные единицы (fr), auto.</p>
+                <p><em>Пример:</em> <code>grid-template-columns: 1fr 2fr 1fr;</code></p>
+            </div>
+        </div>
+        
+        <div class="three columns">
+            <div class="property-description">
+                <p><strong>grid-template-rows</strong> определяет количество и размеры строк в grid-контейнере.</p>
+                <p>Аналогично columns, но применяется для строк. Можно комбинировать с columns для создания сложных сеток.</p>
+                <p><em>Пример:</em> <code>grid-template-rows: 100px auto 200px;</code></p>
+            </div>
+        </div>
+        
+        <div class="three columns">
+            <div class="property-description">
+                <p><strong>grid-gap</strong> (или gap в современном синтаксисе) задает расстояние между элементами grid-сетки.</p>
+                <p>Можно задать одно значение для всех промежутков или два значения отдельно для row-gap и column-gap.</p>
+                <p><em>Пример:</em> <code>grid-gap: 20px 15px;</code></p>
+            </div>
+        </div>
+        
+        <div class="three columns">
+            <div class="property-description">
+                <p><strong>grid-area</strong> позволяет задать имя области или определить расположение элемента в сетке.</p>
+                <p>Можно использовать для размещения элемента в определенной области или для задания границ элемента.</p>
+                <p><em>Пример:</em> <code>grid-area: 2 / 1 / 4 / 3;</code></p>
+            </div>
+        </div>
+    </div>
+    
+
+</body>
+</html>

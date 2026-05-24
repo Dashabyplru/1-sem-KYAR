@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Задание 3</title>
+    <style>
+        body {
+            font-family: Arial;
+            margin: 10px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 10px;
+            font-size: 25px;
+            margin: 5px 20px;
+            border: 2px solid black;
+        }
+        
+        .row {
+            display: flex;
+            padding: 10px;
+            height: 95vh;
+        }
+        
+        .cell {
+            flex: 1;
+            border: 2px solid black;
+            margin: 10px;
+            padding: 10px;
+        }
+        
+        .cell-title {
+            text-align: center;
+            font-weight: bold;
+            padding: 5px;
+        }
+        
+        .video-box {
+            padding: 10px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .video-placeholder {
+            width: 100%;
+            height: 220px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .audio-box {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 2px solid black;
+        }
+        
+        .audio-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .audio-icon {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Внутреннее подключение медиазапроса для 480px - красный цвет текста */
+        @media screen and (max-width: 480px) {
+            .gallery-title {
+                color: red;
+            }
+        }
+
+        /* Для экранов меньше 1280px - вертикальная галерея */
+        @media screen and (max-width: 1280px) {
+            .gallery-container {
+                flex-direction: column;
+            }
+            .gallery-item {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+        .gallery-item{
+            flex: 1 1 200px; 
+            border: 1px solid #ddd; 
+            padding: 10px; 
+            text-align: center;
+        }
+        .gallery-container{
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 10px; 
+            padding: 10px; 
+            border: 2px solid black; 
+            margin: 10px;
+        }
+    </style>
+
+    <!-- Подключение стилей через @import для 768px - синий цвет текста -->
+    <style>
+        @import url('data:text/css,@media%20screen%20and%20(min-width:%20768px)%20and%20(max-width:%201279px)%20{.gallery-title%20{color:%20blue;}}');
+    </style>
+
+    <!-- Подключение через тег <link> для 1280px - зеленый цвет текста -->
+    <link rel="stylesheet" media="(min-width: 1280px)" href="data:text/css,.gallery-title%20{color:%20green;}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">Flexbox-верстка</div>
+        <div class="row">
+            <div class="cell">
+                <div class="cell-title">Видео</div>
+                <div class="video-box">
+                    <div class="video-placeholder">
+                        <video controls width="500" height="200">
+                            <source src="C:\Users\Дашка\Downloads\f174f1b80c33b232b6774ea50db3e880.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="video-placeholder">
+                        <video controls width="500" height="200">
+                            <source src="C:\Users\Дашка\Downloads\9e94c6571f6c0abea59f14ba904dfac3_720w.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="video-placeholder">
+                        <video controls width="500" height="200">
+                            <source src="C:\Users\Дашка\Downloads\97312519a82baffbc0da06f4712d82ae.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+            </div>
+            <div class="cell">
+                <div class="cell-title">Теория</div>
+                <div>
+                    <h3>Flexbox-верстка</h3>
+                    <p>Flexbox - это CSS модуль для создания гибких макетов. Flexbox - это CSS модуль для создания гибких макетов. Flexbox - это CSS модуль для создания гибких макетов.</p>
+                    <p>display: flex - делает элемент flex-контейнером. display: flex - делает элемент flex-контейнером. display: flex - делает элемент flex-контейнером.</p>
+                    <p>flex-direction - задает направление элементов. flex-direction - задает направление элементов. flex-direction - задает направление элементов.</p>
+                    <p>justify-content - выравнивание по главной оси. justify-content - выравнивание по главной оси. justify-content - выравнивание по главной оси.</p>
+                    <p>align-items - выравнивание по поперечной оси. align-items - выравнивание по поперечной оси. align-items - выравнивание по поперечной оси.</p>
+                    <p>flex-wrap - перенос элементов на новую строку. flex-wrap - перенос элементов на новую строку. flex-wrap - перенос элементов на новую строку.</p>
+                    <p>flex-grow - определяет, как элемент будет расти. flex-grow - определяет, как элемент будет расти. flex-grow - определяет, как элемент будет расти.</p>
+                    <p>flex-shrink - задает, как элемент будет сжиматься. flex-shrink - задает, как элемент будет сжиматься. flex-shrink - задает, как элемент будет сжиматься.</p>
+                    <p>flex-basis - устанавливает начальный размер элемента. flex-basis - устанавливает начальный размер элемента. flex-basis - устанавливает начальный размер элемента.</p>
+                </div>
+            </div>
+            <div class="cell">
+                <div class="cell-title">Аудио</div>
+                <div class="audio-box">
+                    <div class="audio-info">
+                        <div class="audio-icon">♫</div>
+                        <audio controls>
+                          <source src="C:\Users\Дашка\Downloads\MACAN feat. Kiliana - Как Je.mp3" type="audio/mpeg">
+                          Ваш браузер не поддерживает тег audio.
+                        </audio>
+                    </div>
+                </div>
+                <div class="audio-box">
+                    <div class="audio-info">
+                        <div class="audio-icon">♫</div>
+                        <audio controls>
+                          <source src="C:\Users\Дашка\Downloads\MACAN feat. A.V.G - Привыкаю.mp3" type="audio/mpeg">
+                          Ваш браузер не поддерживает тег audio.
+                        </audio>
+                    </div>
+                </div>
+                <div class="audio-box">
+                    <div class="audio-info">
+                        <div class="audio-icon">♫</div>
+                        <audio controls>
+                          <source src="C:\Users\Дашка\Downloads\MACAN - Самый Пьяный Округ В Мире.mp3" type="audio/mpeg">
+                          Ваш браузер не поддерживает тег audio.
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Фотогалерея -->
+        <div class="gallery-container">
+            <h3 class="gallery-title" style="width: 100%; text-align: center;">Фотогалерея</h3>
+            <div class="gallery-item">
+                <img src="pic3/adidas.jpg" alt="Фото 1" style="width: 100%; max-width: 200px;">
+                <p>Adidas</p>
+            </div>
+            <div class="gallery-item">
+                <img src="pic3/aigul.jpg" alt="Фото 2" style="width: 100%; max-width: 200px;">
+                <p>Aigul</p>
+            </div>
+            <div class="gallery-item">
+                <img src="pic3/lampa.jpg" alt="Фото 3" style="width: 100%; max-width: 200px;">
+                <p>Lampa</p>
+            </div>
+            <div class="gallery-item">
+                <img src="pic3/marat.jpg" alt="Фото 4" style="width: 100%; max-width: 200px;">
+                <p>Marat</p>
+            </div>
+            <div class="gallery-item">
+                <img src="pic3/palto.jpg" alt="Фото 5" style="width: 100%; max-width: 200px;">
+                <p>Palto</p>
+            </div>
+            <div class="gallery-item">
+                <img src="pic3/slovo.jpg" alt="Фото 6" style="width: 100%; max-width: 200px;">
+                <p>Slovo</p>
+            </div>
+            <div class="gallery-item">
+                <img src="pic3/turbo.jpg" alt="Фото 7" style="width: 100%; max-width: 200px;">
+                <p>Turbo</p>
+            </div>
+            <div class="gallery-item">
+                <img src="pic3/zima.jpg" alt="Фото 8" style="width: 100%; max-width: 200px;">
+                <p>Zima</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

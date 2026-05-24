@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Gradient</title>
+	<style>
+		.box{
+			display: inline-block;
+			width: 100px;
+			height: 100px;
+			border: 3px solid black;
+		}
+		.grad1{
+			background: linear-gradient(blue, pink);
+		}
+		.grad2{
+			background: repeating-linear-gradient(
+		    45deg,
+		    red,
+		    red 5px,
+		    blue 5px,
+		    blue 10px);
+		}
+		.grad3{
+			background: radial-gradient(red, blue);
+		}
+		.grad4{
+			background: repeating-radial-gradient(red,
+		    red 5px,
+		    blue 5px,
+		    blue 10px);
+		}
+		.grad5{
+		    background-image: 
+		    radial-gradient(circle 67px, red,blue,transparent),
+		    linear-gradient(to bottom,yellow, pink);
+		}
+	</style>
+</head>
+<body>
+	<div class="box grad1"></div>
+	<div class="box grad2"></div>
+	<div class="box grad3"></div>
+	<div class="box grad4"></div>
+	<div class="box grad5"></div>
+</body>
+</html>

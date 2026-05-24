@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мир котиков</title>
+    <style>
+        /* Подключение шрифтов */
+        @font-face {
+            font-family: 'Caveat';
+            src: url('fonts/Caveat-Regular.ttf') format('truetype');
+        }
+        
+        @font-face {
+            font-family: 'Exo2';
+            src: url('fonts/Exo2-Regular.ttf') format('truetype');
+        }
+        
+        @font-face {
+            font-family: 'Comfortaa';
+            src: url('fonts/Comfortaa-Regular.ttf') format('truetype');
+        }
+
+        /* Стили для заголовка h1 */
+        h1 {
+            font-family: 'Caveat', cursive;
+            margin-bottom: 0;
+            text-align: center;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 45px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Стили для заголовков h2 */
+        h2 {
+            font-family: 'Exo2', sans-serif;
+            margin-bottom: 1.2em;
+            margin-top: 0.2rem;
+            text-indent: 25px;
+            text-align: left;
+        }
+
+        /* Стили для абзацев */
+        p {
+            font-family: 'Comfortaa', sans-serif;
+            text-indent: 25px;
+            text-align: justify;
+            margin: 0;
+            line-height: 200%;
+            font-size: 20px;
+        }
+
+        /* Псевдоэлемент для первой буквы абзаца */
+        p::first-letter {
+            font-weight: bold;
+            font-size: 45px;
+            color: white;
+            background-color: hsla(275, 100%, 10%, 1);
+        }
+        /* Стили для списка */
+        ol {
+            font-family: 'Comfortaa', sans-serif;
+            font-size: 20px;
+            list-style-type: upper-roman;
+            color: blue;
+            list-style-type: upper-roman; /* Заглавные римские цифры */
+            padding-left: 2em; /* Стандартный отступ для списка */
+        }
+
+        /* Стиль для элементов списка */
+        li {
+            color: black; /* Черный цвет текста пункта */
+        }
+
+        /* Стиль для римских цифр (номеров пунктов) */
+        li::marker {
+            color: blue; /* Синий цвет нумерации */
+            font-weight: bold; /* Можно добавить, чтобы цифры были четче */
+        }
+        /* Стили для специального абзаца */
+        .special-paragraph {
+            font-family: 'Comfortaa', sans-serif;
+            font-size: 20px;
+            text-indent: 25px;
+        }
+
+        .special-paragraph::first-line {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Мир котиков</h1>
+    
+    <h2>О котиках</h2>
+    <p>Кошки - удивительные создания, которые уже тысячи лет живут рядом с человеком. Эти грациозные животные обладают независимым характером и в то же время дарят своим хозяевам бесконечную любовь и ласку. Каждый котик имеет свой уникальный характер и привычки.</p>
+    <p>История одомашнивания кошек насчитывает около 10 000 лет. Первые свидетельства тесного взаимодействия человека и кошки были обнаружены на Кипре, где в древних захоронениях нашли останки людей и кошек рядом. С тех пор эти животные стали неотъемлемой частью человеческой культуры.</p>
+    
+    <h2>Породы кошек</h2>
+    <p>Существует множество пород кошек, каждая из которых имеет свои особенности. От пушистых персидских кошек до грациозных сиамских - разнообразие поражает воображение. Выбор породы зависит от предпочтений будущего хозяина и условий содержания животного.</p>
+    
+    <h2>Интересные факты о котиках</h2>
+    <ol>
+        <li>Кошки спят около 16 часов в сутки</li>
+        <li>У кошек более 20 мышц управляют каждым ухом</li>
+        <li>Кошки могут поворачивать уши на 180 градусов</li>
+        <li>Усы помогают кошкам ориентироваться в пространстве</li>
+        <li>Кошки издают более 100 различных звуков</li>
+    </ol>
+
+    <p class="special-paragraph">А кошки, эти грациозные и загадочные создания, являются поистине идеальными спутниками на всю жизнь, наполняя наши дома безмолвным пониманием и мягким утешением. Их бархатное мурлыканье, этот вибрирующий звук абсолютного покоя, обладает доказанными целебными свойствами: он успокаивает нервную систему, исцеляет душевные раны и создает в доме неповторимую ауру уюта и безопасности, превращая обычное жилище в настоящую крепость от внешних бурь.</p>
+</body>
+</html>
